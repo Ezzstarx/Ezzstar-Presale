@@ -1,0 +1,357 @@
+"use client";
+
+import PresaleWidget from "./PresaleWidget";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const StarBadge = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M12 0l1.2 7.2L19.2 2.4l-4.8 6L24 12l-9.6 3.6 4.8 6-7.2-4.8L12 24l-1.2-7.2-7.2 4.8 4.8-6L0 12l9.6-3.6-4.8-6 7.2 4.8z" />
+    </svg>
+);
+
+const NFT_TIERS = [
+    {
+        id: "lily",
+        name: "Lily NFT",
+        price: "$50",
+        image: "/assets/images/product-2.jpg",
+        badge: "/assets/images/LilyBadge.png",
+        color: "text-[#4ADE80]",
+        borderColor: "border-[#4ADE80]",
+        glowColor: "rgba(74, 222, 128, 0.4)",
+        zIndex: 10,
+        benefits: [
+            "Bronze Star Verified Glowing Badge",
+            "Standard Profile Frame",
+            "Access to Basic Features",
+            "Standard Community Support",
+            "1 Month Free Membership",
+            "Tradable: Sell Your Status"
+        ]
+    },
+    {
+        id: "spica",
+        name: "Spica NFT",
+        price: "$150",
+        image: "/assets/images/product-1.jpg",
+        badge: "/assets/images/SpicaBadge.png",
+        color: "text-[#D946EF]",
+        borderColor: "border-[#D946EF]",
+        glowColor: "rgba(217, 70, 239, 0.4)",
+        zIndex: 30, // Center card on top
+        benefits: [
+            "Gold Star Verified Glowing Badge",
+            "Animated Profile Frame",
+            "Early Access to New Feature",
+            "Discounted Premium Merch Every Quarter",
+            "3 Months Free Membership",
+            "Tradable: Sell Your Status"
+        ]
+    },
+    {
+        id: "buffo",
+        name: "Buffo NFT",
+        price: "$100",
+        image: "/assets/images/product-3.jpg",
+        badge: "/assets/images/BuffoBadge.png",
+        color: "text-[#EF4444]",
+        borderColor: "border-[#EF4444]",
+        glowColor: "rgba(239, 68, 68, 0.4)",
+        zIndex: 20,
+        benefits: [
+            "Silver Star Verified Glowing Badge",
+            "Silver Profile Frame",
+            "Early Access to Beta Features",
+            "Discounted Merch Selection",
+            "2 Months Free Membership",
+            "Tradable: Sell Your Status"
+        ]
+    }
+];
+
+import { useWallet } from "../providers/WalletProvider";
+import WalletModal from "../ui/WalletModal";
+
+export default function Hero() {
+    // Desktop State
+    const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
+    const [hoveredTierId, setHoveredTierId] = useState<string | null>(null);
+    const selectedTier = NFT_TIERS.find(t => t.id === selectedTierId);
+
+    // Wallet State
+    const { isConnected, address, disconnectWallet } = useWallet();
+    const [showWalletModal, setShowWalletModal] = useState(false);
+
+    // Mobile State
+    const [mobileTab, setMobileTab] = useState<'widget' | 'spica' | 'buffo' | 'lily'>('widget');
+
+    // MAPPING for Mobile Tabs: Icon + Content
+    const MOBILE_TABS = [
+        { id: 'widget', icon: '/assets/images/Product-icon1-M.png', label: 'Widget' },
+        { id: 'spica', icon: '/assets/images/Product-icon2-M.png', label: 'Spica' }, // Purple
+        { id: 'buffo', icon: '/assets/images/Product-icon3-M.png', label: 'Buffo' }, // Red
+        { id: 'lily', icon: '/assets/images/Product-icon4-M.png', label: 'Lily' },   // Green
+    ];
+
+    return (
+        <section className="relative min-h-screen flex flex-col items-center justify-start pt-24 pb-0 overflow-x-hidden text-center sm:px-6">
+            <div className="container mx-auto max-w-[1400px] relative z-10 flex flex-col items-center">
+
+                {/* Header Content */}
+                <div className="mb-8 md:mb-12 space-y-4">
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-tektur font-semibold leading-tight">
+                        Empowering the Future of <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-pink uppercase tracking-[0.2em] font-medium">
+                            Digital Aliens!
+                        </span>
+                    </h1>
+
+                    <div className="flex flex-row gap-4 justify-center pt-4">
+                        <button className="px-6 py-2 border border-white/10 bg-black rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
+                            Presale is Live
+                        </button>
+                        <button className="px-6 py-2 border border-white/10 bg-white/10 rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
+                            Whitepaper
+                        </button>
+                    </div>
+                </div>
+
+                {/* DESKTOP CONTENT (Hidden on Mobile) */}
+                <div className="hidden lg:grid w-full grid-cols-12 gap-8 items-start justify-center relative min-h-[600px]">
+                    {/* LEFT: Presale Widget */}
+                    <div className="col-span-4 flex justify-end z-40">
+                        <PresaleWidget />
+                    </div>
+
+                    {/* RIGHT AREA: Dynamic Interaction Zone */}
+                    <div className="col-span-8 flex flex-row items-center justify-center relative h-[540px]">
+                        {/* CENTER PANEL: Benefits */}
+                        <AnimatePresence mode="popLayout">
+                            {selectedTier && (
+                                <motion.div
+                                    key="benefits-panel"
+                                    initial={{ width: 0, opacity: 0, marginRight: 0 }}
+                                    animate={{ width: 340, opacity: 1, marginRight: 20 }}
+                                    exit={{ width: 0, opacity: 0, marginRight: 0 }}
+                                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                                    className="overflow-hidden flex-shrink-0 h-[500px] bg-[#0a0a0c]/95 backdrop-blur-md border border-white/10 rounded-2xl relative z-30 shadow-2xl"
+                                >
+                                    <div className="w-[340px] p-8 h-full flex flex-col items-center justify-center text-left">
+                                        <h3 className={`text-2xl font-tektur font-bold mb-6 ${selectedTier.color}`}>
+                                            {selectedTier.name} Benefits
+                                        </h3>
+                                        <ul className="space-y-4 w-full">
+                                            {selectedTier.benefits.map((benefit, idx) => (
+                                                <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
+                                                    <img src={selectedTier.badge} alt="Badge" className="w-5 h-5 object-contain mt-0.5" />
+                                                    <span>{benefit}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
+                        {/* RIGHT: NFT Cards Deck */}
+                        <motion.div
+                            className="flex flex-row items-center relative h-[500px]"
+                            layout
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                        >
+                            {NFT_TIERS.map((tier, index) => {
+                                const isDetailsOpen = !!selectedTierId;
+                                const defaultMargin = index === 0 ? 0 : -100;
+                                const collapsedMargin = index === 0 ? 0 : -220;
+                                const currentMargin = isDetailsOpen ? collapsedMargin : defaultMargin;
+                                const activeZIndex = hoveredTierId === tier.id ? 50 : tier.zIndex;
+                                const isOtherCardActive = !!selectedTierId && selectedTierId !== tier.id;
+
+                                return (
+                                    <motion.div
+                                        layout
+                                        key={tier.id}
+                                        onMouseEnter={() => setHoveredTierId(tier.id)}
+                                        onMouseLeave={() => setHoveredTierId(null)}
+                                        className={`relative w-[280px] h-[460px] bg-black rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden shadow-2xl transition-all duration-300`}
+                                        style={{
+                                            zIndex: activeZIndex,
+                                            boxShadow: `0 0 20px ${tier.glowColor}`,
+                                        }}
+                                        whileHover={{ scale: 1.05 }}
+                                        animate={{
+                                            marginLeft: isOtherCardActive ? 0 : (selectedTierId === tier.id ? 20 : currentMargin),
+                                            width: isOtherCardActive ? 0 : 280,
+                                            opacity: isOtherCardActive ? 0 : 1,
+                                            scale: isDetailsOpen ? 1 : 1,
+                                            padding: isOtherCardActive ? 0 : '',
+                                            marginRight: isOtherCardActive ? 0 : '',
+                                        }}
+                                        transition={{ duration: 0.4 }}
+                                    >
+                                        {/* Image Section */}
+                                        <div className="relative h-[65%] w-full bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+                                            <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
+                                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
+                                        </div>
+                                        {/* Content Section */}
+                                        <div className="h-[35%] w-full flex flex-col items-center justify-center bg-black pt-2 pb-6 px-4 relative z-10">
+                                            <div className="flex items-center gap-3 mb-2 justify-center w-full">
+                                                <img src={tier.badge} alt="Badge" className={`${tier.id === 'lily' ? 'w-20 h-20' : 'w-12 h-12'} object-contain`} />
+                                                <h3 className={`text-2xl font-bold font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                            </div>
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <span className="text-gray-400 text-sm">Invest:</span>
+                                                <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
+                                            </div>
+                                            <button
+                                                onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
+                                                className={`px-6 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all text-xs uppercase tracking-wide font-medium ${selectedTierId === tier.id ? 'bg-white/20' : ''}`}
+                                            >
+                                                {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
+                                            </button>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* MOBILE CONTENT (Visible on Mobile/Tablet) */}
+                <div className="flex lg:hidden flex-col w-full items-center gap-8 min-h-[600px] pb-12">
+
+                    {/* Content Display Area */}
+                    <div className="w-full flex justify-center items-start min-h-[480px]">
+                        <AnimatePresence mode="wait">
+                            {mobileTab === 'widget' ? (
+                                <motion.div
+                                    key="mobile-widget"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="w-full flex justify-center"
+                                >
+                                    <PresaleWidget />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key={`mobile-tier-${mobileTab}`}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="w-full flex flex-col items-center justify-center px-4"
+                                >
+                                    {(() => {
+                                        const tier = NFT_TIERS.find(t => t.id === mobileTab);
+                                        if (!tier) return null;
+
+                                        // Calculate received amount (Example logic: Price / 0.004)
+                                        const priceVal = parseInt(tier.price.replace('$', ''));
+                                        const receiveAmount = (priceVal / 0.004).toLocaleString();
+
+                                        return (
+                                            <div className={`relative w-full max-w-[340px] bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[32px] border border-white/10 p-6 flex flex-col items-start gap-6 shadow-2xl`}
+                                                style={{ boxShadow: `0 0 30px ${tier.glowColor}` }}>
+
+                                                {/* Top: Icon + Name */}
+                                                <div className="flex items-center gap-3 w-full">
+                                                    <img src={tier.badge} alt="Badge" className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
+                                                    <h3 className={`text-2xl font-tektur font-bold uppercase tracking-wider ${tier.color} drop-shadow-[0_0_10px_currentColor]`}>
+                                                        {tier.name}
+                                                    </h3>
+                                                </div>
+
+                                                {/* Middle: Bullet Points */}
+                                                <ul className="space-y-3 w-full pl-2">
+                                                    {tier.benefits.map((benefit, i) => (
+                                                        <li key={i} className="flex items-start gap-3 text-sm text-gray-200 font-medium">
+                                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
+                                                            <span className="leading-tight">{benefit}</span>
+                                                        </li>
+                                                    ))}
+                                                    <li className="flex items-start gap-3 text-sm text-gray-200 font-medium pt-2">
+                                                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
+                                                        <span className="leading-tight">
+                                                            Receive: <span className={`font-bold ${tier.color}`}>{receiveAmount} SPCA</span>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+
+                                                {/* Bottom: Icon Left, Action Right */}
+                                                <div className="w-full flex items-end justify-between mt-2 pt-4 border-t border-white/5">
+
+                                                    {/* Left: Tab Icon (Rounded Square, Black BG) */}
+                                                    <div className="w-16 h-16 rounded-2xl bg-black border border-white/10 overflow-hidden shadow-lg shrink-0 p-1 flex items-center justify-center">
+                                                        {(() => {
+                                                            const iconSrc = MOBILE_TABS.find(tab => tab.id === tier.id)?.icon;
+                                                            return <img src={iconSrc} alt={tier.name} className="w-full h-full object-contain" />;
+                                                        })()}
+                                                    </div>
+
+                                                    {/* Right: Invest + Button */}
+                                                    <div className="flex flex-col items-end gap-3 ml-4 flex-1 mr-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-gray-400 text-sm">Invest:</span>
+                                                            <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
+                                                        </div>
+                                                        {isConnected ? (
+                                                            <button
+                                                                onClick={disconnectWallet}
+                                                                className="w-full max-w-[160px] py-2.5 rounded-lg bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-tektur font-medium text-sm tracking-wide transition-all shadow-[0_0_10px_rgba(74,222,128,0.2)]"
+                                                            >
+                                                                {address?.slice(0, 4)}...{address?.slice(-4)}
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                onClick={() => setShowWalletModal(true)}
+                                                                className="w-full max-w-[160px] py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white font-tektur font-medium text-sm tracking-wide transition-all shadow-lg active:scale-95"
+                                                            >
+                                                                Connect Wallet
+                                                            </button>
+                                                        )}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Mobile Tab Selector (Squared Rounded Buttons) */}
+                    <div className="grid grid-cols-4 gap-4 p-4 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl">
+                        {MOBILE_TABS.map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setMobileTab(tab.id as any)}
+                                className={`w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center border transition-all duration-300
+                                    ${mobileTab === tab.id
+                                        ? 'bg-white/20 border-white/50 shadow-[0_0_15px_rgba(255,255,255,0.2)]'
+                                        : 'bg-black border-white/10 opacity-60 hover:opacity-100'
+                                    }
+                                `}
+                            >
+                                <img
+                                    src={tab.icon}
+                                    alt={tab.label}
+                                    className="w-full h-full object-contain p-1 rounded-full"
+                                />
+                            </button>
+                        ))}
+                    </div>
+
+                </div>
+
+            </div>
+            <WalletModal isOpen={showWalletModal} onClose={() => setShowWalletModal(false)} />
+        </section>
+    );
+}

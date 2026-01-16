@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+
+  --color-primary: #D946EF;
+  --color-primary-hover: #c026d3;
+
+  --color-secondary: #8B5CF6;
+  --color-secondary-hover: #7c3aed;
+
+  --color-accent-cyan: #00EAFF;
+  --color-accent-pink: #DE3BD6;
+
+  --color-card: rgba(9, 9, 15, 0.5);
+  --color-card-border: rgba(255, 255, 255, 0.1);
+
+  --font-tektur: 'Tektur', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+
+  --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
+
+  --animate-pulse-scale: pulse-scale 2s infinite ease-in-out;
+  --animate-breathing-glow: breathing-glow 2s infinite ease-in-out;
+  --animate-spin-slow: spin 12s linear infinite;
+  --animate-reverse-spin: reverse-spin 15s linear infinite;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+
+  @keyframes pulse-scale {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes breathing-glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 10px rgba(222, 59, 214, 0.4);
+      filter: brightness(1);
+    }
+
+    50% {
+      box-shadow: 0 0 25px rgba(222, 59, 214, 0.6);
+      filter: brightness(1.2);
+    }
+  }
+
+  @keyframes reverse-spin {
+    from {
+      transform: rotate(360deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+:root {
+  --font-tektur: 'Tektur', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-satoshi;
+    background-color: #000000;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85));
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-cyan to-accent-pink;
+  }
+
+  .glass-card {
+    @apply bg-card backdrop-blur-md border border-card-border;
+  }
+
+  .btn-primary-glow {
+    @apply bg-gradient-to-r from-[#C243FE] to-[#5B099B] bg-[length:200%_200%] hover:brightness-110 transition-all duration-300 animate-pulse-scale;
+    box-shadow: 0 0 15px rgba(194, 67, 254, 0.4);
+  }
+
+  .btn-primary-glow:hover {
+    box-shadow: 0 0 30px rgba(194, 67, 254, 0.6);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
