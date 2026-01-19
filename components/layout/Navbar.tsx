@@ -5,12 +5,11 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import WalletModal from "../ui/WalletModal";
+// import WalletModal from "../ui/WalletModal";
 import { useWallet } from "../providers/WalletProvider";
 
 export default function Navbar() {
-    const [showWalletModal, setShowWalletModal] = useState(false);
-    const { isConnected, address, disconnectWallet } = useWallet();
+    const { isConnected, address, disconnectWallet, openWalletModal } = useWallet();
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -61,12 +60,12 @@ export default function Navbar() {
     };
 
     const navLinks = [
-        { name: "Tokenomics", href: "#tokenomics" },
-        { name: "Roadmap", href: "#roadmap" },
+        { name: "Tokenomics", href: "/#tokenomics" },
+        { name: "Roadmap", href: "/#roadmap" },
         { name: "Stake", href: "/staking" },
-        { name: "Referral", href: "#referral" },
-        { name: "About Us", href: "#about" },
-        { name: "Our Team", href: "#team" },
+        { name: "Referral", href: "/referral" },
+        { name: "About Us", href: "/#about" },
+        { name: "Our Team", href: "/#team" },
     ];
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -121,7 +120,7 @@ export default function Navbar() {
                         </button>
                     ) : (
                         <button
-                            onClick={() => setShowWalletModal(true)}
+                            onClick={openWalletModal}
                             className="relative group px-8 py-2.5 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur text-white font-bold tracking-wide hover:brightness-110 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all transform hover:scale-105"
                         >
                             Connect Wallet
@@ -185,7 +184,7 @@ export default function Navbar() {
                                 ) : (
                                     <button
                                         onClick={() => {
-                                            setShowWalletModal(true);
+                                            openWalletModal();
                                             setMobileMenuOpen(false);
                                         }}
                                         className="w-full px-8 py-2.5 bg-gradient-to-r from-secondary to-primary rounded-lg font-tektur text-white font-bold tracking-wide shadow-[0_0_20px_rgba(139,92,246,0.2)] hover:shadow-[0_0_25px_rgba(139,92,246,0.4)] transition-all text-sm"
@@ -199,7 +198,6 @@ export default function Navbar() {
                 )}
             </AnimatePresence>
 
-            <WalletModal isOpen={showWalletModal} onClose={() => setShowWalletModal(false)} />
         </motion.nav>
     );
 }

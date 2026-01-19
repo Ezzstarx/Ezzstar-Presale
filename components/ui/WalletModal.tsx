@@ -55,7 +55,8 @@ export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
                         </p>
 
                         {/* Horizontal Scroll Container */}
-                        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+                        {/* Horizontal Scroll Container */}
+                        <div className="grid grid-cols-3 gap-3 md:flex md:overflow-x-auto md:gap-4 pb-4 md:pb-2 no-scrollbar">
                             {wallets.map((wallet) => (
                                 <button
                                     key={wallet.name}
@@ -63,9 +64,9 @@ export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
                                         connectWallet();
                                         onClose();
                                     }}
-                                    className="flex-shrink-0 snap-start w-[100px] md:w-[120px] flex flex-col items-center justify-center gap-3 p-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl transition-all group"
+                                    className="w-full md:w-28 md:shrink-0 flex flex-col items-center justify-center gap-3 p-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl transition-all group"
                                 >
-                                    <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform">
+                                    <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform">
                                         <Image
                                             src={wallet.icon}
                                             alt={wallet.name}
@@ -77,9 +78,9 @@ export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
                                 </button>
                             ))}
                             <button
-                                className="flex-shrink-0 snap-start w-[100px] md:w-[120px] flex flex-col items-center justify-center gap-3 p-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl transition-all group"
+                                className="w-full md:w-28 md:shrink-0 flex flex-col items-center justify-center gap-3 p-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl transition-all group"
                             >
-                                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                                     <div className="flex gap-0.5">
                                         <div className="w-1 h-1 bg-black rounded-full"></div>
                                         <div className="w-1 h-1 bg-black rounded-full"></div>

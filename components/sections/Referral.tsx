@@ -1,77 +1,218 @@
 "use client";
 
-import { Link as LinkIcon, Users, DollarSign, Copy } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import { Facebook, Instagram, Linkedin, Send, MessageCircle, Twitter } from "lucide-react";
+import { useWallet } from "../providers/WalletProvider";
+import WithdrawModal from "../ui/WithdrawModal";
 
 export default function Referral() {
+    const { isConnected, address, openWalletModal } = useWallet();
+    const [copied, setCopied] = useState(false);
+    const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+
+    const handleCopy = () => {
+        const link = `https://ezzstar.space/?ref=${address ? address.slice(0, 10) : '0878871527'}`;
+        navigator.clipboard.writeText(link);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
-        <section id="referral" className="py-24 relative bg-black/50 border-t border-white/5">
-            <div className="container mx-auto px-6">
-                <div className="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                    {/* Content */}
-                    <div className="relative z-10 text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-tektur font-bold mb-4">
-                            Invite Your Friends And Earn <span className="text-accent-cyan">20%</span>
-                        </h2>
-                        <p className="text-gray-400 font-satoshi max-w-2xl mx-auto">
-                            Share the love, stack the rewards! Earn 10% of what your friend deposits and another 10% in SPICA when they invest $10+ in the pre-sale. Cash out anytime — no limits!
-                        </p>
-                    </div>
 
-                    {/* Steps */}
-                    <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
-                        {/* Connector Line (Desktop) */}
-                        <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-gradient-to-r from-blue-500/50 via-yellow-500/50 to-green-500/50 border-t border-dashed border-white/20"></div>
+        <section className="py-24 relative bg-black/50 overflow-hidden text-white">
+            <div className="container mx-auto px-6 space-y-12">
 
-                        {/* Step 1 */}
-                        <div className="flex flex-col items-center relative z-10">
-                            <div className="w-24 h-24 rounded-full bg-black border border-blue-500/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                                <LinkIcon className="text-blue-500" size={32} />
-                            </div>
-                            <h3 className="text-blue-500 font-tektur font-bold mb-1">Share Your Link</h3>
+                {/* Top Section: Header & Steps Combined */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="glass-card rounded-xl p-8 md:p-12 relative overflow-hidden z-10">
+                        {/* Header Content */}
+                        <div className="mb-24 relative z-10">
+                            <h2 className="text-3xl md:text-4xl font-tektur font-bold mb-4">
+                                Invite Your Friends And Earn <span className="text-accent-cyan">20%</span>
+                            </h2>
+                            <p className="text-gray-400 font-satoshi max-w-2xl text-sm">
+                                Share the love, stack the rewards! Earn 10% of what your friend deposits and another 10% in SPICA when they invest $10+ in the pre-sale. Cash out anytime — no limits!
+                            </p>
                         </div>
 
-                        {/* Step 2 */}
-                        <div className="flex flex-col items-center relative z-10">
-                            <div className="w-24 h-24 rounded-full bg-black border border-yellow-500/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(234,179,8,0.2)]">
-                                <Users className="text-yellow-500" size={32} />
-                            </div>
-                            <h3 className="text-yellow-500 font-tektur font-bold mb-1">Friend Invests $10</h3>
-                        </div>
+                        {/* Steps Content */}
+                        <div className="relative">
+                            {/* Curved Connector Lines (Desktop) */}
+                            <svg className="hidden md:block absolute top-[-50px] left-0 w-full h-[170px] pointer-events-none z-0" viewBox="0 0 800 170" preserveAspectRatio="none">
+                                {/* Curve 1: Left to Middle - Top Right Origin */}
+                                <path
+                                    d="M 155 65 Q 185 5 355 105"
+                                    fill="none"
+                                    stroke="rgba(255,255,255,0.3)"
+                                    strokeWidth="2"
+                                    strokeDasharray="2 4"
+                                />
+                                {/* Curve 2: Middle to Right */}
+                                <path
+                                    d="M 425 65 Q 455 10 625 105"
+                                    fill="none"
+                                    stroke="rgba(255,255,255,0.3)"
+                                    strokeWidth="2"
+                                    strokeDasharray="2 4"
+                                />
+                            </svg>
 
-                        {/* Step 3 */}
-                        <div className="flex flex-col items-center relative z-10">
-                            <div className="w-24 h-24 rounded-full bg-black border border-green-500/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                                <DollarSign className="text-green-500" size={32} />
+                            <div className="grid grid-cols-3 gap-2 md:gap-8 relative z-10">
+                                {/* Mobile Dotted Line Connecting Icons */}
+                                <svg className="md:hidden absolute top-[4px] left-0 w-full h-[40px] -z-10 overflow-visible" viewBox="0 0 300 40" preserveAspectRatio="none">
+                                    {/* Curve 1: Step 1 to Step 2 */}
+                                    <path
+                                        d="M 78 20 Q 112 -10 125 20"
+                                        fill="none"
+                                        stroke="rgba(255,255,255,0.4)"
+                                        strokeWidth="2"
+                                        strokeDasharray="4 4"
+                                    />
+                                    {/* Curve 2: Step 2 to Step 3 */}
+                                    <path
+                                        d="M 178 20 Q 212 -5 225 20"
+                                        fill="none"
+                                        stroke="rgba(255,255,255,0.4)"
+                                        strokeWidth="2"
+                                        strokeDasharray="4 4"
+                                    />
+                                </svg>
+                                {/* Step 1 */}
+                                <div className="flex flex-col items-center">
+                                    <div className="mb-4 relative">
+                                        <Image
+                                            src="/assets/images/Share-Link.png"
+                                            alt="Share Your Link"
+                                            width={80}
+                                            height={80}
+                                            className="object-contain w-12 h-12 md:w-20 md:h-20"
+                                        />
+                                    </div>
+                                    <h3 className="text-blue-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">Share Your Link</h3>
+                                </div>
+
+                                {/* Step 2 */}
+                                <div className="flex flex-col items-center">
+                                    <div className="mb-4 relative">
+                                        <Image
+                                            src="/assets/images/Friend-Invest.png"
+                                            alt="Friend Invests $10"
+                                            width={80}
+                                            height={80}
+                                            className="object-contain w-12 h-12 md:w-20 md:h-20"
+                                        />
+                                    </div>
+                                    <h3 className="text-yellow-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">Friend Invests $10</h3>
+                                </div>
+
+                                {/* Step 3 */}
+                                <div className="flex flex-col items-center">
+                                    <div className="mb-4 relative">
+                                        <Image
+                                            src="/assets/images/Earn-Instantly.png"
+                                            alt="You Earn Instantly"
+                                            width={80}
+                                            height={80}
+                                            className="object-contain w-12 h-12 md:w-20 md:h-20"
+                                        />
+                                    </div>
+                                    <h3 className="text-green-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">You Earn Instantly</h3>
+                                </div>
                             </div>
-                            <h3 className="text-green-500 font-tektur font-bold mb-1">You Earn Instantly</h3>
+
+                            {/* Connector Button or Dashboard */}
+                            <div className="mt-12">
+                                {!isConnected ? (
+                                    <div className="text-center">
+                                        <button onClick={openWalletModal} className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full border border-accent-pink/50 bg-black text-accent-pink font-tektur text-sm hover:bg-white/5 transition-colors shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+                                            <Image src="/assets/images/Ref-Connect.png" alt="" width={20} height={20} className="w-4 h-4" />
+                                            <span>Connect your wallet to access the referral system</span>
+                                            <Image src="/assets/images/Ref-Connect.png" alt="" width={20} height={20} className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-row items-center justify-center gap-2 md:gap-6">
+                                        {/* Button 1 */}
+                                        <div className="px-3 py-2 md:px-6 md:py-2.5 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
+                                            <span className="text-white/80 font-tektur text-[10px] md:text-sm whitespace-nowrap">0.00 USDT</span>
+                                        </div>
+
+                                        {/* Button 2 with Icon */}
+                                        <div className="px-3 py-2 md:px-6 md:py-2.5 rounded-full border border-white/20 bg-white/5 flex items-center justify-center gap-1.5">
+                                            <span className="text-white/80 font-tektur text-[10px] md:text-sm whitespace-nowrap">0.00 SPICA</span>
+                                            <Image src="/assets/images/Ref-Connect.png" alt="icon" width={14} height={14} className="w-3 h-3 md:w-4 md:h-4" />
+                                        </div>
+
+                                        {/* Button 3: Withdraw */}
+                                        <button
+                                            onClick={() => setIsWithdrawOpen(true)}
+                                            className="px-4 py-2 md:px-8 md:py-2.5 rounded-full bg-gradient-to-r from-[#D659E4] to-[#9F40D6] text-white font-tektur font-bold shadow-[0_0_15px_rgba(214,89,228,0.4)] hover:brightness-110 transition-all text-[10px] md:text-base whitespace-nowrap"
+                                        >
+                                            Withdraw Reward
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Connector Button */}
-                    <div className="text-center mb-16">
-                        <button className="px-8 py-3 rounded-full border border-accent-pink/50 bg-accent-pink/10 text-accent-pink font-tektur text-sm hover:bg-accent-pink/20 transition-colors">
-                            Connect your wallet to access the referral system
-                        </button>
-                    </div>
-
-                    {/* Interface */}
-                    <div className="grid md:grid-cols-2 gap-8">
+                {/* Bottom Section: Interface Split (Standalone Cards) */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="grid md:grid-cols-5 gap-8">
                         {/* Link Box */}
-                        <div className="bg-black/40 border border-white/10 rounded-xl p-6">
+                        <div className="glass-card rounded-xl p-8 bg-black/40 border border-white/10 md:col-span-3">
                             <h4 className="text-accent-pink font-tektur font-bold mb-4">Share the referral link</h4>
                             <p className="text-xs text-gray-500 mb-4">Share your referral link by copying and sending it to your friends or sharing it on social media.</p>
 
-                            <div className="flex bg-black/60 border border-white/10 rounded-lg p-1.5 mb-4">
-                                <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-500 focus:outline-none" />
-                                <button className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-bold transition-colors">
-                                    Connect Wallet
-                                </button>
+                            <div className="flex bg-black/60 border border-white/10 rounded-lg p-1.5 mb-6">
+                                {!isConnected ? (
+                                    <>
+                                        <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-500 focus:outline-none" />
+                                        <button onClick={openWalletModal} className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-bold transition-colors">
+                                            Connect Wallet
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={`https://ezzstar.space/?ref=${address ? address.slice(0, 10) : '0878871527'}`}
+                                            readOnly
+                                            className="bg-transparent flex-1 px-3 text-sm text-gray-300 focus:outline-none font-mono"
+                                        />
+                                        <button
+                                            onClick={handleCopy}
+                                            className="px-6 py-2 bg-black border border-white/20 rounded-md text-white/80 hover:text-white text-xs font-tektur uppercase tracking-wider hover:border-white/50 transition-all shadow-[0_0_10px_rgba(255,255,255,0.05)]"
+                                        >
+                                            {copied ? "Copied!" : "Copy"}
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+
+                            {/* Social Icons */}
+                            <div>
+                                <p className="text-sm text-gray-400 mb-3">Invite via:</p>
+                                <div className="flex gap-4 text-gray-400">
+                                    <MessageCircle className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                    <Send className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                    <Twitter className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                    <Facebook className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                    <Instagram className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                    <Linkedin className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                                </div>
                             </div>
                         </div>
 
                         {/* Stats Box */}
-                        <div className="bg-black/40 border border-white/10 rounded-xl p-6">
+                        <div className="glass-card rounded-xl p-8 bg-black/40 border border-white/10 md:col-span-2">
                             <div className="text-center mb-6">
+                                {/* Ref-referred Icon */}
+                                <div className="flex justify-center mb-2">
+                                    <Image src="/assets/images/Ref-referred.png" alt="Referred" width={32} height={32} className="object-contain" />
+                                </div>
                                 <h4 className="inline-flex items-center gap-2 text-2xl font-tektur font-bold">
                                     Referred <span className="text-yellow-500">(03)</span>
                                 </h4>
@@ -95,6 +236,7 @@ export default function Referral() {
                     </div>
                 </div>
             </div>
+            <WithdrawModal isOpen={isWithdrawOpen} onClose={() => setIsWithdrawOpen(false)} />
         </section>
     );
 }

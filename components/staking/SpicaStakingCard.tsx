@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useWallet } from "../providers/WalletProvider";
 
 export default function SpicaStakingCard() {
-    const { isConnected, connectWallet } = useWallet();
+    const { isConnected, connectWallet, openWalletModal } = useWallet();
     const [amount, setAmount] = useState<string>("10,000");
     const [lockDays, setLockDays] = useState(1080);
     const [apr, setApr] = useState(80);
@@ -39,7 +39,7 @@ export default function SpicaStakingCard() {
 
     const handleAction = () => {
         if (!isConnected) {
-            connectWallet();
+            openWalletModal();
         } else {
             // Stake logic would go here
             console.log("Staking", amount, "for", lockDays, "days");

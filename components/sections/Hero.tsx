@@ -71,7 +71,7 @@ const NFT_TIERS = [
 ];
 
 import { useWallet } from "../providers/WalletProvider";
-import WalletModal from "../ui/WalletModal";
+// import WalletModal from "../ui/WalletModal";
 
 export default function Hero() {
     // Desktop State
@@ -80,8 +80,8 @@ export default function Hero() {
     const selectedTier = NFT_TIERS.find(t => t.id === selectedTierId);
 
     // Wallet State
-    const { isConnected, address, disconnectWallet } = useWallet();
-    const [showWalletModal, setShowWalletModal] = useState(false);
+    const { isConnected, address, disconnectWallet, openWalletModal } = useWallet();
+    // const [showWalletModal, setShowWalletModal] = useState(false);
 
     // Mobile State
     const [mobileTab, setMobileTab] = useState<'widget' | 'spica' | 'buffo' | 'lily'>('widget');
@@ -309,7 +309,7 @@ export default function Hero() {
                                                             </button>
                                                         ) : (
                                                             <button
-                                                                onClick={() => setShowWalletModal(true)}
+                                                                onClick={openWalletModal}
                                                                 className="w-full max-w-[160px] py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white font-tektur font-medium text-sm tracking-wide transition-all shadow-lg active:scale-95"
                                                             >
                                                                 Connect Wallet
@@ -351,7 +351,6 @@ export default function Hero() {
                 </div>
 
             </div>
-            <WalletModal isOpen={showWalletModal} onClose={() => setShowWalletModal(false)} />
         </section>
     );
 }

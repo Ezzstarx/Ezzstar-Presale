@@ -1,12 +1,14 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import WalletModal from "../ui/WalletModal";
 
 interface WalletContextType {
     isConnected: boolean;
     address: string | null;
     connectWallet: () => void;
     disconnectWallet: () => void;
+    openWalletModal: () => void;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -14,6 +16,7 @@ const WalletContext = createContext<WalletContextType | undefined>(undefined);
 export function WalletProvider({ children }: { children: ReactNode }) {
     const [isConnected, setIsConnected] = useState(false);
     const [address, setAddress] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Check custom simulations
     useEffect(() => {
@@ -40,9 +43,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         localStorage.removeItem("ezzstar_wallet_connected");
     };
 
+    const openWalletModal = () => setIsModalOpen(true);
+
     return (
-        <WalletContext.Provider value={{ isConnected, address, connectWallet, disconnectWallet }}>
+        <WalletContext.Provider value={{ isConnected, address, connectWallet, disconnectWallet, openWalletModal }}>
             {children}
+            <WalletModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </WalletContext.Provider>
     );
 }
