@@ -16,24 +16,19 @@ export default function About() {
         return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.defaultMuted = true;
-            videoRef.current.play().catch(error => console.error("Video playback failed:", error));
-        }
-    }, []);
+
 
     return (
-        <section id="about" className="pt-0 pb-24 relative overflow-hidden bg-black">
+        <section id="about" className="pt-0 pb-24 relative overflow-hidden bg-transparent">
             {/* Background Blurs */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-pink/5 blur-[100px] rounded-full pointer-events-none"></div>
 
             <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
 
                 {/* Promo Text & Socials */}
-                <div className="flex flex-col items-center gap-8 mb-40 w-full">
+                <div className="flex flex-col items-center gap-8 mb-20 w-full">
                     <p className="text-sm md:text-base font-satoshi text-gray-300 text-center tracking-wide">
-                        Don't miss out! Invest in <span className="text-[#FF00FF] font-bold">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-bold">Exclusive NFT Signature</span> directly in your wallet.
+                        Don't miss out! Invest in <span className="text-[#FF00FF] font-medium">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-medium">Exclusive NFT Signature</span> directly in your wallet.
                     </p>
 
                     <div className="flex items-center gap-8 md:gap-12 opacity-80">
@@ -47,11 +42,11 @@ export default function About() {
                             <span className="w-6 h-6 md:w-8 md:h-8 bg-current rounded-full flex items-center justify-between overflow-hidden p-[2px]">
                                 <svg viewBox="0 0 24 24" fill="black" className="w-full h-full"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" /></svg>
                             </span>
-                            <span className="font-serif font-bold text-lg hidden md:block">Medium</span>
+                            <span className="font-serif font-medium text-lg hidden md:block">Medium</span>
                         </a>
                         <a href="#" className="hover:text-white hover:scale-110 transition-all text-gray-400 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.334-.956 2.42-2.157 2.42zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.334-.946 2.42-2.157 2.42z" /></svg>
-                            <span className="font-bold text-lg hidden md:block tracking-wide">Discord</span>
+                            <span className="font-medium text-lg hidden md:block tracking-wide">Discord</span>
                         </a>
                         <a href="#" className="hover:text-white hover:scale-110 transition-all text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
@@ -63,10 +58,10 @@ export default function About() {
                 </div>
 
                 {/* Animated Heading */}
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-tektur font-semibold mb-6 flex items-center justify-center gap-2">
-                        <span className="w-[120px] md:w-[200px] text-right">About</span>
-                        <div className="relative h-[1.2em] w-[200px] flex items-center justify-start overflow-hidden">
+                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-16">
+                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] mb-0 flex items-center justify-center gap-2">
+                        <span className="w-[160px] md:w-[300px] text-right">About</span>
+                        <div className="relative h-[1.2em] w-[160px] md:w-[300px] flex items-center justify-start overflow-hidden">
                             <AnimatePresence mode="wait">
                                 <motion.span
                                     key={texts[textIndex]}
@@ -74,7 +69,7 @@ export default function About() {
                                     animate={{ y: 0, opacity: 1 }}
                                     exit={{ y: -20, opacity: 0 }}
                                     transition={{ duration: 0.5, ease: "easeOut" }}
-                                    className={`absolute font-bold text-left ${texts[textIndex] === "EZZSTAR" ? "bg-gradient-to-r from-accent-cyan to-[#ff00ff] text-transparent bg-clip-text" :
+                                    className={`absolute font-medium text-left ${texts[textIndex] === "EZZSTAR" ? "bg-gradient-to-r from-accent-cyan to-[#ff00ff] text-transparent bg-clip-text" :
                                         texts[textIndex] === "SPICA" ? "text-[#ff00ff]" :
                                             texts[textIndex] === "Us" ? "text-accent-cyan" : "text-white"
                                         }`}
@@ -84,6 +79,7 @@ export default function About() {
                             </AnimatePresence>
                         </div>
                     </h2>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
                 </div>
 
                 {/* Stylized Black Box Content with Exact Dimensions */}
@@ -94,21 +90,22 @@ export default function About() {
                         {/* Logo */}
                         <div className="mb-6">
                             <img
-                                src="/assets/images/About-Logo.jpeg"
+                                src="/assets/images/Footer-Logo.png"
                                 alt="About Ezzstar Logo"
-                                className="w-32 md:w-48 h-auto object-contain brightness-110 contrast-125"
+                                className="object-contain brightness-110 contrast-125"
+                                style={{ width: '93px', height: '85px' }}
                             />
                         </div>
 
                         {/* Text Content - Professional & Compact */}
                         <div className="space-y-4 text-center w-full max-w-[600px]">
                             <p className="text-sm md:text-[15px] text-white/90 font-satoshi leading-relaxed font-light">
-                                Welcome to <span className="font-semibold text-white">Ezzstar</span>, a fully interconnected Web3 ecosystem empowering creators,
+                                Welcome to <span className="font-medium text-white">Ezzstar</span>, a fully interconnected Web3 ecosystem empowering creators,
                                 gamers, and anonymous users. We&apos;re not just building platforms. We&apos;re
                                 constructing an economy where <span className="font-medium text-white">time, identity, and creativity are currency.</span>
                             </p>
 
-                            <p className="text-base md:text-[17px] font-tektur font-semibold text-accent-cyan tracking-wide">
+                            <p className="text-base md:text-[17px] font-tektur font-medium text-accent-cyan tracking-wide">
                                 From digital aliens to elite-ranked players,
                             </p>
 
@@ -116,10 +113,10 @@ export default function About() {
                                 Ezzstar enables you to own your identity across a decentralized social hub, a play-
                                 to-earn game, and metaverse.
                                 <br />
-                                All powered by a single currency: <span className="text-[#ff00ff] font-bold tracking-wider">SPICA</span>
+                                All powered by a single currency: <span className="text-[#ff00ff] font-medium tracking-wider">SPICA</span>
                             </p>
 
-                            <p className="text-sm md:text-[16px] font-satoshi font-bold text-red-600 tracking-tight brightness-110 leading-tight pt-2">
+                            <p className="text-sm md:text-[16px] font-satoshi font-medium text-red-600 tracking-tight brightness-110 leading-tight pt-2">
                                 This is a world where reputation matters, identity is earned, and your presence
                                 shapes the future.
                             </p>
@@ -127,15 +124,20 @@ export default function About() {
                     </div>
 
                     {/* Bottom Section: Video Content */}
-                    <div className="w-full relative bg-black/50 h-[300px] md:h-[390px] md:mt-[5px]">
-                        {/* Placeholder Image for Layout Verification */}
-                        <img
-                            src="/assets/images/placeholder_video_bg.png"
-                            alt="About Section Visual"
-                            className="w-full h-full object-cover opacity-90"
-                        />
+                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px]">
+                        {/* Video Content */}
+                        <video
+                            className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1]"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="auto"
+                        >
+                            <source src="/assets/Videos/Video-About.MP4" type="video/mp4" />
+                        </video>
                         {/* Gradient Overlay for smooth integration */}
-                        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#050507] to-transparent"></div>
+                        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#050507] to-transparent z-10"></div>
                     </div>
                 </div>
 
@@ -147,9 +149,15 @@ export default function About() {
                     transition={{ duration: 0.6 }}
                     className="w-full max-w-7xl mt-24 md:mt-32 px-6 md:px-4 flex flex-col items-center"
                 >
-                    <h2 className="text-3xl md:text-5xl font-tektur font-semibold text-center mb-12 md:mb-16 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 w-full">
-                        What makes Spica unique ?
-                    </h2>
+                    <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12 md:mb-16">
+                        <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
+                            What makes Spica unique ?
+                        </h2>
+                        {/* Top Gradient Line */}
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                        {/* Bottom White Line */}
+                        <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-white opacity-50"></div>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                         {/* Card 1: What Is SPICA? */}
@@ -160,7 +168,7 @@ export default function About() {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C243FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bot"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
                                 </div>
 
-                                <h3 className="text-2xl font-tektur font-bold mb-4 text-[#C243FE]">
+                                <h3 className="text-2xl font-tektur font-medium mb-4 text-[#C243FE]">
                                     What Is SPICA?
                                 </h3>
 
@@ -195,7 +203,7 @@ export default function About() {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-coins"><circle cx="8" cy="8" r="6" /><path d="M18.09 10.37A6 6 0 1 1 10.34 18" /><path d="M7 6h1v4" /><path d="m16.71 13.88.7.71-2.82 2.82" /></svg>
                                 </div>
 
-                                <h3 className="text-2xl font-tektur font-bold mb-4 text-[#C243FE]">
+                                <h3 className="text-2xl font-tektur font-medium mb-4 text-[#C243FE]">
                                     Why You Should Invest In SPICA
                                 </h3>
 

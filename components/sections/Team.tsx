@@ -72,11 +72,14 @@ export default function Team() {
     }, [currentIndex, nextSlide]);
 
     return (
-        <section id="team" className="py-12 bg-black relative overflow-hidden">
+        <section id="team" className="py-12 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
-                <h2 className="text-4xl font-tektur font-bold text-center mb-8 text-white">
-                    Core <span className="text-[#00ffcc] text-shadow-glow">Team</span>
-                </h2>
+                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
+                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                        Core <span className="text-[#00ffcc] text-shadow-glow">Team</span>
+                    </h2>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                </div>
 
                 <div className="relative max-w-5xl mx-auto group">
                     {/* Carousel Window */}
@@ -101,7 +104,7 @@ export default function Team() {
                                             > {/* Fixed width card centered */}
                                                 {/* Glow Border Container */}
                                                 <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full">
-                                                    <div className="bg-black rounded-xl overflow-hidden relative h-full flex flex-col">
+                                                    <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
                                                         {/* Image Section */}
                                                         <div className="relative aspect-square w-full border-b border-white/10">
                                                             <Image
@@ -115,7 +118,7 @@ export default function Team() {
                                                         </div>
                                                         {/* Text Content */}
                                                         <div className="p-4 flex flex-col justify-end flex-grow bg-black/40 backdrop-blur-sm">
-                                                            <h3 className="text-xl font-tektur font-bold text-white mb-1">
+                                                            <h3 className="text-xl font-tektur font-medium text-white mb-1">
                                                                 {member.name}
                                                             </h3>
                                                             <div className="flex items-center gap-2">
@@ -146,7 +149,7 @@ export default function Team() {
                                                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                                                 >
                                                     <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full">
-                                                        <div className="bg-black rounded-xl overflow-hidden relative h-full flex flex-col">
+                                                        <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
                                                             <div className="relative aspect-square w-full border-b border-white/10">
                                                                 <Image
                                                                     src="/assets/images/TeamPics.png"
@@ -157,7 +160,7 @@ export default function Team() {
                                                                 <div className="absolute inset-0 bg-transparent opacity-20 mix-blend-overlay pointer-events-none"></div>
                                                             </div>
                                                             <div className="p-4 flex flex-col justify-end flex-grow bg-black/40 backdrop-blur-sm">
-                                                                <h3 className="text-xl font-tektur font-bold text-white mb-1">
+                                                                <h3 className="text-xl font-tektur font-medium text-white mb-1">
                                                                     {member.name}
                                                                 </h3>
                                                                 <div className="flex items-center gap-2">

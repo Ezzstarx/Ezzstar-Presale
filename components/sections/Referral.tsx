@@ -20,7 +20,7 @@ export default function Referral() {
 
     return (
 
-        <section className="py-24 relative bg-black/50 overflow-hidden text-white">
+        <section className="py-24 relative bg-transparent overflow-hidden text-white">
             <div className="container mx-auto px-6 space-y-12">
 
                 {/* Top Section: Header & Steps Combined */}
@@ -28,9 +28,12 @@ export default function Referral() {
                     <div className="glass-card rounded-xl p-8 md:p-12 relative overflow-hidden z-10">
                         {/* Header Content */}
                         <div className="mb-24 relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-tektur font-bold mb-4">
-                                Invite Your Friends And Earn <span className="text-accent-cyan">20%</span>
-                            </h2>
+                            <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-4">
+                                <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] mb-0">
+                                    Invite Your Friends And Earn <span className="text-accent-cyan">20%</span>
+                                </h2>
+                                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                            </div>
                             <p className="text-gray-400 font-satoshi max-w-2xl text-sm">
                                 Share the love, stack the rewards! Earn 10% of what your friend deposits and another 10% in SPICA when they invest $10+ in the pre-sale. Cash out anytime — no limits!
                             </p>
@@ -89,7 +92,7 @@ export default function Referral() {
                                             className="object-contain w-12 h-12 md:w-20 md:h-20"
                                         />
                                     </div>
-                                    <h3 className="text-blue-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">Share Your Link</h3>
+                                    <h3 className="text-blue-500 font-tektur font-medium mb-1 text-[10px] md:text-base text-center">Share Your Link</h3>
                                 </div>
 
                                 {/* Step 2 */}
@@ -103,7 +106,7 @@ export default function Referral() {
                                             className="object-contain w-12 h-12 md:w-20 md:h-20"
                                         />
                                     </div>
-                                    <h3 className="text-yellow-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">Friend Invests $10</h3>
+                                    <h3 className="text-yellow-500 font-tektur font-medium mb-1 text-[10px] md:text-base text-center">Friend Invests $10</h3>
                                 </div>
 
                                 {/* Step 3 */}
@@ -117,7 +120,7 @@ export default function Referral() {
                                             className="object-contain w-12 h-12 md:w-20 md:h-20"
                                         />
                                     </div>
-                                    <h3 className="text-green-500 font-tektur font-bold mb-1 text-[10px] md:text-base text-center">You Earn Instantly</h3>
+                                    <h3 className="text-green-500 font-tektur font-medium mb-1 text-[10px] md:text-base text-center">You Earn Instantly</h3>
                                 </div>
                             </div>
 
@@ -146,8 +149,8 @@ export default function Referral() {
 
                                         {/* Button 3: Withdraw */}
                                         <button
-                                            onClick={() => setIsWithdrawOpen(true)}
-                                            className="px-4 py-2 md:px-8 md:py-2.5 rounded-full bg-gradient-to-r from-[#D659E4] to-[#9F40D6] text-white font-tektur font-bold shadow-[0_0_15px_rgba(214,89,228,0.4)] hover:brightness-110 transition-all text-[10px] md:text-base whitespace-nowrap"
+                                            disabled
+                                            className="px-4 py-2 md:px-8 md:py-2.5 rounded-full bg-gray-600/50 text-white/40 font-tektur font-medium cursor-not-allowed text-[10px] md:text-base whitespace-nowrap"
                                         >
                                             Withdraw Reward
                                         </button>
@@ -163,14 +166,14 @@ export default function Referral() {
                     <div className="grid md:grid-cols-5 gap-8">
                         {/* Link Box */}
                         <div className="glass-card rounded-xl p-8 bg-black/40 border border-white/10 md:col-span-3">
-                            <h4 className="text-accent-pink font-tektur font-bold mb-4">Share the referral link</h4>
+                            <h4 className="text-accent-pink font-tektur font-medium mb-4">Share the referral link</h4>
                             <p className="text-xs text-gray-500 mb-4">Share your referral link by copying and sending it to your friends or sharing it on social media.</p>
 
                             <div className="flex bg-black/60 border border-white/10 rounded-lg p-1.5 mb-6">
                                 {!isConnected ? (
                                     <>
                                         <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-500 focus:outline-none" />
-                                        <button onClick={openWalletModal} className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-bold transition-colors">
+                                        <button onClick={openWalletModal} className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-medium transition-colors">
                                             Connect Wallet
                                         </button>
                                     </>
@@ -213,13 +216,13 @@ export default function Referral() {
                                 <div className="flex justify-center mb-2">
                                     <Image src="/assets/images/Ref-referred.png" alt="Referred" width={32} height={32} className="object-contain" />
                                 </div>
-                                <h4 className="inline-flex items-center gap-2 text-2xl font-tektur font-bold">
+                                <h4 className="inline-flex items-center gap-2 text-2xl font-tektur font-medium">
                                     Referred <span className="text-yellow-500">(03)</span>
                                 </h4>
                             </div>
 
                             <div className="space-y-2">
-                                <div className="flex justify-between text-xs text-accent-cyan font-bold border-b border-white/5 pb-2">
+                                <div className="flex justify-between text-xs text-accent-cyan font-medium border-b border-white/5 pb-2">
                                     <span>Address</span>
                                     <span>Amount</span>
                                     <span>Date</span>

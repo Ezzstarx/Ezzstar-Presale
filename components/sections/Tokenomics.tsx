@@ -14,14 +14,17 @@ export default function Tokenomics() {
     };
 
     return (
-        <section id="tokenomics" className="py-12 relative overflow-hidden bg-black">
+        <section id="tokenomics" className="py-12 relative overflow-hidden bg-transparent">
             <div className="container mx-auto px-6 relative z-10">
-                <h2 className="text-4xl font-tektur font-bold text-center mb-8">
-                    Tokenomics
-                </h2>
+                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
+                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0">
+                        Tokenomics
+                    </h2>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                </div>
 
                 <div className="flex flex-col items-center gap-6">
-                    <div className="relative w-full max-w-5xl aspect-[21/9] mb-4">
+                    <div className="relative w-[1137px] h-[388px] mb-4 shrink-0">
                         <Image
                             src="/assets/images/Tokenomics.png"
                             alt="Tokenomics Distribution"
@@ -33,12 +36,12 @@ export default function Tokenomics() {
 
                     <div className="w-full max-w-6xl">
                         {/* Title */}
-                        <h3 className="text-2xl md:text-3xl font-tektur font-bold text-center mb-6 text-white/90">
+                        <h3 className="text-2xl md:text-3xl font-satoshi text-center mb-6 text-white/90">
                             Total Supply: <span className="text-[#FF00FF]">5 Billion SPICA</span>
                         </h3>
 
-                        {/* Distribution Grid */}
-                        <div className="grid grid-cols-6 md:grid-cols-5 gap-4 bg-white/5 rounded-2xl p-4 md:p-6 backdrop-blur-sm">
+                        {/* Distribution Grid - FIXED DIMENSIONS */}
+                        <div className="grid grid-cols-6 md:grid-cols-5 gap-4 bg-black/40 rounded-2xl p-4 md:p-6 backdrop-blur-md w-[1061px] h-[201px]">
                             {[
                                 { pct: "5%", label: "Private-Sale" },
                                 { pct: "10%", label: "Pre-sale" },
@@ -56,12 +59,14 @@ export default function Tokenomics() {
                                         <div
                                             className={`relative p-2 flex flex-col gap-1 col-span-2 md:col-span-1 items-center md:items-start group/item`}
                                         >
-                                            <span className="text-2xl md:text-3xl font-tektur font-bold text-white mb-1">{item.pct}</span>
+                                            <span className="text-2xl md:text-3xl font-satoshi text-white mb-1">{item.pct}</span>
                                             <span className="text-gray-400 text-xs md:text-sm leading-tight font-satoshi text-center md:text-left">{item.label}</span>
 
-                                            {/* Custom Separators (Inverted L) */}
-                                            <div className="absolute right-0 top-2 bottom-0 w-[1px] bg-white/20" />
-                                            <div className="absolute bottom-0 left-2 right-0 h-[1px] bg-white/20" />
+                                            {/* Custom Separators */}
+                                            {/* Right Line: Hide on last column in desktop (idx 4, 9) */}
+                                            <div className={`absolute right-0 top-2 md:top-0 bottom-0 w-[1px] bg-white/20 ${((idx + 1) % 5 === 0) ? 'md:hidden' : ''}`} />
+                                            {/* Bottom Line: Hide on last row in desktop (idx >= 5) */}
+                                            <div className={`absolute bottom-0 left-2 md:left-0 right-0 h-[1px] bg-white/20 ${(idx >= 5) ? 'md:hidden' : ''}`} />
                                         </div>
 
                                         {/* Spacer for 3-2-3-2 Layout (Mobile) */}
@@ -73,11 +78,11 @@ export default function Tokenomics() {
                             })}
                         </div>
 
-                        {/* Contract Section */}
-                        <div className="mt-4 bg-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm flex flex-col gap-6">
+                        {/* Contract Section - FIXED DIMENSIONS */}
+                        <div className="mt-4 bg-black/40 rounded-2xl p-6 md:p-8 backdrop-blur-md flex flex-col gap-6 w-[1040px] h-[202px]">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                 <div>
-                                    <h4 className="text-xl font-tektur font-semibold text-white mb-2">Contract Address</h4>
+                                    <h4 className="text-xl font-tektur font-medium text-white mb-2">Contract Address</h4>
                                     <div className="flex flex-col gap-1">
                                         <code className="text-gray-400 font-mono text-sm break-all">
                                             {contractAddress}
@@ -123,14 +128,14 @@ export default function Tokenomics() {
                                             key={idx}
                                             className="relative col-span-2 md:col-span-1 text-center md:text-left w-full flex flex-col items-center md:items-start p-2"
                                         >
-                                            <span className="block text-xl font-tektur font-bold text-white mb-1">{item.value}</span>
-                                            <span className="text-gray-500 text-xs text-center md:text-left block w-full">{item.label}</span>
+                                            <span className="block text-xl font-tektur font-medium text-white mb-1">{item.value}</span>
+                                            <span className="text-gray-500 text-xs text-center md:text-left block w-full font-satoshi">{item.label}</span>
 
-                                            {/* Custom Separators (Inverted L) */}
-                                            {/* Right Line */}
-                                            <div className="absolute right-0 top-2 bottom-0 w-[1px] bg-white/20" />
-                                            {/* Bottom Line */}
-                                            <div className="absolute bottom-0 left-2 right-0 h-[1px] bg-white/20" />
+                                            {/* Custom Separators */}
+                                            {/* Right Line: Hide on last column in desktop (idx 4) */}
+                                            <div className={`absolute right-0 top-2 md:top-0 bottom-0 w-[1px] bg-white/20 ${((idx + 1) % 5 === 0) ? 'md:hidden' : ''}`} />
+                                            {/* Bottom Line: Hide always on desktop (single row) */}
+                                            <div className={`absolute bottom-0 left-2 md:left-0 right-0 h-[1px] bg-white/20 md:hidden`} />
                                         </div>
                                     );
                                 })}

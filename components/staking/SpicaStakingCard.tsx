@@ -41,8 +41,7 @@ export default function SpicaStakingCard() {
         if (!isConnected) {
             openWalletModal();
         } else {
-            // Stake logic would go here
-            console.log("Staking", amount, "for", lockDays, "days");
+            console.log("Staking functionality is currently disabled.");
         }
     };
 

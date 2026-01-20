@@ -1,16 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowDown } from "lucide-react";
-import WalletModal from "../ui/WalletModal";
+import { ArrowDown, Loader2 } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
 
 export default function PresaleWidget() {
-    const { isConnected, connectWallet } = useWallet();
+    const { isConnected, openWalletModal } = useWallet();
     const [payCurrency, setPayCurrency] = useState<string>("USDT");
     const [amount, setAmount] = useState<string>("0.002");
     const [receiveAmount, setReceiveAmount] = useState<string>("0.5");
-    const [showWalletModal, setShowWalletModal] = useState(false);
 
     const RATES: Record<string, number> = {
         "USDT": 250,      // 1 USDT = 250 SPCA
@@ -44,9 +42,18 @@ export default function PresaleWidget() {
         setReceiveAmount((num * rate).toLocaleString(undefined, { maximumFractionDigits: 2 }));
     };
 
+    const handleBuy = async () => {
+        if (!isConnected) {
+            openWalletModal();
+            return;
+        }
+        // Transaction logic disabled as per user request
+        console.log("Wallet already connected. Purchase functionality is currently disabled.");
+    };
+
     return (
-        <div className="relative w-full max-w-[420px] mx-auto lg:mx-0">
-            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 shadow-2xl">
+        <div className="relative w-[422px] h-[431px] mx-auto lg:mx-0">
+            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 shadow-2xl h-full flex flex-col justify-center">
                 {/* Title */}
                 <div className="text-left mb-6">
                     <h3 className="text-base font-tektur font-bold text-[#ff00ff]">
@@ -137,16 +144,19 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
-                {/* Connect Wallet Button */}
-                <button
-                    onClick={() => !isConnected && setShowWalletModal(true)}
-                    className="w-full py-2.5 border border-white/10 bg-transparent hover:bg-white/5 rounded-xl font-tektur text-white/60 text-sm transition-all"
-                >
-                    {isConnected ? "BUY NOW" : "Connect Wallet"}
-                </button>
+                {/* Button */}
+                <div className="flex flex-col gap-2">
+                    <button
+                        onClick={handleBuy}
+                        className={`w-full py-2.5 border border-white/10 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
+                            ? "bg-green-500/20 text-green-400 border-green-500/30 cursor-default"
+                            : "bg-transparent text-white/60 hover:bg-white/5"
+                            }`}
+                    >
+                        {!isConnected ? "Connect Wallet" : "CONNECTED"}
+                    </button>
+                </div>
             </div>
-
-            <WalletModal isOpen={showWalletModal} onClose={() => setShowWalletModal(false)} />
         </div>
     );
 }

@@ -29,10 +29,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${tektur.variable} ${satoshi.variable} bg-black font-satoshi text-white antialiased overflow-x-hidden`}>
+      <body className={`${tektur.variable} ${satoshi.variable} font-tektur text-white antialiased overflow-x-hidden relative`}>
+        {/* Global Background Image */}
+        <div
+          className="fixed inset-0 z-[-1] pointer-events-none"
+          style={{
+            backgroundImage: "url('/assets/images/background.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            backgroundColor: "#000000"
+          }}
+        />
         <WalletProvider>
           <Navbar />
-          <main className="min-h-screen relative overflow-hidden">
+          <main className="min-h-screen relative z-10">
             {children}
           </main>
         </WalletProvider>

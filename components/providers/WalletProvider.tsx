@@ -1,11 +1,43 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import WalletModal from "../ui/WalletModal";
+import { createContext, useContext, ReactNode } from "react";
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { WagmiProvider, useAccount, useDisconnect } from 'wagmi'
+import { bsc, mainnet } from 'wagmi/chains'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
+const queryClient = new QueryClient()
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = '02c80f7df2febc83dfaba59aa293c194'
+
+// 2. Create wagmiConfig
+const metadata = {
+    name: 'Ezzstar',
+    description: 'Ezzstar App',
+    url: 'https://ezzstar-app.vercel.app', // Update with your actual domain
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const chains = [bsc, mainnet] as const
+const config = defaultWagmiConfig({
+    chains,
+    projectId,
+    metadata,
+})
+
+// 3. Create modal
+createWeb3Modal({
+    wagmiConfig: config,
+    projectId,
+    enableAnalytics: true,
+    enableOnramp: true
+})
 
 interface WalletContextType {
     isConnected: boolean;
-    address: string | null;
+    address: string | undefined;
     connectWallet: () => void;
     disconnectWallet: () => void;
     openWalletModal: () => void;
@@ -13,43 +45,37 @@ interface WalletContextType {
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
-export function WalletProvider({ children }: { children: ReactNode }) {
-    const [isConnected, setIsConnected] = useState(false);
-    const [address, setAddress] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+function WalletInternalProvider({ children }: { children: ReactNode }) {
+    const { address, isConnected } = useAccount();
+    const { disconnect } = useDisconnect();
+    const { open } = useWeb3Modal();
 
-    // Check custom simulations
-    useEffect(() => {
-        // In a real app, check window.ethereum or localStorage
-        const saved = localStorage.getItem("ezzstar_wallet_connected");
-        if (saved === "true") {
-            setIsConnected(true);
-            setAddress("0x71...3A9"); // Mock address
-        }
-    }, []);
-
-    const connectWallet = () => {
-        // Simulate connection delay
-        setTimeout(() => {
-            setIsConnected(true);
-            setAddress("0x71...3A9");
-            localStorage.setItem("ezzstar_wallet_connected", "true");
-        }, 1000);
-    };
-
-    const disconnectWallet = () => {
-        setIsConnected(false);
-        setAddress(null);
-        localStorage.removeItem("ezzstar_wallet_connected");
-    };
-
-    const openWalletModal = () => setIsModalOpen(true);
+    const connectWallet = () => open();
+    const disconnectWallet = () => disconnect();
+    const openWalletModal = () => open();
 
     return (
-        <WalletContext.Provider value={{ isConnected, address, connectWallet, disconnectWallet, openWalletModal }}>
+        <WalletContext.Provider value={{
+            isConnected,
+            address,
+            connectWallet,
+            disconnectWallet,
+            openWalletModal
+        }}>
             {children}
-            <WalletModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </WalletContext.Provider>
+    );
+}
+
+export function WalletProvider({ children }: { children: ReactNode }) {
+    return (
+        <WagmiProvider config={config}>
+            <QueryClientProvider client={queryClient}>
+                <WalletInternalProvider>
+                    {children}
+                </WalletInternalProvider>
+            </QueryClientProvider>
+        </WagmiProvider>
     );
 }
 

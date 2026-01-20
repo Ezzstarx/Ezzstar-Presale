@@ -14,7 +14,7 @@ export default function StakingHero() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8"
                 >
-                    <h1 className="text-5xl md:text-7xl font-bold font-tektur mb-6 tracking-tight relative z-10 text-white">
+                    <h1 className="text-[55px] font-medium font-tektur tracking-[-1px] mb-6 relative z-10 text-white">
                         STAKE <span className="text-[#FF00FF] text-shadow-glow">SPICA</span>
                     </h1>
                 </motion.div>
@@ -27,14 +27,14 @@ export default function StakingHero() {
                 >
                     <div className="flex gap-6 justify-center items-center">
                         <div className="bg-[#FF00FF]/60 border border-[#FF00FF]/20 rounded-xl px-10 py-2 backdrop-blur-md hover:bg-[#FF00FF] hover:shadow-[0_0_20px_rgba(255,0,255,0.4)] transition-all duration-300 group cursor-default">
-                            <span className="block text-white text-xs font-satoshi font-bold uppercase tracking-wider mb-0 group-hover:text-white transition-colors">Current APR</span>
-                            <span className="text-2xl font-bold font-tektur text-white leading-none group-hover:text-white transition-colors">100%</span>
+                            <span className="block text-white text-xs font-satoshi font-medium uppercase tracking-wider mb-0 group-hover:text-white transition-colors">Current APR</span>
+                            <span className="text-2xl font-medium font-tektur text-white leading-none group-hover:text-white transition-colors">100%</span>
                         </div>
 
                         {/* Stat Card 2 */}
                         <div className="bg-[#1a001a] border border-[#FF00FF]/20 rounded-xl px-10 py-2 backdrop-blur-md hover:bg-[#2a002a] hover:border-[#FF00FF]/50 hover:shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300">
-                            <div className="text-white font-tektur font-bold text-2xl leading-none">174.71M</div>
-                            <div className="text-gray-400 text-xs font-satoshi font-bold uppercase tracking-wider">SPCA Staked</div>
+                            <div className="text-white font-tektur font-medium text-2xl leading-none">174.71M</div>
+                            <div className="text-gray-400 text-xs font-satoshi font-medium uppercase tracking-wider">SPCA Staked</div>
                         </div>
                     </div>
                 </motion.div>

@@ -45,7 +45,7 @@ export default function NFTGallery() {
     const [activeId, setActiveId] = useState<number | null>(null);
 
     return (
-        <section id="portfolios" className="py-24 relative overflow-hidden bg-black">
+        <section id="portfolios" className="py-24 relative overflow-hidden bg-transparent">
             <div className="container mx-auto px-6">
                 <h2 className="text-5xl font-tektur font-bold text-center mb-16">
                     Choose Your <span className="text-accent-cyan">Character</span>
@@ -58,7 +58,7 @@ export default function NFTGallery() {
                             <div
                                 key={nft.id}
                                 className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-300 h-[500px] flex flex-col
-                                ${nft.borderColor} ${nft.glowColor} bg-gray-900`}
+                                ${nft.borderColor} ${nft.glowColor} bg-black/40 backdrop-blur-md`}
                             >
                                 {/* Decorative Corner Lines */}
                                 <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-white/30 z-20"></div>
@@ -87,7 +87,7 @@ export default function NFTGallery() {
                                 </div>
 
                                 {/* Content Section */}
-                                <div className="p-6 bg-black z-10 flex flex-col items-center border-t border-white/10">
+                                <div className="p-6 bg-black/60 backdrop-blur-md z-10 flex flex-col items-center border-t border-white/10">
                                     <h3 className={`text-3xl font-tektur font-bold mb-2 ${nft.color}`}>{nft.name}</h3>
 
                                     <div className="flex items-center gap-2 mb-6">

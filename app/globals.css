@@ -83,14 +83,8 @@
 
 @layer base {
   body {
-    @apply bg-black text-white font-satoshi;
-    background-color: #000000;
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85));
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    @apply text-white font-satoshi;
+    background-color: transparent;
     min-height: 100vh;
   }
 }
@@ -101,7 +95,9 @@
   }
 
   .glass-card {
-    @apply bg-card backdrop-blur-md border border-card-border;
+    background: rgba(9, 9, 15, 0.3);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .btn-primary-glow {

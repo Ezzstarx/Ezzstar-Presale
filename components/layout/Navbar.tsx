@@ -5,7 +5,6 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-// import WalletModal from "../ui/WalletModal";
 import { useWallet } from "../providers/WalletProvider";
 
 export default function Navbar() {

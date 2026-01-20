@@ -81,7 +81,6 @@ export default function Hero() {
 
     // Wallet State
     const { isConnected, address, disconnectWallet, openWalletModal } = useWallet();
-    // const [showWalletModal, setShowWalletModal] = useState(false);
 
     // Mobile State
     const [mobileTab, setMobileTab] = useState<'widget' | 'spica' | 'buffo' | 'lily'>('widget');
@@ -100,15 +99,15 @@ export default function Hero() {
 
                 {/* Header Content */}
                 <div className="mb-8 md:mb-12 space-y-4">
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-tektur font-semibold leading-tight">
+                    <h1 className="text-[55px] font-tektur font-medium tracking-[-1px] leading-tight text-[#FAFAFA]">
                         Empowering the Future of <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-pink uppercase tracking-[0.2em] font-medium">
-                            Digital Aliens!
+                        <span className="uppercase tracking-[0.2em] font-medium leading-none">
+                            Digital <span className="text-transparent bg-clip-text bg-[linear-gradient(135deg,#FC009F_30%,#3EE1F0_70%)]">Aliens!</span>
                         </span>
                     </h1>
 
                     <div className="flex flex-row gap-4 justify-center pt-4">
-                        <button className="px-6 py-2 border border-white/10 bg-black rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
+                        <button className="px-6 py-2 border border-white/10 bg-black/40 backdrop-blur-sm rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
                             Presale is Live
                         </button>
                         <button className="px-6 py-2 border border-white/10 bg-white/10 rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
@@ -120,12 +119,12 @@ export default function Hero() {
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
                 <div className="hidden lg:grid w-full grid-cols-12 gap-8 items-start justify-center relative min-h-[600px]">
                     {/* LEFT: Presale Widget */}
-                    <div className="col-span-4 flex justify-end z-40">
+                    <div className="col-span-4 flex justify-start z-40 ml-[90px]">
                         <PresaleWidget />
                     </div>
 
                     {/* RIGHT AREA: Dynamic Interaction Zone */}
-                    <div className="col-span-8 flex flex-row items-center justify-center relative h-[540px]">
+                    <div className="col-span-8 flex flex-row items-center justify-start relative h-[420px] mx-[160px]">
                         {/* CENTER PANEL: Benefits */}
                         <AnimatePresence mode="popLayout">
                             {selectedTier && (
@@ -138,7 +137,7 @@ export default function Hero() {
                                     className="overflow-hidden flex-shrink-0 h-[500px] bg-[#0a0a0c]/95 backdrop-blur-md border border-white/10 rounded-2xl relative z-30 shadow-2xl"
                                 >
                                     <div className="w-[340px] p-8 h-full flex flex-col items-center justify-center text-left">
-                                        <h3 className={`text-2xl font-tektur font-bold mb-6 ${selectedTier.color}`}>
+                                        <h3 className={`text-2xl font-tektur font-medium mb-6 ${selectedTier.color}`}>
                                             {selectedTier.name} Benefits
                                         </h3>
                                         <ul className="space-y-4 w-full">
@@ -156,7 +155,7 @@ export default function Hero() {
 
                         {/* RIGHT: NFT Cards Deck */}
                         <motion.div
-                            className="flex flex-row items-center relative h-[500px]"
+                            className="flex flex-row items-center relative h-[420px] w-[582px]"
                             layout
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
@@ -174,7 +173,7 @@ export default function Hero() {
                                         key={tier.id}
                                         onMouseEnter={() => setHoveredTierId(tier.id)}
                                         onMouseLeave={() => setHoveredTierId(null)}
-                                        className={`relative w-[280px] h-[460px] bg-black rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden shadow-2xl transition-all duration-300`}
+                                        className={`relative w-[300px] h-[420px] bg-black/40 backdrop-blur-md rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden shadow-2xl transition-all duration-300`}
                                         style={{
                                             zIndex: activeZIndex,
                                             boxShadow: `0 0 20px ${tier.glowColor}`,
@@ -182,7 +181,7 @@ export default function Hero() {
                                         whileHover={{ scale: 1.05 }}
                                         animate={{
                                             marginLeft: isOtherCardActive ? 0 : (selectedTierId === tier.id ? 20 : currentMargin),
-                                            width: isOtherCardActive ? 0 : 280,
+                                            width: isOtherCardActive ? 0 : 300,
                                             opacity: isOtherCardActive ? 0 : 1,
                                             scale: isDetailsOpen ? 1 : 1,
                                             padding: isOtherCardActive ? 0 : '',
@@ -196,14 +195,14 @@ export default function Hero() {
                                             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
                                         </div>
                                         {/* Content Section */}
-                                        <div className="h-[35%] w-full flex flex-col items-center justify-center bg-black pt-2 pb-6 px-4 relative z-10">
+                                        <div className="h-[35%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
                                             <div className="flex items-center gap-3 mb-2 justify-center w-full">
                                                 <img src={tier.badge} alt="Badge" className={`${tier.id === 'lily' ? 'w-20 h-20' : 'w-12 h-12'} object-contain`} />
-                                                <h3 className={`text-2xl font-bold font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                                <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
                                             </div>
                                             <div className="flex items-center gap-2 mb-4">
                                                 <span className="text-gray-400 text-sm">Invest:</span>
-                                                <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
+                                                <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
                                             </div>
                                             <button
                                                 onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
@@ -262,7 +261,7 @@ export default function Hero() {
                                                 {/* Top: Icon + Name */}
                                                 <div className="flex items-center gap-3 w-full">
                                                     <img src={tier.badge} alt="Badge" className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-                                                    <h3 className={`text-2xl font-tektur font-bold uppercase tracking-wider ${tier.color} drop-shadow-[0_0_10px_currentColor]`}>
+                                                    <h3 className={`text-2xl font-tektur font-medium uppercase tracking-wider ${tier.color} drop-shadow-[0_0_10px_currentColor]`}>
                                                         {tier.name}
                                                     </h3>
                                                 </div>
@@ -278,7 +277,7 @@ export default function Hero() {
                                                     <li className="flex items-start gap-3 text-sm text-gray-200 font-medium pt-2">
                                                         <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
                                                         <span className="leading-tight">
-                                                            Receive: <span className={`font-bold ${tier.color}`}>{receiveAmount} SPCA</span>
+                                                            Receive: <span className={`font-medium ${tier.color}`}>{receiveAmount} SPCA</span>
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -287,7 +286,7 @@ export default function Hero() {
                                                 <div className="w-full flex items-end justify-between mt-2 pt-4 border-t border-white/5">
 
                                                     {/* Left: Tab Icon (Rounded Square, Black BG) */}
-                                                    <div className="w-16 h-16 rounded-2xl bg-black border border-white/10 overflow-hidden shadow-lg shrink-0 p-1 flex items-center justify-center">
+                                                    <div className="w-16 h-16 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10 overflow-hidden shadow-lg shrink-0 p-1 flex items-center justify-center">
                                                         {(() => {
                                                             const iconSrc = MOBILE_TABS.find(tab => tab.id === tier.id)?.icon;
                                                             return <img src={iconSrc} alt={tier.name} className="w-full h-full object-contain" />;

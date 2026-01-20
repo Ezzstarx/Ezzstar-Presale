@@ -11,7 +11,7 @@ export default function Staking() {
     const earnings = (amount * (apy / 100) * (duration / 365));
 
     return (
-        <section className="py-24 relative bg-[#080808] border-t border-white/5">
+        <section className="py-24 relative bg-transparent border-t border-white/5">
             <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
                 {/* Left Text */}
