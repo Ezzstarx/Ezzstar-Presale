@@ -105,7 +105,7 @@ export default function About() {
                             playsInline
                             preload="auto"
                         >
-                            <source src="/assets/Videos/Video-About.mp4" type="video/mp4" />
+                            <source src="/assets/Videos/ezzstar-about.mp4" type="video/mp4" />
                         </video>
                     </div>
                 </div>
