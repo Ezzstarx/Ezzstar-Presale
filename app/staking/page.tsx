@@ -11,12 +11,14 @@ export default function StakingPage() {
             <Navbar />
 
             <main className="pb-24">
-                <StakingHero />
+                <div className="bg-[url('/assets/images/background.png')] bg-cover bg-center pb-8 border-b border-white/5">
+                    <StakingHero />
 
-                <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
-                        <SpicaStakingCard />
-                        <StakingCalculator />
+                    <div className="container mx-auto px-6">
+                        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-8">
+                            <SpicaStakingCard />
+                            <StakingCalculator />
+                        </div>
                     </div>
                 </div>
 

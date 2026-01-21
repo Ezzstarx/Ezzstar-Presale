@@ -19,9 +19,8 @@ const SocialButton = ({ href, icon: Icon, label, colorClass }: { href: string, i
 
 export default function Footer() {
     return (
-        <footer className="relative bg-[#050505] pt-24 pb-6 border-t border-white/5 overflow-hidden">
-            {/* Top Purple Glow Effect - Adjusted for subtle ambiance */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-32 bg-[#C243FE] opacity-5 blur-[120px] pointer-events-none"></div>
+        <footer className="relative bg-[radial-gradient(ellipse_at_top,_rgba(222,59,214,0.15)_0%,_#020205_50%,_#000000_100%)] pt-24 pb-6 border-t border-white/5 overflow-hidden">
+            {/* Top Purple Glow Effect - Removed as background handles it now */}
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-12">

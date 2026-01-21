@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
+import UniqueFeatures from "@/components/sections/UniqueFeatures";
 
 import Roadmap from "@/components/sections/Roadmap";
 import Tokenomics from "@/components/sections/Tokenomics";
@@ -14,6 +15,7 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white">
       <Hero />
       <About />
+      <UniqueFeatures />
 
       <Roadmap />
       <Tokenomics />

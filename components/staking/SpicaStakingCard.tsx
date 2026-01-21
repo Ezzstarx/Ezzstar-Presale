@@ -46,7 +46,7 @@ export default function SpicaStakingCard() {
     };
 
     return (
-        <div className="bg-[#0a0a0c] border border-white/10 rounded-[30px] p-6 md:p-8 relative overflow-hidden h-full">
+        <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[30px] p-6 md:p-8 relative overflow-hidden h-full">
             {/* Header */}
             <h2 className="text-3xl md:text-4xl font-tektur font-bold mb-2 text-white">
                 <span className="text-[#FF00FF]">SPICA</span> <span className="text-white">Staking</span>

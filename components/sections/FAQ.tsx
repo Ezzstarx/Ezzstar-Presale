@@ -42,16 +42,16 @@ export default function FAQ() {
     };
 
     return (
-        <section id="faq" className="py-24 bg-transparent relative overflow-hidden">
+        <section id="faq" className="py-24 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             {/* Pink Top Line/Glow */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FF00FF] to-transparent opacity-50"></div>
 
             <div className="container mx-auto px-6 max-w-5xl">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12">
-                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white uppercase">
+                    <h2 className="text-[32px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
                         Frequently Asked Questions
                     </h2>
-                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
                 <div className="space-y-4">

@@ -22,7 +22,7 @@ export default function StakingHistorySection() {
     const [activeTab, setActiveTab] = useState<Tab>("unlock"); // Default to unlock as requested
 
     return (
-        <section className="py-6">
+        <section className="py-12 bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             <div className="container mx-auto px-6 max-w-5xl">
 
                 {/* Content Container (Card Background) */}

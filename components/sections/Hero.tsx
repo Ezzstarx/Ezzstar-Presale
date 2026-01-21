@@ -73,6 +73,8 @@ const NFT_TIERS = [
 import { useWallet } from "../providers/WalletProvider";
 // import WalletModal from "../ui/WalletModal";
 
+import NextImage from "next/image";
+
 export default function Hero() {
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
@@ -94,7 +96,7 @@ export default function Hero() {
     ];
 
     return (
-        <section className="relative min-h-screen flex flex-col items-center justify-start pt-24 pb-0 overflow-x-hidden text-center sm:px-6">
+        <section className="relative min-h-screen flex flex-col items-center justify-start pt-24 pb-0 overflow-x-hidden text-center sm:px-6 bg-[url('/assets/images/background.png')] bg-cover bg-center">
             <div className="container mx-auto max-w-[1400px] relative z-10 flex flex-col items-center">
 
                 {/* Header Content */}
@@ -190,12 +192,12 @@ export default function Hero() {
                                         transition={{ duration: 0.4 }}
                                     >
                                         {/* Image Section */}
-                                        <div className="relative h-[65%] w-full bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+                                        <div className={`relative w-full bg-gradient-to-b from-gray-900 to-black overflow-hidden ${tier.id === 'lily' ? 'h-[55%]' : 'h-[65%]'}`}>
                                             <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
                                             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
                                         </div>
                                         {/* Content Section */}
-                                        <div className="h-[35%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
+                                        <div className={`${tier.id === 'lily' ? 'h-[45%]' : 'h-[35%]'} w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10`}>
                                             <div className="flex items-center gap-3 mb-2 justify-center w-full">
                                                 <img src={tier.badge} alt="Badge" className={`${tier.id === 'lily' ? 'w-20 h-20' : 'w-12 h-12'} object-contain`} />
                                                 <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
@@ -347,6 +349,52 @@ export default function Hero() {
                         ))}
                     </div>
 
+                </div>
+
+                {/* Promo Text & Socials - Moved from About Section */}
+                <div className="flex flex-col items-center w-full mb-20 mt-8">
+                    <p className="text-sm md:text-base font-satoshi text-gray-300 text-center tracking-wide mb-16 mt-0">
+                        Don't miss out! Invest in <span className="text-[#FF00FF] font-medium">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-medium">Exclusive NFT Signature</span> directly in your wallet.
+                    </p>
+
+                    <div className="flex items-center gap-8 md:gap-14 opacity-80 mt-8">
+                        {/* LinkedIn */}
+                        <a href="#" className="hover:scale-110 transition-transform">
+                            <div className="relative w-12 h-12 md:w-16 md:h-16">
+                                <NextImage src="/assets/images/Social-LinkedIn.png" alt="LinkedIn" fill className="object-contain" />
+                            </div>
+                        </a>
+                        {/* X (Twitter) */}
+                        <a href="#" className="hover:scale-110 transition-transform">
+                            <div className="relative w-5 h-5 md:w-7 md:h-7">
+                                <NextImage src="/assets/images/Social-X.png" alt="X" fill className="object-contain" />
+                            </div>
+                        </a>
+                        {/* Medium (Wordmark) */}
+                        <a href="#" className="hover:scale-105 transition-transform">
+                            <div className="relative w-28 h-7 md:w-40 md:h-10">
+                                <NextImage src="/assets/images/Social-Medium.png" alt="Medium" fill className="object-contain" />
+                            </div>
+                        </a>
+                        {/* Discord (Wordmark) */}
+                        <a href="#" className="hover:scale-105 transition-transform">
+                            <div className="relative w-28 h-7 md:w-40 md:h-10">
+                                <NextImage src="/assets/images/Social-Discord.png" alt="Discord" fill className="object-contain" />
+                            </div>
+                        </a>
+                        {/* Telegram */}
+                        <a href="#" className="hover:scale-110 transition-transform">
+                            <div className="relative w-6 h-6 md:w-8 md:h-8">
+                                <NextImage src="/assets/images/Social-Telegram.png" alt="Telegram" fill className="object-contain" />
+                            </div>
+                        </a>
+                        {/* Instagram */}
+                        <a href="#" className="hover:scale-110 transition-transform">
+                            <div className="relative w-6 h-6 md:w-8 md:h-8">
+                                <NextImage src="/assets/images/Social-Instagram.png" alt="Instagram" fill className="object-contain" />
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
             </div>

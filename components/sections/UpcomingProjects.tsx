@@ -5,38 +5,114 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const projects = [
+interface Project {
+    id: number;
+    title: string;
+    cardImages: string[];
+    modalImages: string[];
+    description: string;
+    extendedContent?: {
+        mainTitle: string;
+        sections: {
+            title?: string;
+            items: string[];
+            footer?: string;
+        }[];
+    };
+}
+
+const projects: Project[] = [
     {
         id: 1,
-        title: "Social Website",
-        image: "/assets/images/SocialWebsite.png",
-        description: "This social website will empower creators, gamers, and manga artists by allowing users to monetize their work without intermediaries' thresholds and unpredictable algorithms."
+        title: "Upcoming Social Website",
+        cardImages: [
+            "/assets/images/Upcoming/Up-SocialSite-1.png"
+        ],
+        modalImages: [
+            "/assets/images/Upcoming/Up-SocialSite-1.1.png",
+            "/assets/images/Upcoming/Up-SocialSite-1.2.png",
+            "/assets/images/Upcoming/Up-SocialSite-1.3.png"
+        ],
+        description: "This social website will empower creators, gamers, and manga artists by allowing users to monetize their work without intermediaries' thresholds and unpredictable algorithms. Our platform provides fair rewards for contributions, enabling users to earn while reading, claim rewards per hour, and tip their favorite artists."
     },
     {
         id: 2,
-        title: "Web3 Social Media App",
-        image: "/assets/images/Web3SocialApp.png",
-        description: "Introducing a revolutionizing web3 social media app where users can engage with content, socialize, participate in esports tournaments, and earn rewards."
+        title: "Web3 Social Media App Concept",
+        cardImages: [
+            "/assets/images/Upcoming/Up-SocialApp-2.1.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.2.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.3.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.4.png"
+        ],
+        modalImages: [
+            "/assets/images/Upcoming/Up-SocialApp-2.5.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.6.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.7.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.8.png",
+            "/assets/images/Upcoming/Up-SocialApp-2.9.png"
+        ],
+        description: "Introducing a revolutionizing web3 social media app where users can engage with content, socialize, hangout, participate in esports/events, and explore a digital marketplace and more. Each user will have a unique digital identity.",
+        extendedContent: {
+            mainTitle: "Those who own an Ezzstar 3D NFT character will join the exclusive \"Elite Division\" rank system. Elite Division members will enjoy:",
+            sections: [
+                {
+                    items: [
+                        "- Weekly rewards",
+                        "- Free metaverse real estate",
+                        "- Exclusive benefits"
+                    ],
+                    footer: "To rank up within the Elite Division, members will complete tasks and challenges, earning them exclusive rewards and higher status within the community."
+                },
+                {
+                    title: "All users will be part of a social rating system, where their profiles will be rated by others, influencing their position on the Hall of Fame leaderboard. A higher social rating will unlock benefits like:",
+                    items: [
+                        "- Discounts",
+                        "- Digital goods"
+                    ]
+                }
+            ]
+        }
     },
     {
         id: 3,
-        title: "3D NFT Character",
-        image: "/assets/images/3D-NFTChar.png",
-        description: "Introducing our NFT Character concept! (Note: These are conceptual designs, not the actual 3D models yet). Customize your avatar and explore the metaverse."
+        title: "NFT Character Concept",
+        cardImages: [
+            "/assets/images/Upcoming/3D-NFTChar.png"
+        ],
+        modalImages: [
+            "/assets/images/Upcoming/Up-3DNFT-3.1.png",
+            "/assets/images/Upcoming/Up-3DNFT-3.2.png",
+            "/assets/images/Upcoming/Up-3DNFT-3.3.png"
+        ],
+        description: "Introducing our NFT Character concept! (Note: These are conceptual designs, not the actual 3D NFTs)",
+        extendedContent: {
+            mainTitle: "Owning a 3D NFT character comes with exclusive benefits:",
+            sections: [
+                {
+                    items: [
+                        "- Unique backstory for each character",
+                        "- Usable in our mobile app, in-game, and metaverse",
+                        "- Customize with skins, and weapons",
+                        "- Trade digital wearable"
+                    ]
+                },
+                {
+                    title: "NFT owners will enjoy:",
+                    items: [
+                        "- Ability to rank up in divisions by completing elite tasks",
+                        "- Free metaverse land",
+                        "- And more"
+                    ]
+                }
+            ]
+        }
     }
 ];
 
 export default function UpcomingProjects() {
-    // Implements window-based slider logic.
-
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-    // Number of items to show per screen (Responsive)
-    // Mobile: 1, Tablet: 2, Desktop: 3
-    // For simplicity in this logic, we'll slide one by one or assume desktop shows 3.
-
-    // Helper to handle next/prev
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % projects.length);
     };
@@ -45,34 +121,26 @@ export default function UpcomingProjects() {
         setCurrentIndex((prev) => (prev - 1 < 0 ? projects.length - 1 : prev - 1));
     };
 
-    // Auto-Scroll Logic
     useEffect(() => {
         const interval = setInterval(() => {
             nextSlide();
-        }, 5000); // Slide every 5 seconds
+        }, 5000);
         return () => clearInterval(interval);
     }, [currentIndex]);
 
-
-
-    // Update logic to handle responsiveness
-
-
     return (
-        <section id="upcoming-projects" className="py-12 bg-transparent relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#C243FE]/5 blur-[120px] rounded-full pointer-events-none" />
+        <section id="upcoming-projects" className="py-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C243FE]/20 to-transparent" />
+            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#C243FE]/5 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10 w-full">
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
+                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12">
+                    <h2 className="text-[40px] md:text-[50px] font-tektur font-medium tracking-tight text-center mb-0 text-white">
                         Upcoming Projects
                     </h2>
-                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                {/* Carousel Container */}
                 <div className="relative group max-w-6xl mx-auto">
                     <div className="overflow-hidden w-full">
                         {/* Mobile Slider View */}
@@ -82,139 +150,189 @@ export default function UpcomingProjects() {
                             animate={{ x: `-${currentIndex * 100}%` }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         >
-                            <div className="flex w-full">
-                                {projects.map((project) => (
-                                    <div key={project.id} className="min-w-full px-4" onClick={() => setSelectedProject(project)}>
-                                        <div className="relative group/card bg-[#0a0a0c] border border-white/10 rounded-2xl overflow-hidden hover:border-[#C243FE]/50 transition-all duration-300 flex flex-col h-full cursor-pointer">
-                                            {/* Image Area */}
-                                            <div className="relative h-[220px] w-full overflow-hidden bg-black/50">
-                                                <Image
-                                                    src={project.image}
-                                                    alt={project.title}
-                                                    fill
-                                                    className="object-cover group-hover/card:scale-105 transition-transform duration-500"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-80" />
-                                            </div>
-
-                                            {/* Content */}
-                                            <div className="p-6 flex flex-col flex-grow text-center">
-                                                <h3 className="text-xl font-tektur font-medium mb-3 text-[#C243FE]">
-                                                    {project.title}
-                                                </h3>
-                                                <p className="text-sm text-gray-400 font-satoshi leading-relaxed mb-4 flex-grow line-clamp-3">
-                                                    {project.description}
-                                                </p>
-                                                <button className="text-white text-sm hover:text-[#C243FE] transition-colors mt-auto font-tektur uppercase tracking-wider flex items-center gap-2 justify-center group/btn">
-                                                    Learn More
-                                                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                                                </button>
-                                            </div>
+                            {projects.map((project) => (
+                                <div key={project.id} className="min-w-full px-4" onClick={() => setSelectedProject(project)}>
+                                    <div className="relative group/card bg-[#0a0a0c]/60 border border-white/10 rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer backdrop-blur-md">
+                                        <div className="relative h-[200px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
+                                            {project.cardImages.map((img, idx) => (
+                                                <div key={idx} className="relative flex-1 h-full">
+                                                    <Image src={img} alt={project.title} fill className="object-cover" />
+                                                </div>
+                                            ))}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-40 pointer-events-none" />
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow text-center">
+                                            <h3 className="text-xl font-tektur font-medium mb-3 text-[#DE3BD6]">{project.title}</h3>
+                                            <p className="text-sm text-gray-400 font-satoshi leading-relaxed mb-4 flex-grow line-clamp-3">
+                                                {project.description}
+                                            </p>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </motion.div>
 
                         {/* Desktop Grid View */}
-                        <div className="hidden md:grid md:grid-cols-3 gap-6 w-full">
+                        <div className="hidden md:grid md:grid-cols-3 gap-8 w-full">
                             {projects.map((project) => (
                                 <div
                                     key={project.id}
-                                    className="relative group/card bg-[#0a0a0c] border border-white/10 rounded-2xl overflow-hidden hover:border-[#C243FE]/50 transition-all duration-300 flex flex-col cursor-pointer hover:-translate-y-2"
+                                    className="relative group/card bg-[#0a0a0c]/60 border border-white/10 rounded-2xl overflow-hidden flex flex-col cursor-pointer backdrop-blur-md hover:border-[#DE3BD6]/20 transition-colors"
                                     onClick={() => setSelectedProject(project)}
                                 >
-                                    <div className="relative h-[220px] w-full overflow-hidden bg-black/50">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover group-hover/card:scale-105 transition-transform duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-80" />
+                                    <div className="relative h-[220px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
+                                        {project.cardImages.map((img, idx) => (
+                                            <div key={idx} className="relative flex-1 h-full">
+                                                <Image src={img} alt={project.title} fill className="object-cover" />
+                                            </div>
+                                        ))}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-40 pointer-events-none" />
                                     </div>
-
-                                    <div className="p-4 flex flex-col flex-grow text-center">
-                                        <h3 className="text-lg font-tektur font-medium mb-2 text-[#C243FE]">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-xs text-gray-400 font-satoshi leading-relaxed mb-4 flex-grow line-clamp-4">
+                                    <div className="p-6 flex flex-col flex-grow text-center">
+                                        <h3 className="text-lg font-tektur font-medium mb-2 text-[#DE3BD6]">{project.title}</h3>
+                                        <p className="text-xs text-gray-400 font-satoshi leading-relaxed flex-grow line-clamp-4">
                                             {project.description}
                                         </p>
-                                        <button className="text-white text-xs hover:text-[#C243FE] transition-colors mt-auto font-tektur uppercase tracking-wider flex items-center gap-2 justify-center group/btn">
-                                            View Details
-                                            <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                                        </button>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Navigation Arrows (Mobile Only) */}
                     <div className="flex justify-center gap-4 mt-8 md:hidden">
-                        <button
-                            onClick={prevSlide}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white disabled:opacity-50 active:scale-95 transition-all hover:bg-white/10"
-                        >
+                        <button onClick={prevSlide} className="p-3 rounded-full border border-white/10 bg-white/5 text-white">
                             <ChevronLeft size={24} />
                         </button>
-                        <button
-                            onClick={nextSlide}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white disabled:opacity-50 active:scale-95 transition-all hover:bg-white/10"
-                        >
+                        <button onClick={nextSlide} className="p-3 rounded-full border border-white/10 bg-white/5 text-white">
                             <ChevronRight size={24} />
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Project Details Modal */}
             <AnimatePresence>
                 {selectedProject && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            className="w-full max-w-4xl bg-[#0a0a0c] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative"
+                            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                            className="w-full max-w-5xl h-auto max-h-[90vh] bg-transparent border border-white/5 rounded-[40px] overflow-hidden shadow-2xl relative flex flex-col"
                             style={{
                                 backgroundImage: "url('/assets/images/background.png')",
                                 backgroundSize: "cover",
                                 backgroundPosition: "center"
                             }}
                         >
-                            {/* Top Black Container (Long Width) */}
-                            <div className="relative w-full h-[300px] bg-black/60 backdrop-blur-md flex items-center justify-center border-b border-white/10 overflow-hidden">
-                                <Image
-                                    src={selectedProject.image}
-                                    alt={selectedProject.title}
-                                    fill
-                                    className="object-cover opacity-60"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
-                            </div>
+                            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
-                            {/* Content Section */}
-                            <div className="p-8 md:p-12 text-center relative z-10">
-                                <h3 className="text-3xl md:text-4xl font-tektur font-medium mb-6 text-[#C243FE] drop-shadow-lg">
-                                    {selectedProject.title}
-                                </h3>
-                                <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#C243FE] to-transparent mx-auto mb-8" />
+                            {/* Single Scrollable Container */}
+                            <div className="relative z-10 flex flex-col h-full overflow-y-auto custom-scrollbar p-0">
 
-                                <p className="text-gray-200 text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-satoshi">
-                                    {selectedProject.description}
-                                </p>
-                            </div>
+                                {/* Image Container - INSIDE SCROLL - FULL VISIBILITY */}
+                                <div className="w-full h-auto flex flex-col items-center pt-8 pb-6 px-8 flex-shrink-0">
+                                    <div className="w-full h-64 md:h-[360px] flex gap-0 justify-center items-center bg-black/20 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/5 mx-auto max-w-4xl relative p-0">
+                                        {selectedProject.modalImages.map((img, idx) => {
+                                            // Special scaling for "Upcoming Social Website" (ID 1), 1st and 3rd images
+                                            const isSpecialProject = selectedProject.id === 1;
+                                            const isSpecialImage = idx === 0 || idx === 2;
+                                            const scaleClass = (isSpecialProject && isSpecialImage) ? "scale-[1.35]" : "scale-[1]";
 
-                            {/* Footer / Cancel Button */}
-                            <div className="p-6 flex justify-end">
-                                <button
-                                    onClick={() => setSelectedProject(null)}
-                                    className="px-8 py-2 bg-gradient-to-b from-[#333] to-[#111] border border-white/20 rounded-full text-white/90 font-tektur uppercase tracking-wider hover:text-white hover:border-white/40 transition-all shadow-lg"
-                                >
-                                    Cancel
-                                </button>
+                                            return (
+                                                <div key={idx} className="relative flex-1 h-full min-w-0 overflow-hidden">
+                                                    <Image
+                                                        src={img}
+                                                        alt={selectedProject.title}
+                                                        fill
+                                                        className={`object-contain ${scaleClass}`}
+                                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                                    />
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="flex-1 flex flex-col items-center px-6 md:px-10 pb-10">
+                                    {/* Animated Heading */}
+                                    <div className="text-center relative mb-6 w-full flex-shrink-0">
+                                        <h3 className="font-tektur font-medium text-[#DE3BD6] mb-4 tracking-tight uppercase" style={{ fontSize: '26px' }}>
+                                            {selectedProject.title}
+                                        </h3>
+                                        {/* Glowing Line Container */}
+                                        <div className="relative h-[2px] w-[60%] md:w-[50%] mx-auto flex justify-center items-center z-10">
+                                            {/* Ambient Glow Area - Visible All Time - Multi-color Gradient */}
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[20px] bg-gradient-to-r from-cyan-500/40 via-purple-500/40 to-pink-500/40 blur-[12px] rounded-full pointer-events-none" />
+
+                                            <div className="relative w-full h-full overflow-hidden rounded-full z-10">
+                                                {/* Base Line - Visible All Time with Multi-color Gradient */}
+                                                <div className="absolute inset-x-0 h-full bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.6)]" />
+
+                                                {/* Intense White Glow (Left to Right Only) */}
+                                                <motion.div
+                                                    className="absolute top-0 h-full bg-white rounded-full blur-[1px]"
+                                                    style={{
+                                                        boxShadow: "0 0 20px 4px rgba(255, 255, 255, 1), 0 0 40px 8px rgba(194, 67, 254, 0.8)",
+                                                        width: "30%"
+                                                    }}
+                                                    animate={{
+                                                        left: ["-30%", "110%"]
+                                                    }}
+                                                    transition={{
+                                                        duration: 2.5,
+                                                        repeat: Infinity,
+                                                        ease: "linear"
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full max-w-4xl mx-auto space-y-4 mb-8">
+                                        <p className="text-gray-200 text-xs md:text-sm leading-relaxed font-satoshi font-light px-4 drop-shadow-md text-center">
+                                            {selectedProject.description}
+                                        </p>
+
+                                        {selectedProject.extendedContent && (
+                                            <div className="space-y-6 text-gray-200 font-satoshi font-light text-[10px] md:text-xs text-center px-4">
+                                                <p className="font-bold text-white text-xs md:text-sm drop-shadow-lg">
+                                                    {selectedProject.extendedContent.mainTitle}
+                                                </p>
+
+                                                {selectedProject.extendedContent.sections.map((section, sidx) => (
+                                                    <div key={sidx} className="space-y-3">
+                                                        {section.title && <p className="text-white/90 font-medium">{section.title}</p>}
+                                                        <div className="flex flex-col items-center space-y-1">
+                                                            {section.items.map((item, iidx) => (
+                                                                <p key={iidx} className="drop-shadow-sm">{item}</p>
+                                                            ))}
+                                                        </div>
+                                                        {section.footer && (
+                                                            <p className="mt-4 text-[9px] md:text-[10px] italic text-gray-300/80 max-w-2xl mx-auto leading-relaxed">
+                                                                {section.footer}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Purple Separator Line - Updated Color */}
+                                    <div className="w-full max-w-3xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent shadow-[0_0_15px_rgba(222,59,214,0.9)] opacity-90 mb-6" />
+
+                                    {/* Cancel Button */}
+                                    <div className="w-full flex justify-end px-4 mb-2">
+                                        <button
+                                            onClick={() => setSelectedProject(null)}
+                                            className="px-6 py-1 bg-white/5 backdrop-blur-md border border-white/20 rounded-[12px] text-white/70 font-tektur font-medium tracking-[2px] hover:bg-white/10 hover:border-white/40 hover:text-white transition-all shadow-lg active:scale-95 flex items-center justify-center min-w-[100px]"
+                                            style={{ fontSize: '18px' }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     </div>

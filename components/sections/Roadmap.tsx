@@ -110,7 +110,7 @@ export default function Roadmap() {
     const activePhase = phases.find(p => p.id === activePhaseId) || phases[2];
 
     return (
-        <section id="roadmap" className="relative w-full py-8 px-4 overflow-hidden bg-transparent">
+        <section id="roadmap" className="relative w-full py-8 px-4 overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             {/* Background Glows */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00ffcc]/5 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#C243FE]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -120,7 +120,7 @@ export default function Roadmap() {
                 <h2 className="text-[55px] font-tektur font-medium text-center mb-0 text-white tracking-[-1px]">
                     RoadMap
                 </h2>
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
+                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
             </div>
 
             <div className="max-w-7xl mx-auto flex flex-col gap-6">

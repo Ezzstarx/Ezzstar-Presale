@@ -14,8 +14,8 @@ export default function StakingHero() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8"
                 >
-                    <h1 className="text-[55px] font-medium font-tektur tracking-[-1px] mb-6 relative z-10 text-white">
-                        STAKE <span className="text-[#FF00FF] text-shadow-glow">SPICA</span>
+                    <h1 className="text-[50px] font-medium font-tektur tracking-[-1px] mb-6 relative z-10 text-white">
+                        Earn Rewards by Staking <span className="text-[#FF00FF] text-shadow-glow">Spica</span>
                     </h1>
                 </motion.div>
 

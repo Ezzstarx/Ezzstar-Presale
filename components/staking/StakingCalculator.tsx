@@ -25,7 +25,7 @@ export default function StakingCalculator() {
     const totalEarnings = oneDayEarnings * periodDays;
 
     return (
-        <div className="bg-[#0a0a0c] border border-white/10 rounded-[30px] p-8 md:p-12 relative overflow-hidden h-full flex flex-col justify-center">
+        <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[30px] p-8 md:p-12 relative overflow-hidden h-full flex flex-col justify-center">
             {/* Header */}
             <h2 className="text-4xl text-center font-tektur font-bold mb-4 text-white">
                 Staking Calculator
