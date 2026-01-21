@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-
+import NextImage from "next/image";
 
 // Mock Data - 15 Members
 const teamMembers = [
@@ -110,7 +110,7 @@ export default function Team() {
                                         <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full hover:scale-105 transition-transform duration-300">
                                             <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
                                                 <div className="relative aspect-square w-full border-b border-white/10">
-                                                    <Image
+                                                    <NextImage
                                                         src="/assets/images/TeamPics.png"
                                                         alt={member.name}
                                                         fill
