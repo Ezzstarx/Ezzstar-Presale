@@ -94,20 +94,19 @@ export default function About() {
                     </div>
 
                     {/* Bottom Section: Video Content */}
-                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px]">
+                    {/* Bottom Section: Video Content */}
+                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden">
                         {/* Video Content */}
                         <video
-                            className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1]"
+                            className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1] scale-[1.35]"
                             autoPlay
                             loop
                             muted
                             playsInline
                             preload="auto"
                         >
-                            <source src="/assets/videos/Video-About-Compressed.mp4" type="video/mp4" />
+                            <source src="/assets/videos/Video-About.mp4" type="video/mp4" />
                         </video>
-                        {/* Gradient Overlay for smooth integration */}
-                        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#050507] to-transparent z-10"></div>
                     </div>
                 </div>
 
