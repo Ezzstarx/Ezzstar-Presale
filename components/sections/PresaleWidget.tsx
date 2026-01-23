@@ -20,12 +20,12 @@ export default function PresaleWidget() {
     };
 
     const CURRENCIES = [
-        { id: "USDT", icon: "₮" },
-        { id: "BTC", icon: "₿" },
-        { id: "ETH", icon: "Ξ" },
-        { id: "SOL", icon: "S" },
-        { id: "BNB", icon: "B" },
-        { id: "USDC", icon: "U" }
+        { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-v2.png" },
+        { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
+        { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
+        { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
+        { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
+        { id: "ETH", icon: "/assets/icons/crypto/icon-eth.png" }
     ];
 
     useEffect(() => {
@@ -56,19 +56,42 @@ export default function PresaleWidget() {
             <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 shadow-2xl h-full flex flex-col justify-center">
                 {/* Title */}
                 <div className="text-left mb-6">
-                    <h3 className="text-base font-tektur font-bold text-[#ff00ff]">
+                    <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
                         1 SPCA = 0.004 USDT
                     </h3>
                 </div>
 
-                {/* Progress Bar - Slim & Glowing */}
-                <div className="mb-6">
-                    <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#ff00ff] to-[#7000ff] w-[25%] rounded-full shadow-[0_0_10px_#ff00ff]"></div>
+                {/* Progress Bar - Thin, Bright & Traveling Glow */}
+                <style>{`
+                    @keyframes glowTravel {
+                        0% {
+                            left: 0;
+                        }
+                        100% {
+                            left: calc(75% - 20px);
+                        }
+                    }
+                    
+                    .glow-travel {
+                        animation: glowTravel 4s infinite linear;
+                    }
+                `}</style>
+                <div className="mb-6 w-full flex flex-col items-center">
+                    <div className="relative w-[376px] h-[10px] bg-black border border-white rounded-full overflow-hidden">
+                        {/* Thin Progress Line with Gradient */}
+                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-cyan-400/60 via-purple-400/60 to-purple-500/60 rounded-full">
+                        </div>
+                        {/* Traveling Glow Spot */}
+                        <div className="glow-travel absolute top-1/2 -translate-y-1/2 w-[20px] h-[2px] rounded-full"
+                             style={{
+                                 boxShadow: '0 0 20px 6px rgba(34, 211, 238, 0.8), 0 0 35px 10px rgba(168, 85, 247, 0.6), 0 0 50px 15px rgba(236, 72, 153, 0.4)',
+                                 filter: 'brightness(2)'
+                             }}>
+                        </div>
                     </div>
-                    <div className="flex justify-between text-[10px] font-tektur text-white/40 mt-2">
-                        <span>25%</span>
-                        <span>$3M</span>
+                    <div className="w-[376px] flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-3">
+                        <span>75%</span>
+                        <span>$9M</span>
                     </div>
                 </div>
 
@@ -81,8 +104,12 @@ export default function PresaleWidget() {
                 <div className="space-y-3">
                     {/* Pay Input */}
                     <div className="bg-[#050507] border border-white/5 rounded-xl p-3 flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-[10px] font-bold text-blue-400">
-                            {CURRENCIES.find(c => c.id === payCurrency)?.icon}
+                        <div className="w-6 h-6 flex items-center justify-center">
+                            <img
+                                src={CURRENCIES.find(c => c.id === payCurrency)?.icon}
+                                alt={payCurrency}
+                                className="w-[24px] h-[24px] object-contain"
+                            />
                         </div>
                         <input
                             type="number"
@@ -100,8 +127,12 @@ export default function PresaleWidget() {
 
                     {/* Receive Input */}
                     <div className="bg-[#050507] border border-white/5 rounded-xl p-3 flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[#ff00ff]/10 border border-[#ff00ff]/20 flex items-center justify-center text-[10px] font-bold text-[#ff00ff]">
-                            S
+                        <div className="w-6 h-6 flex items-center justify-center">
+                            <img
+                                src="/assets/icons/crypto/icon-spca.png"
+                                alt="SPCA"
+                                className="w-[24px] h-[24px] object-contain"
+                            />
                         </div>
                         <input
                             type="text"
@@ -112,34 +143,37 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
-                {/* Currency Selector - Matches Reference Image */}
-                <div className="flex items-center justify-between mt-6 mb-6 px-1">
-                    <div className="flex items-center w-full bg-black/40 rounded-xl border border-white/5 overflow-hidden">
-                        {CURRENCIES.map((curr, idx) => (
-                            <div key={curr.id} className="flex items-center flex-1">
-                                <button
-                                    onClick={() => setPayCurrency(curr.id)}
-                                    className={`flex items-center justify-center transition-all duration-300 ${payCurrency === curr.id
-                                        ? "bg-teal-900/40 border-r-2 border-cyan-400 py-3 px-4 flex-[2.5]"
-                                        : "py-3 px-2 flex-1 grayscale opacity-50 hover:grayscale-0 hover:opacity-100"
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-2">
-                                        <div className={`flex items-center justify-center rounded-full bg-white/10 font-bold ${payCurrency === curr.id ? "w-8 h-8 text-base" : "w-6 h-6 text-xs"
-                                            }`}>
-                                            {curr.icon}
-                                        </div>
-                                        {payCurrency === curr.id && (
-                                            <span className="text-sm font-tektur font-bold text-white tracking-wider">
-                                                {curr.id}
-                                            </span>
-                                        )}
+                {/* Currency Selector - Fixed Dimensions */}
+                <div className="flex items-center justify-center mt-6 mb-6 w-full">
+                    <div className="flex items-center w-[376px] h-[45px] bg-black/40 border border-white/5">
+                        {CURRENCIES.map((curr) => (
+                            <button
+                                key={curr.id}
+                                onClick={() => setPayCurrency(curr.id)}
+                                className={`relative flex items-center justify-center transition-all duration-300 h-[44px] ${payCurrency === curr.id
+                                    ? "w-[136px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                                    : "w-[48px] opacity-40 hover:opacity-100 hover:bg-white/5"
+                                    }`}
+                            >
+                                <div className="flex items-center justify-center gap-2">
+                                    <div className="flex items-center justify-center shrink-0">
+                                        <img
+                                            src={curr.icon}
+                                            alt={curr.id}
+                                            className="w-[15px] h-[15px] object-contain"
+                                        />
                                     </div>
-                                </button>
-                                {idx < CURRENCIES.length - 1 && payCurrency !== curr.id && payCurrency !== CURRENCIES[idx + 1].id && (
-                                    <div className="w-[1px] h-6 bg-white/10"></div>
+                                    {payCurrency === curr.id && (
+                                        <span className="text-[10px] font-tektur font-bold text-white tracking-wider whitespace-nowrap">
+                                            {curr.id}
+                                        </span>
+                                    )}
+                                </div>
+                                {/* Right Border for all except last or active (optional, generally cleaner without if strict sizes) */}
+                                {payCurrency !== curr.id && (
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-4 bg-white/10 pointer-events-none"></div>
                                 )}
-                            </div>
+                            </button>
                         ))}
                     </div>
                 </div>
