@@ -3,6 +3,7 @@
 import PresaleWidget from "./PresaleWidget";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import MagicButton from "@/components/ui/MagicButton";
 
 const StarBadge = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -109,12 +110,15 @@ export default function Hero() {
                     </h1>
 
                     <div className="flex flex-row gap-4 justify-center pt-4">
-                        <button className="px-6 py-2 border border-white/10 bg-black/40 backdrop-blur-sm rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
+                        <MagicButton className="w-[155px] h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[16px] font-medium font-tektur bg-black border-[0.5px] border-white/30 text-[#888888] hover:text-white">
                             Presale is Live
-                        </button>
-                        <button className="px-6 py-2 border border-white/10 bg-white/10 rounded-full font-tektur font-medium text-sm text-white/50 hover:text-white transition-all">
+                        </MagicButton>
+                        <MagicButton
+                            style={{ '--mask-bg': '#2C2C2C' } as React.CSSProperties}
+                            className="w-[155px] h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[16px] font-medium font-tektur bg-[#2C2C2C] border-[0.5px] border-white/30 text-[#888888] hover:text-white"
+                        >
                             Whitepaper
-                        </button>
+                        </MagicButton>
                     </div>
                 </div>
 
@@ -175,10 +179,9 @@ export default function Hero() {
                                         key={tier.id}
                                         onMouseEnter={() => setHoveredTierId(tier.id)}
                                         onMouseLeave={() => setHoveredTierId(null)}
-                                        className={`relative w-[300px] h-[420px] bg-black/40 backdrop-blur-md rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden shadow-2xl transition-all duration-300`}
+                                        className={`relative w-[300px] h-[420px] bg-black/40 backdrop-blur-md rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden transition-all duration-300`}
                                         style={{
                                             zIndex: activeZIndex,
-                                            boxShadow: `0 0 20px ${tier.glowColor}`,
                                         }}
                                         whileHover={{ scale: 1.05 }}
                                         animate={{
@@ -192,26 +195,27 @@ export default function Hero() {
                                         transition={{ duration: 0.4 }}
                                     >
                                         {/* Image Section */}
-                                        <div className={`relative w-full bg-gradient-to-b from-gray-900 to-black overflow-hidden ${tier.id === 'lily' ? 'h-[55%]' : 'h-[65%]'}`}>
+                                        <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-900 to-black overflow-hidden">
                                             <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
                                             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
                                         </div>
                                         {/* Content Section */}
-                                        <div className={`${tier.id === 'lily' ? 'h-[45%]' : 'h-[35%]'} w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10`}>
+                                        <div className="h-[42%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
                                             <div className="flex items-center gap-3 mb-2 justify-center w-full">
-                                                <img src={tier.badge} alt="Badge" className={`${tier.id === 'lily' ? 'w-20 h-20' : 'w-12 h-12'} object-contain`} />
+                                                <img src={tier.badge} alt="Badge" className="w-14 h-14 object-contain" />
                                                 <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
                                             </div>
                                             <div className="flex items-center gap-2 mb-4">
                                                 <span className="text-gray-400 text-sm">Invest:</span>
                                                 <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
                                             </div>
-                                            <button
+                                            <MagicButton
                                                 onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
-                                                className={`px-6 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all text-xs uppercase tracking-wide font-medium ${selectedTierId === tier.id ? 'bg-white/20' : ''}`}
+                                                style={{ '--mask-bg': '#000000' } as React.CSSProperties}
+                                                className={`w-[157px] h-[54px] rounded-xl border-[0.5px] border-white/30 font-tektur font-medium text-[16px] text-[#888888] hover:text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
                                             >
                                                 {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
-                                            </button>
+                                            </MagicButton>
                                         </div>
                                     </motion.div>
                                 );
@@ -257,8 +261,7 @@ export default function Hero() {
                                         const receiveAmount = (priceVal / 0.004).toLocaleString();
 
                                         return (
-                                            <div className={`relative w-full max-w-[340px] bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[32px] border border-white/10 p-6 flex flex-col items-start gap-6 shadow-2xl`}
-                                                style={{ boxShadow: `0 0 30px ${tier.glowColor}` }}>
+                                            <div className={`relative w-full max-w-[340px] bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[32px] border border-white/10 p-6 flex flex-col items-start gap-6`}>
 
                                                 {/* Top: Icon + Name */}
                                                 <div className="flex items-center gap-3 w-full">

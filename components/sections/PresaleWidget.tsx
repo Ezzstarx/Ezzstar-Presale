@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowDown, Loader2 } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
+import MagicButton from "@/components/ui/MagicButton";
 
 export default function PresaleWidget() {
     const { isConnected, openWalletModal } = useWallet();
@@ -53,7 +54,7 @@ export default function PresaleWidget() {
 
     return (
         <div className="relative w-[422px] h-[431px] mx-auto lg:mx-0">
-            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 shadow-2xl h-full flex flex-col justify-center">
+            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-8 shadow-2xl h-full flex flex-col justify-center">
                 {/* Title */}
                 <div className="text-left mb-6">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
@@ -83,10 +84,10 @@ export default function PresaleWidget() {
                         </div>
                         {/* Traveling Glow Spot */}
                         <div className="glow-travel absolute top-1/2 -translate-y-1/2 w-[20px] h-[2px] rounded-full"
-                             style={{
-                                 boxShadow: '0 0 20px 6px rgba(34, 211, 238, 0.8), 0 0 35px 10px rgba(168, 85, 247, 0.6), 0 0 50px 15px rgba(236, 72, 153, 0.4)',
-                                 filter: 'brightness(2)'
-                             }}>
+                            style={{
+                                boxShadow: '0 0 20px 6px rgba(34, 211, 238, 0.8), 0 0 35px 10px rgba(168, 85, 247, 0.6), 0 0 50px 15px rgba(236, 72, 153, 0.4)',
+                                filter: 'brightness(2)'
+                            }}>
                         </div>
                     </div>
                     <div className="w-[376px] flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-3">
@@ -96,14 +97,14 @@ export default function PresaleWidget() {
                 </div>
 
                 {/* Balance Display */}
-                <div className="text-left mb-2 px-1">
+                <div className="text-left mb-1 px-1">
                     <span className="text-[10px] text-white/40 font-satoshi">Balance: 0.00 USDC</span>
                 </div>
 
                 {/* Input Fields - Unified Dark */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                     {/* Pay Input */}
-                    <div className="bg-[#050507] border border-white/5 rounded-xl p-3 flex items-center gap-3">
+                    <div className="bg-[#050507] border-[0.5px] border-white/30 rounded-xl p-1.5 flex items-center gap-3">
                         <div className="w-6 h-6 flex items-center justify-center">
                             <img
                                 src={CURRENCIES.find(c => c.id === payCurrency)?.icon}
@@ -121,12 +122,12 @@ export default function PresaleWidget() {
                     </div>
 
                     {/* Label */}
-                    <div className="text-left px-1">
+                    <div className="text-left px-1 mt-0.5">
                         <span className="text-[10px] text-white/40 font-satoshi">Receive</span>
                     </div>
 
                     {/* Receive Input */}
-                    <div className="bg-[#050507] border border-white/5 rounded-xl p-3 flex items-center gap-3">
+                    <div className="bg-[#050507] border-[0.5px] border-white/30 rounded-xl p-1.5 flex items-center gap-3">
                         <div className="w-6 h-6 flex items-center justify-center">
                             <img
                                 src="/assets/icons/crypto/icon-spca.png"
@@ -143,16 +144,15 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
-                {/* Currency Selector - Fixed Dimensions */}
-                <div className="flex items-center justify-center mt-6 mb-6 w-full">
-                    <div className="flex items-center w-[376px] h-[45px] bg-black/40 border border-white/5">
+                <div className="flex items-center justify-center mt-4 mb-4 w-full">
+                    <div className="flex items-center w-[350px] h-[38px] bg-black/40">
                         {CURRENCIES.map((curr) => (
                             <button
                                 key={curr.id}
                                 onClick={() => setPayCurrency(curr.id)}
-                                className={`relative flex items-center justify-center transition-all duration-300 h-[44px] ${payCurrency === curr.id
-                                    ? "w-[136px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
-                                    : "w-[48px] opacity-40 hover:opacity-100 hover:bg-white/5"
+                                className={`relative flex items-center justify-center transition-all duration-300 h-[37px] ${payCurrency === curr.id
+                                    ? "w-[110px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                                    : "w-[48px]"
                                     }`}
                             >
                                 <div className="flex items-center justify-center gap-2">
@@ -169,9 +169,9 @@ export default function PresaleWidget() {
                                         </span>
                                     )}
                                 </div>
-                                {/* Right Border for all except last or active (optional, generally cleaner without if strict sizes) */}
+                                {/* Right Border for all except last or active */}
                                 {payCurrency !== curr.id && (
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-4 bg-white/10 pointer-events-none"></div>
+                                    <div className="absolute right-0 top-0 w-[1px] h-full bg-white/30 pointer-events-none"></div>
                                 )}
                             </button>
                         ))}
@@ -180,15 +180,16 @@ export default function PresaleWidget() {
 
                 {/* Button */}
                 <div className="flex flex-col gap-2">
-                    <button
+                    <MagicButton
                         onClick={handleBuy}
-                        className={`w-full py-2.5 border border-white/10 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
+                        style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
+                        className={`w-full py-2 border-[0.5px] border-white/30 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
                             ? "bg-green-500/20 text-green-400 border-green-500/30 cursor-default"
                             : "bg-transparent text-white/60 hover:bg-white/5"
                             }`}
                     >
                         {!isConnected ? "Connect Wallet" : "CONNECTED"}
-                    </button>
+                    </MagicButton>
                 </div>
             </div>
         </div>

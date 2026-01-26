@@ -127,3 +127,49 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Magic Button Animation */
+.magic {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Rotating border */
+.magic::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 250deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 290deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 5s linear infinite;
+}
+
+/* Inner mask to keep only border visible */
+.magic::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  /* Controls border thickness visually */
+  border-radius: inherit;
+  background: var(--mask-bg, black);
+  z-index: -1;
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
