@@ -131,7 +131,7 @@ export default function Roadmap() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px]"
+                    className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px] relative z-10"
                 >
 
                     {/* Left: Details Card - FIXED DIMENSIONS */}
@@ -224,7 +224,7 @@ export default function Roadmap() {
 
 
                 {/* Bottom: Phase Selectors - Aligned Left (with padding) */}
-                <div className="flex flex-nowrap overflow-x-auto justify-start items-start gap-6 md:gap-10 mt-20 pl-4 lg:ml-12 w-full pb-4 scrollbar-hide">
+                <div className="flex flex-nowrap overflow-x-auto justify-start items-start gap-6 md:gap-10 mt-4 pt-10 pl-4 lg:ml-12 w-full pb-4 scrollbar-hide relative z-30">
                     {phases.map((phase) => (
                         <div
                             key={phase.id}

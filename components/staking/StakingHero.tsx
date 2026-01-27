@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import MagicButton from "@/components/ui/MagicButton";
 
 export default function StakingHero() {
     return (
@@ -26,16 +27,25 @@ export default function StakingHero() {
                     className="flex justify-center gap-8 mt-12"
                 >
                     <div className="flex gap-6 justify-center items-center">
-                        <div className="bg-[#FF00FF]/60 border border-[#FF00FF]/20 rounded-xl px-10 py-2 backdrop-blur-md hover:bg-[#FF00FF] hover:shadow-[0_0_20px_rgba(255,0,255,0.4)] transition-all duration-300 group cursor-default">
-                            <span className="block text-white text-xs font-satoshi font-medium uppercase tracking-wider mb-0 group-hover:text-white transition-colors">Current APR</span>
-                            <span className="text-2xl font-medium font-tektur text-white leading-none group-hover:text-white transition-colors">100%</span>
-                        </div>
+                        <MagicButton
+                            className="px-10 py-2 cursor-default h-auto rounded-xl"
+                            style={{ "--mask-bg": "#000000" } as React.CSSProperties}
+                        >
+                            <div className="flex flex-col items-center justify-center pointer-events-none">
+                                <span className="block text-white text-xs font-satoshi font-medium uppercase tracking-wider mb-0">Current APR</span>
+                                <span className="text-2xl font-medium font-tektur text-white leading-none">100%</span>
+                            </div>
+                        </MagicButton>
 
-                        {/* Stat Card 2 */}
-                        <div className="bg-[#1a001a] border border-[#FF00FF]/20 rounded-xl px-10 py-2 backdrop-blur-md hover:bg-[#2a002a] hover:border-[#FF00FF]/50 hover:shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300">
-                            <div className="text-white font-tektur font-medium text-2xl leading-none">174.71M</div>
-                            <div className="text-gray-400 text-xs font-satoshi font-medium uppercase tracking-wider">SPCA Staked</div>
-                        </div>
+                        <MagicButton
+                            className="px-10 py-2 h-auto rounded-xl"
+                            style={{ "--mask-bg": "#000000" } as React.CSSProperties}
+                        >
+                            <div className="flex flex-col items-center justify-center pointer-events-none">
+                                <div className="text-white font-tektur font-medium text-2xl leading-none">174.71M</div>
+                                <div className="text-gray-400 text-xs font-satoshi font-medium uppercase tracking-wider">SPCA Staked</div>
+                            </div>
+                        </MagicButton>
                     </div>
                 </motion.div>
             </div>

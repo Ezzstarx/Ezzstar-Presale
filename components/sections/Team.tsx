@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Mock Data - 15 Members
 const teamMembers = [
@@ -101,13 +102,13 @@ export default function Team() {
                                     key={idx}
                                     className="flex-shrink-0 w-[240px] md:w-[280px]"
                                 >
-                                    <a 
+                                    <a
                                         href={member.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="relative group/card h-full block"
                                     >
-                                        <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full hover:scale-105 transition-transform duration-300">
+                                        <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full">
                                             <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
                                                 <div className="relative aspect-square w-full border-b border-white/10 cursor-pointer">
                                                     <NextImage
@@ -119,7 +120,7 @@ export default function Team() {
                                                     <div className="absolute inset-0 bg-transparent opacity-20 mix-blend-overlay pointer-events-none"></div>
                                                 </div>
                                                 <div className="p-4 flex flex-col justify-end flex-grow bg-black/40 backdrop-blur-sm">
-                                                    <h3 className="text-xl font-tektur font-medium text-white mb-1 hover:text-[#00ffcc] transition-colors duration-300 cursor-pointer">
+                                                    <h3 className="text-xl font-tektur font-medium text-white mb-1">
                                                         {member.name}
                                                     </h3>
                                                     <div className="flex items-center gap-2">
@@ -144,7 +145,7 @@ export default function Team() {
                         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Previous team member"
                     >
-                        ←
+                        <ChevronLeft className="w-6 h-6" />
                     </button>
                     <button
                         onClick={nextSlide}
@@ -152,7 +153,7 @@ export default function Team() {
                         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Next team member"
                     >
-                        →
+                        <ChevronRight className="w-6 h-6" />
                     </button>
                 </div>
             </div>

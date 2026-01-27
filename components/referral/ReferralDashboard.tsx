@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Facebook, Instagram, Linkedin, Send, MessageCircle, Twitter } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
+import MagicButton from "@/components/ui/MagicButton";
 
 export default function ReferralDashboard() {
     const { isConnected, address, openWalletModal } = useWallet();
@@ -28,9 +29,13 @@ export default function ReferralDashboard() {
                         {!isConnected ? (
                             <>
                                 <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-500 focus:outline-none" />
-                                <button onClick={openWalletModal} className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-medium transition-colors">
+                                <MagicButton
+                                    onClick={openWalletModal}
+                                    className="px-4 py-2 rounded-md text-white text-xs font-medium transition-colors"
+                                    style={{ "--mask-bg": "#000000" } as React.CSSProperties}
+                                >
                                     Connect Wallet
-                                </button>
+                                </MagicButton>
                             </>
                         ) : (
                             <>

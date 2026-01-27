@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useWallet } from "../providers/WalletProvider";
+import MagicButton from "@/components/ui/MagicButton";
 
 export default function SpicaStakingCard() {
     const { isConnected, connectWallet, openWalletModal } = useWallet();
@@ -121,15 +122,16 @@ export default function SpicaStakingCard() {
             </div>
 
             {/* Action Button */}
-            <button
+            <MagicButton
                 onClick={handleAction}
-                className={`w-full py-3 rounded-xl font-tektur font-bold text-lg transition-all shadow-[0_0_20px_rgba(255,0,255,0.2)] hover:shadow-[0_0_30px_rgba(255,0,255,0.4)] hover:scale-[1.02] active:scale-[0.98] ${isConnected
-                    ? "bg-[#FF00FF]/60 text-white hover:bg-[#FF00FF]"
-                    : "bg-white text-black hover:bg-gray-200"
+                className={`w-full py-3 rounded-xl font-tektur font-bold text-lg transition-all ${isConnected
+                    ? "text-white"
+                    : "text-black"
                     }`}
+                style={{ "--mask-bg": isConnected ? "#FF00FF" : "#FFFFFF" } as React.CSSProperties}
             >
                 {isConnected ? "Stake Spica" : "Connect Wallet"}
-            </button>
+            </MagicButton>
 
         </div>
     );
