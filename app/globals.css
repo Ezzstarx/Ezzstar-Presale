@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'AlienCons TFB';
+  src: url('/fonts/AlienCons-TFB.ttf') format('truetype');
+  /* Ensure this file exists in public/fonts */
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --color-background: #000000;
   --color-foreground: #ffffff;
@@ -18,6 +28,8 @@
 
   --font-tektur: 'Tektur', sans-serif;
   --font-satoshi: 'Satoshi', sans-serif;
+  --font-aliencons: 'AlienCons TFB', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 
   --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
 
@@ -79,6 +91,8 @@
 :root {
   --font-tektur: 'Tektur', sans-serif;
   --font-satoshi: 'Satoshi', sans-serif;
+  --font-aliencons: 'AlienCons TFB', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 
 @layer base {

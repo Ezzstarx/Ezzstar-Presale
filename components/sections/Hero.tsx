@@ -104,7 +104,7 @@ export default function Hero() {
                 <div className="mb-8 md:mb-12 space-y-4">
                     <h1 className="text-[55px] font-tektur font-medium tracking-[-1px] leading-tight text-[#FAFAFA]">
                         Empowering the Future of <br />
-                        <span className="uppercase tracking-[0.2em] font-medium leading-none">
+                        <span className="tracking-normal font-medium leading-none">
                             Digital <span className="text-transparent bg-clip-text bg-[linear-gradient(135deg,#FC009F_30%,#3EE1F0_70%)]">Aliens!</span>
                         </span>
                     </h1>
@@ -206,7 +206,7 @@ export default function Hero() {
                                                 <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
                                             </div>
                                             <div className="flex items-center gap-2 mb-4">
-                                                <span className="text-gray-400 text-sm">Invest:</span>
+                                                <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
                                                 <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
                                             </div>
                                             <MagicButton
@@ -301,7 +301,7 @@ export default function Hero() {
                                                     {/* Right: Invest + Button */}
                                                     <div className="flex flex-col items-end gap-3 ml-4 flex-1 mr-2">
                                                         <div className="flex items-center gap-2">
-                                                            <span className="text-gray-400 text-sm">Invest:</span>
+                                                            <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
                                                             <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
                                                         </div>
                                                         {isConnected ? (
@@ -356,7 +356,7 @@ export default function Hero() {
 
                 {/* Promo Text & Socials - Moved from About Section */}
                 <div className="flex flex-col items-center w-full mb-20 mt-8">
-                    <p className="text-sm md:text-base font-satoshi text-gray-300 text-center tracking-wide mb-16 mt-0">
+                    <p className="text-[16px] font-tektur font-medium text-gray-300 text-center tracking-wide mb-16 mt-0">
                         Don't miss out! Invest in <span className="text-[#FF00FF] font-medium">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-medium">Exclusive NFT Signature</span> directly in your wallet.
                     </p>
 

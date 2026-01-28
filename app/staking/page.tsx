@@ -15,17 +15,23 @@ export default function StakingPage() {
                     <StakingHero />
 
                     <div className="container mx-auto px-6">
-                        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-8">
-                            <SpicaStakingCard />
-                            <StakingCalculator />
+                        {/* Staking Section - Side by Side */}
+                        <div className="flex flex-col xl:flex-row justify-center items-stretch gap-8 relative z-10 max-w-[1000px] mx-auto">
+                            <div className="w-full max-w-[460px] flex flex-col">
+                                <SpicaStakingCard />
+                            </div>
+                            <div className="w-full max-w-[460px] flex flex-col">
+                                <StakingCalculator />
+                            </div>
                         </div>
                     </div>
                 </div>
 
+
                 <StakingHistorySection />
-            </main>
+            </main >
 
             <Footer />
-        </div>
+        </div >
     );
 }

@@ -31,6 +31,8 @@ const config: Config = {
       fontFamily: {
         tektur: ['var(--font-tektur)', 'sans-serif'],
         satoshi: ['var(--font-satoshi)', 'sans-serif'],
+        aliencons: ['var(--font-aliencons)', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

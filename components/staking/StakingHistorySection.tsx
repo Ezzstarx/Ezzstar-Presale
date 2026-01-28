@@ -34,17 +34,17 @@ export default function StakingHistorySection() {
                             <button
                                 onClick={() => setActiveTab("unlock")}
                                 className={`flex items-center gap-2 px-6 py-2 md:px-8 md:py-3 font-tektur font-medium text-sm md:text-base transition-all ${activeTab === "unlock"
-                                    ? "bg-[#FF00FF]/60 text-black"
+                                    ? "bg-[#AD7AFF] text-black"
                                     : "bg-transparent text-gray-300 hover:text-white"
                                     }`}
                             >
                                 <RefreshCw size={16} />
-                                <span>Unlock Period</span>
+                                <span className={activeTab === "unlock" ? "font-bold" : ""}>Unlock Period</span>
                             </button>
                             <button
                                 onClick={() => setActiveTab("history")}
                                 className={`flex items-center gap-2 px-6 py-2 md:px-8 md:py-3 font-tektur font-medium text-sm md:text-base transition-all ${activeTab === "history"
-                                    ? "bg-[#FF00FF] text-black"
+                                    ? "bg-[#AD7AFF] text-black"
                                     : "bg-transparent text-gray-300 hover:text-white border-l border-white/10"
                                     }`}
                             >
@@ -84,7 +84,7 @@ export default function StakingHistorySection() {
                                         {item.address}
                                     </div>
 
-                                    <div className="col-span-1 text-white font-tektur font-bold text-sm text-center">
+                                    <div className="col-span-1 text-white font-satoshi font-bold text-sm text-center">
                                         {item.amount} <span className="text-[#FF00FF]">SPCA</span>
                                     </div>
 

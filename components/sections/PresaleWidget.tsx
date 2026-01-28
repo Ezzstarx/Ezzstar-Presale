@@ -98,7 +98,7 @@ export default function PresaleWidget() {
 
                 {/* Balance Display */}
                 <div className="text-left mb-1 px-1">
-                    <span className="text-[10px] text-white/40 font-satoshi">Balance: 0.00 USDC</span>
+                    <span className="text-[12px] text-white/40 font-satoshi font-medium">Balance: 0.00 USDC</span>
                 </div>
 
                 {/* Input Fields - Unified Dark */}
@@ -123,7 +123,7 @@ export default function PresaleWidget() {
 
                     {/* Label */}
                     <div className="text-left px-1 mt-0.5">
-                        <span className="text-[10px] text-white/40 font-satoshi">Receive</span>
+                        <span className="text-[12px] text-white/40 font-satoshi font-medium">Receive</span>
                     </div>
 
                     {/* Receive Input */}
@@ -164,7 +164,7 @@ export default function PresaleWidget() {
                                         />
                                     </div>
                                     {payCurrency === curr.id && (
-                                        <span className="text-[10px] font-tektur font-bold text-white tracking-wider whitespace-nowrap">
+                                        <span className="text-[14px] font-montserrat font-medium text-white tracking-wider whitespace-nowrap">
                                             {curr.id}
                                         </span>
                                     )}

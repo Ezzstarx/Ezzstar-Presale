@@ -125,7 +125,7 @@ export default function Team() {
                                                     </h3>
                                                     <div className="flex items-center gap-2">
                                                         <div className="w-2 h-2 rounded-full bg-[#39FF14] shadow-[0_0_8px_#39FF14]"></div>
-                                                        <p className="text-[#39FF14] font-satoshi font-medium tracking-wide text-xs">
+                                                        <p className="text-[#39FF14] font-tektur font-medium tracking-wide text-xs">
                                                             {member.role}
                                                         </p>
                                                     </div>

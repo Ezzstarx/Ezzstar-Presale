@@ -69,7 +69,7 @@ export default function FAQ() {
                                     onClick={() => toggleFAQ(i)}
                                     className="w-full flex items-center justify-between p-4 text-left group"
                                 >
-                                    <span className="font-tektur font-medium text-lg text-white tracking-wide">{faq.q}</span>
+                                    <span className="font-satoshi font-medium text-lg text-white tracking-wide">{faq.q}</span>
 
                                     {/* Close Icon (Circle with X) */}
                                     <div className={`

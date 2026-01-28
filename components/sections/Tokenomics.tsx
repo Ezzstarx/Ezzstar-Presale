@@ -28,8 +28,8 @@ export default function Tokenomics() {
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
-                        Tokenomics
+                    <h2 className="text-[50px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                        Tokenomics & Distribution
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
@@ -101,7 +101,7 @@ export default function Tokenomics() {
                             {/* Top Section with Border */}
                             <div className="p-6 md:p-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                 <div>
-                                    <h4 className="text-xl font-tektur font-medium text-white mb-2">Contract Address</h4>
+                                    <h4 className="text-xl font-satoshi font-medium text-white mb-2">Contract Address</h4>
                                     <div className="flex flex-col gap-1">
                                         <code className="text-gray-400 font-mono text-sm break-all">
                                             {contractAddress}
@@ -111,7 +111,7 @@ export default function Tokenomics() {
                                 <div className="flex flex-col items-end gap-2 self-end md:self-auto">
                                     <button
                                         onClick={handleCopy}
-                                        className="flex items-center gap-2 text-[#F1C40F] hover:text-[#d4ac0d] transition-colors font-tektur text-sm uppercase tracking-wide"
+                                        className="flex items-center gap-2 text-[#F1C40F] hover:text-[#d4ac0d] transition-colors font-satoshi text-sm uppercase tracking-wide"
                                     >
                                         {copied ? (
                                             <>

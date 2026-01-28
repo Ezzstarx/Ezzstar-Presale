@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Skull } from 'lucide-react';
+
 
 // Phase Data Interface
 interface PhasePoint {
@@ -70,7 +70,7 @@ const phases: PhaseData[] = [
         title: "PHASE 3",
         period: "(Q4 2025 - Q2 2026)",
         status: "Scheduled",
-        badgeColor: "bg-[#00E5FF]/20 text-[#00E5FF] border-2 border-[#00E5FF]/30", // Cyan badge
+        badgeColor: "bg-[#00E5FF]/20 text-[#00E5FF] border-2 border-[#00E5FF]/30 font-satoshi font-medium text-[14px]", // Cyan badge
         heading: "Game & Metaverse Expansion",
         points: [
             { text: "Full Social Media App Launch", color: "#C243FE" }, // Purple
@@ -134,8 +134,8 @@ export default function Roadmap() {
                     className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px] relative z-10"
                 >
 
-                    {/* Left: Details Card - FIXED DIMENSIONS */}
-                    <div className="w-[483px] h-[347px] relative p-8 rounded-xl bg-[#0a0a0c]/40 backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
+                    {/* Left: Details Card - DYNAMIC DIMENSIONS */}
+                    <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-[#0a0a0c]/40 backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
                         style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
                     >
                         {/* Status Badge */}
@@ -153,7 +153,7 @@ export default function Roadmap() {
                             >
                                 {/* Title & Period */}
                                 <h2 className="text-3xl md:text-4xl font-tektur font-medium text-white mb-2 tracking-tighter uppercase">
-                                    {activePhase.title} <span className="text-sm md:text-base font-normal text-white/50 ml-2 tracking-normal font-satoshi">{activePhase.period}</span>
+                                    {activePhase.title} <span className="text-base font-medium text-white/50 ml-2 tracking-normal font-tektur">{activePhase.period}</span>
                                 </h2>
 
                                 {/* Heading */}
@@ -165,9 +165,9 @@ export default function Roadmap() {
                                 <ul className="space-y-2">
                                     {activePhase.points.map((point, idx) => (
                                         <li key={idx} className="flex items-center gap-2.5 group">
-                                            {/* Custom Bullet: Alien Skull */}
-                                            <span className="mt-0.5 min-w-[14px]">
-                                                <Skull size={14} color={point.color} style={{ filter: `drop-shadow(0 0 5px ${point.color})` }} />
+                                            {/* Custom Bullet: AlienCons 't' */}
+                                            <span className="mt-0.5 min-w-[14px] font-aliencons text-[16px]" style={{ color: point.color, textShadow: `0 0 5px ${point.color}` }}>
+                                                t
                                             </span>
                                             <span className="text-white/80 font-satoshi text-sm group-hover:text-white transition-colors duration-300">
                                                 {point.text}

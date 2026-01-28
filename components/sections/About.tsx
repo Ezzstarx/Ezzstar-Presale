@@ -83,7 +83,7 @@ export default function About() {
                                 Ezzstar enables you to own your identity across a decentralized social hub, a play-
                                 to-earn game, and metaverse.
                                 <br />
-                                All powered by a single currency: <span className="text-[#ff00ff] font-medium tracking-wider">SPICA</span>
+                                All powered by a single currency: <span className="text-[#ff00ff] font-medium tracking-wider font-tektur">SPICA</span>
                             </p>
 
                             <p className="text-sm md:text-[16px] font-satoshi font-medium text-red-600 tracking-tight brightness-110 leading-tight pt-2">

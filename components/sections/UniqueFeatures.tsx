@@ -44,11 +44,11 @@ export default function UniqueFeatures() {
                                     <Image src="/assets/images/Unique-1.png" alt="Unique Icon" fill className="object-contain" />
                                 </div>
 
-                                <h3 className="text-2xl font-tektur font-medium mb-4 text-[#DE3BD6]">
+                                <h3 className="text-[20px] font-tektur font-semibold mb-4 text-[#DE3BD6]">
                                     What Is SPICA?
                                 </h3>
 
-                                <p className="text-white/90 font-satoshi font-medium mb-8 text-lg">
+                                <p className="text-white/90 font-tektur font-medium mb-8 text-lg">
                                     SPICA is a utility coin, not a meme or speculative token
                                 </p>
 
@@ -64,7 +64,7 @@ export default function UniqueFeatures() {
                                     ].map((item, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                             <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C243FE] shrink-0 shadow-[0_0_8px_#C243FE]"></span>
-                                            <span className="text-white/70 font-satoshi text-[15px] leading-relaxed">{item}</span>
+                                            <span className="text-white/70 font-tektur text-[15px] leading-relaxed">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -89,11 +89,11 @@ export default function UniqueFeatures() {
                                     <Image src="/assets/images/Unique-2.png" alt="Unique Icon" fill className="object-cover" />
                                 </div>
 
-                                <h3 className="text-2xl font-tektur font-medium mb-4 text-[#DE3BD6]">
+                                <h3 className="text-[20px] font-tektur font-semibold mb-4 text-[#DE3BD6]">
                                     Why You Should Invest In SPICA
                                 </h3>
 
-                                <p className="text-white/90 font-satoshi font-medium mb-8 text-base px-2">
+                                <p className="text-white/90 font-tektur font-medium mb-8 text-base px-2">
                                     SPICA is the core currency powering the entire Ezzstar ecosystem – from social to gameplay and metaverse experiences.
                                 </p>
 
@@ -112,7 +112,7 @@ export default function UniqueFeatures() {
                                     ].map((item, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                             <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#FFD700] shrink-0 shadow-[0_0_8px_#FFD700]"></span>
-                                            <span className="text-white/70 font-satoshi text-[15px] leading-relaxed">{item}</span>
+                                            <span className="text-white/70 font-tektur text-[15px] leading-relaxed">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -121,7 +121,7 @@ export default function UniqueFeatures() {
                     </div>
                 </motion.div>
                 {/* End Unique Features */}
-            </div>
-        </section>
+            </div >
+        </section >
     );
 }

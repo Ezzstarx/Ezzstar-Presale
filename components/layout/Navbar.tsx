@@ -94,7 +94,7 @@ export default function Navbar() {
             </div>
 
             {/* Middle: Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8 font-tektur text-sm text-gray-300 font-medium">
+            <div className="hidden md:flex items-center gap-8 font-satoshi text-sm text-gray-300 font-medium">
                 {navLinks.map((link) => (
                     <Link
                         key={link.name}
@@ -120,7 +120,7 @@ export default function Navbar() {
                     ) : (
                         <button
                             onClick={openWalletModal}
-                            className="relative group px-8 py-2.5 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur text-white font-bold tracking-wide hover:brightness-110 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all transform hover:scale-105"
+                            className="relative group px-8 py-2.5 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur font-normal text-white tracking-wide hover:brightness-110 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all transform hover:scale-105 text-base"
                         >
                             Connect Wallet
                         </button>
@@ -160,7 +160,7 @@ export default function Navbar() {
                                         key={link.name}
                                         href={link.href}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="px-4 py-2 text-base font-tektur text-white/80 hover:text-accent-cyan hover:bg-white/5 rounded-lg transition-all text-center"
+                                        className="px-4 py-2 text-[14px] font-satoshi font-medium text-white/80 hover:text-accent-cyan hover:bg-white/5 rounded-lg transition-all text-center"
                                     >
                                         {link.name}
                                     </Link>

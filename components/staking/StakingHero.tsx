@@ -15,8 +15,9 @@ export default function StakingHero() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8"
                 >
-                    <h1 className="text-[50px] font-medium font-tektur tracking-[-1px] mb-6 relative z-10 text-white">
-                        Earn Rewards by Staking <span className="text-[#FF00FF] text-shadow-glow">Spica</span>
+                    <h1 className="text-[50px] font-medium font-tektur tracking-[-1px] mb-6 relative z-10 text-white leading-tight">
+                        Earn Rewards by Staking <br />
+                        <span className="text-[#FF00FF] text-shadow-glow">SPICA</span>
                     </h1>
                 </motion.div>
 
@@ -32,7 +33,7 @@ export default function StakingHero() {
                             style={{ "--mask-bg": "#000000" } as React.CSSProperties}
                         >
                             <div className="flex flex-col items-center justify-center pointer-events-none">
-                                <span className="block text-white text-xs font-satoshi font-medium uppercase tracking-wider mb-0">Current APR</span>
+                                <span className="block text-white text-xs font-satoshi font-medium uppercase tracking-wider mb-0">Estimated APR</span>
                                 <span className="text-2xl font-medium font-tektur text-white leading-none">100%</span>
                             </div>
                         </MagicButton>
@@ -43,7 +44,7 @@ export default function StakingHero() {
                         >
                             <div className="flex flex-col items-center justify-center pointer-events-none">
                                 <div className="text-white font-tektur font-medium text-2xl leading-none">174.71M</div>
-                                <div className="text-gray-400 text-xs font-satoshi font-medium uppercase tracking-wider">SPCA Staked</div>
+                                <div className="text-gray-400 text-xs font-satoshi font-medium uppercase tracking-wider">SPICA Staked</div>
                             </div>
                         </MagicButton>
                     </div>
