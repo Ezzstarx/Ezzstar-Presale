@@ -9,7 +9,7 @@ export default function SpicaStakingCard() {
     const { isConnected, connectWallet, openWalletModal } = useWallet();
     const [amount, setAmount] = useState<string>("10,000");
     const [lockDays, setLockDays] = useState(1080);
-    const [apr, setApr] = useState(80);
+    const [apr, setApr] = useState(100);
 
     // Mock Base Balances
     const TOTAL_BALANCE = 10000;
@@ -21,7 +21,7 @@ export default function SpicaStakingCard() {
     const stakeableBalance = Math.max(0, TOTAL_BALANCE - numericAmount);
 
     // Calculate APR based on lock days (Example logic: Base 20% + bonus per day)
-    // 1080 days = 80% (Max)
+    // 1080 days = 100% (Max)
     // Linear interpolation for demo
     // Calculate properties for UI rendering
     const MIN_DAYS = 30;
@@ -54,7 +54,7 @@ export default function SpicaStakingCard() {
     return (
         <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[20px] p-5 md:p-6 pb-4 relative overflow-hidden w-full h-full flex flex-col">
             {/* Header */}
-            <h2 className="text-2xl md:text-3xl font-tektur font-bold mb-1 text-white">
+            <h2 className="text-2xl md:text-3xl font-tektur mb-1 text-white">
                 <span className="text-[#FF00FF]">SPICA</span> <span className="text-white">Staking</span>
             </h2>
             <p className="text-center text-gray-400 font-satoshi mb-4 text-[10px] md:text-xs px-2">
@@ -69,14 +69,12 @@ export default function SpicaStakingCard() {
                 {/* Token Input Section */}
                 <div className="mb-4">
                     <div className="flex items-center gap-2 mb-2">
-                        <div className="w-7 h-7 rounded-full bg-[#FF00FF] p-1 flex items-center justify-center overflow-hidden">
-                            <Image src="/assets/images/SpicaBadge.png" alt="Spica" width={28} height={28} className="object-cover" />
-                        </div>
+                        <Image src="/assets/images/Unique-1.png" alt="Spica" width={25} height={25} className="object-contain" />
                         <input
                             type="text"
                             value={amount}
                             onChange={handleAmountChange}
-                            className="bg-transparent border-none outline-none text-white text-base font-tektur font-bold w-full"
+                            className="bg-transparent border-none outline-none text-white text-base font-tektur w-full"
                         />
                     </div>
                 </div>
@@ -85,11 +83,11 @@ export default function SpicaStakingCard() {
             {/* Stats Row */}
             <div className="grid grid-cols-2 gap-3 mb-4">
                 <div className="bg-[#0f0f12] border border-white/5 rounded-xl p-3">
-                    <div className="text-xl font-tektur font-bold text-white mb-0.5">{stakedBalance.toLocaleString()}</div>
+                    <div className="text-xl font-tektur text-white mb-0.5">{stakedBalance.toLocaleString()}</div>
                     <div className="text-gray-400 text-[10px] font-satoshi">Staked Balance</div>
                 </div>
                 <div className="bg-[#0f0f12] border border-white/5 rounded-xl p-3">
-                    <div className="text-xl font-tektur font-bold text-white mb-0.5">{stakeableBalance.toLocaleString()}</div>
+                    <div className="text-xl font-tektur text-white mb-0.5">{stakeableBalance.toLocaleString()}</div>
                     <div className="text-gray-400 text-[10px] font-satoshi">Your Stakeable</div>
                 </div>
             </div>

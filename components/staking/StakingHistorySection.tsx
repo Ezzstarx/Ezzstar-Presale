@@ -84,8 +84,8 @@ export default function StakingHistorySection() {
                                         {item.address}
                                     </div>
 
-                                    <div className="col-span-1 text-white font-satoshi font-bold text-sm text-center">
-                                        {item.amount} <span className="text-[#FF00FF]">SPCA</span>
+                                    <div className="col-span-1 text-white font-satoshi text-sm text-center">
+                                        {item.amount} <span className="text-[#FF00FF] font-tektur">SPCA</span>
                                     </div>
 
                                     <div className="col-span-1 text-white font-satoshi text-sm text-center">

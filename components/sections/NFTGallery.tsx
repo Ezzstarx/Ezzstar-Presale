@@ -15,8 +15,7 @@ const nfts = [
         price: "$50",
         color: "text-green-500",
         // borderColor: "border-green-500", // Removed literal border class
-        borderGradient: "from-green-500 to-green-500", // Solid bright border
-        glowColor: "shadow-[0_0_30px_rgba(34,197,94,0.15)]",
+        borderGradient: "linear-gradient(to bottom, rgb(34,197,94) 0%, rgb(34,197,94) 30%, rgb(17,99,47) 50%, black 100%)", // Fades from 30%
         bgGradient: "from-green-900/20 to-black"
     },
     {
@@ -27,8 +26,7 @@ const nfts = [
         price: "$150",
         color: "text-[#BF5AF2]",
         // borderColor: "border-[#BF5AF2]",
-        borderGradient: "from-[#BF5AF2] to-[#BF5AF2]",
-        glowColor: "shadow-[0_0_30px_rgba(191,90,242,0.15)]",
+        borderGradient: "linear-gradient(to bottom, rgb(191,90,242) 0%, rgb(191,90,242) 60%, rgb(96,45,121) 80%, black 100%)", // Fades from 60%
         bgGradient: "from-[#BF5AF2]/20 to-black"
     },
     {
@@ -39,8 +37,7 @@ const nfts = [
         price: "$100",
         color: "text-red-500",
         // borderColor: "border-red-500",
-        borderGradient: "from-red-500 to-red-500",
-        glowColor: "shadow-[0_0_30px_rgba(239,68,68,0.15)]",
+        borderGradient: "linear-gradient(to bottom, rgb(239,68,68) 0%, rgb(239,68,68) 85%, rgb(120,34,34) 92%, black 100%)", // Fades from 85%
         bgGradient: "from-red-900/20 to-black"
     },
 ];
@@ -61,7 +58,8 @@ export default function NFTGallery() {
                         return (
                             <div
                                 key={nft.id}
-                                className={`relative rounded-2xl p-[1px] bg-gradient-to-b ${nft.borderGradient} min-h-[580px] h-full transition-all duration-300 hover:-translate-y-2`}
+                                className="relative rounded-2xl p-[2px] min-h-[580px] h-full transition-all duration-300 hover:-translate-y-2"
+                                style={{ background: nft.borderGradient }}
                             >
                                 {/* Inner Card Content */}
                                 <div className="relative h-full w-full bg-[#0a0a0c] rounded-2xl overflow-hidden flex flex-col">

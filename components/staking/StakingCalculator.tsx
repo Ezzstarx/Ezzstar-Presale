@@ -28,7 +28,7 @@ export default function StakingCalculator() {
     return (
         <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[20px] p-5 md:p-6 relative overflow-hidden w-full h-full flex flex-col justify-center">
             {/* Header */}
-            <h2 className="text-3xl text-center font-tektur font-bold mb-3 text-white">
+            <h2 className="text-3xl text-center font-tektur mb-3 text-white">
                 Staking Calculator
             </h2>
             <p className="text-center text-gray-400 font-satoshi mb-6 text-xs md:text-sm px-2">

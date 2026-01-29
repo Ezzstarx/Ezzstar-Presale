@@ -20,7 +20,7 @@ const NFT_TIERS = [
         badge: "/assets/images/LilyBadge.png",
         color: "text-[#4ADE80]",
         borderColor: "border-[#4ADE80]",
-        glowColor: "rgba(74, 222, 128, 0.4)",
+        borderGradient: "linear-gradient(to bottom, rgb(74,222,128) 0%, rgb(74,222,128) 30%, rgb(37,111,64) 50%, black 100%)", // Fades from 30%
         zIndex: 10,
         benefits: [
             "Bronze Star Verified Glowing Badge",
@@ -39,7 +39,7 @@ const NFT_TIERS = [
         badge: "/assets/images/SpicaBadge.png",
         color: "text-[#D946EF]",
         borderColor: "border-[#D946EF]",
-        glowColor: "rgba(217, 70, 239, 0.4)",
+        borderGradient: "linear-gradient(to bottom, rgb(217,70,239) 0%, rgb(217,70,239) 60%, rgb(109,35,120) 80%, black 100%)", // Fades from 60%
         zIndex: 30, // Center card on top
         benefits: [
             "Gold Star Verified Glowing Badge",
@@ -58,7 +58,7 @@ const NFT_TIERS = [
         badge: "/assets/images/BuffoBadge.png",
         color: "text-[#EF4444]",
         borderColor: "border-[#EF4444]",
-        glowColor: "rgba(239, 68, 68, 0.4)",
+        borderGradient: "linear-gradient(to bottom, rgb(239,68,68) 0%, rgb(239,68,68) 85%, rgb(120,34,34) 92%, black 100%)", // Fades from 85%
         zIndex: 20,
         benefits: [
             "Silver Star Verified Glowing Badge",
@@ -179,9 +179,10 @@ export default function Hero() {
                                         key={tier.id}
                                         onMouseEnter={() => setHoveredTierId(tier.id)}
                                         onMouseLeave={() => setHoveredTierId(null)}
-                                        className={`relative w-[300px] h-[420px] bg-black/40 backdrop-blur-md rounded-xl border-2 ${tier.borderColor} flex flex-col overflow-hidden transition-all duration-300`}
+                                        className="relative w-[300px] h-[420px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
                                         style={{
                                             zIndex: activeZIndex,
+                                            background: tier.borderGradient
                                         }}
                                         whileHover={{ scale: 1.05 }}
                                         animate={{
@@ -194,28 +195,30 @@ export default function Hero() {
                                         }}
                                         transition={{ duration: 0.4 }}
                                     >
-                                        {/* Image Section */}
-                                        <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-900 to-black overflow-hidden">
-                                            <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
-                                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
-                                        </div>
-                                        {/* Content Section */}
-                                        <div className="h-[42%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
-                                            <div className="flex items-center gap-3 mb-2 justify-center w-full">
-                                                <img src={tier.badge} alt="Badge" className="w-14 h-14 object-contain" />
-                                                <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                        <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
+                                            {/* Image Section */}
+                                            <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+                                                <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
+                                                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
                                             </div>
-                                            <div className="flex items-center gap-2 mb-4">
-                                                <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
-                                                <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
+                                            {/* Content Section */}
+                                            <div className="h-[42%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
+                                                <div className="flex items-center gap-3 mb-2 justify-center w-full">
+                                                    <img src={tier.badge} alt="Badge" className="w-14 h-14 object-contain" />
+                                                    <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                                </div>
+                                                <div className="flex items-center gap-2 mb-4">
+                                                    <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
+                                                    <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
+                                                </div>
+                                                <MagicButton
+                                                    onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
+                                                    style={{ '--mask-bg': '#000000' } as React.CSSProperties}
+                                                    className={`w-[157px] h-[54px] rounded-xl border-[0.5px] border-white/30 font-tektur font-medium text-[16px] text-[#888888] hover:text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
+                                                >
+                                                    {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
+                                                </MagicButton>
                                             </div>
-                                            <MagicButton
-                                                onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
-                                                style={{ '--mask-bg': '#000000' } as React.CSSProperties}
-                                                className={`w-[157px] h-[54px] rounded-xl border-[0.5px] border-white/30 font-tektur font-medium text-[16px] text-[#888888] hover:text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
-                                            >
-                                                {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
-                                            </MagicButton>
                                         </div>
                                     </motion.div>
                                 );
@@ -261,66 +264,71 @@ export default function Hero() {
                                         const receiveAmount = (priceVal / 0.004).toLocaleString();
 
                                         return (
-                                            <div className={`relative w-full max-w-[340px] bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[32px] border border-white/10 p-6 flex flex-col items-start gap-6`}>
+                                            <div
+                                                className="relative w-full max-w-[340px] rounded-[32px] p-[2px] flex flex-col items-start gap-6"
+                                                style={{ background: tier.borderGradient }}
+                                            >
+                                                <div className="relative h-full w-full bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[calc(2rem-1px)] p-6 overflow-hidden flex flex-col">
 
-                                                {/* Top: Icon + Name */}
-                                                <div className="flex items-center gap-3 w-full">
-                                                    <img src={tier.badge} alt="Badge" className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-                                                    <h3 className={`text-2xl font-tektur font-medium uppercase tracking-wider ${tier.color} drop-shadow-[0_0_10px_currentColor]`}>
-                                                        {tier.name}
-                                                    </h3>
-                                                </div>
+                                                    {/* Top: Icon + Name */}
+                                                    <div className="flex items-center gap-3 w-full">
+                                                        <img src={tier.badge} alt="Badge" className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
+                                                        <h3 className={`text-2xl font-tektur font-medium uppercase tracking-wider ${tier.color} drop-shadow-[0_0_10px_currentColor]`}>
+                                                            {tier.name}
+                                                        </h3>
+                                                    </div>
 
-                                                {/* Middle: Bullet Points */}
-                                                <ul className="space-y-3 w-full pl-2">
-                                                    {tier.benefits.map((benefit, i) => (
-                                                        <li key={i} className="flex items-start gap-3 text-sm text-gray-200 font-medium">
+                                                    {/* Middle: Bullet Points */}
+                                                    <ul className="space-y-3 w-full pl-2">
+                                                        {tier.benefits.map((benefit, i) => (
+                                                            <li key={i} className="flex items-start gap-3 text-sm text-gray-200 font-medium">
+                                                                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
+                                                                <span className="leading-tight">{benefit}</span>
+                                                            </li>
+                                                        ))}
+                                                        <li className="flex items-start gap-3 text-sm text-gray-200 font-medium pt-2">
                                                             <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
-                                                            <span className="leading-tight">{benefit}</span>
+                                                            <span className="leading-tight">
+                                                                Receive: <span className={`font-medium ${tier.color}`}>{receiveAmount} SPCA</span>
+                                                            </span>
                                                         </li>
-                                                    ))}
-                                                    <li className="flex items-start gap-3 text-sm text-gray-200 font-medium pt-2">
-                                                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
-                                                        <span className="leading-tight">
-                                                            Receive: <span className={`font-medium ${tier.color}`}>{receiveAmount} SPCA</span>
-                                                        </span>
-                                                    </li>
-                                                </ul>
+                                                    </ul>
 
-                                                {/* Bottom: Icon Left, Action Right */}
-                                                <div className="w-full flex items-end justify-between mt-2 pt-4 border-t border-white/5">
+                                                    {/* Bottom: Icon Left, Action Right */}
+                                                    <div className="w-full flex items-end justify-between mt-2 pt-4 border-t border-white/5">
 
-                                                    {/* Left: Tab Icon (Rounded Square, Black BG) */}
-                                                    <div className="w-16 h-16 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10 overflow-hidden shadow-lg shrink-0 p-1 flex items-center justify-center">
-                                                        {(() => {
-                                                            const iconSrc = MOBILE_TABS.find(tab => tab.id === tier.id)?.icon;
-                                                            return <img src={iconSrc} alt={tier.name} className="w-full h-full object-contain" />;
-                                                        })()}
-                                                    </div>
-
-                                                    {/* Right: Invest + Button */}
-                                                    <div className="flex flex-col items-end gap-3 ml-4 flex-1 mr-2">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
-                                                            <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
+                                                        {/* Left: Tab Icon (Rounded Square, Black BG) */}
+                                                        <div className="w-16 h-16 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10 overflow-hidden shadow-lg shrink-0 p-1 flex items-center justify-center">
+                                                            {(() => {
+                                                                const iconSrc = MOBILE_TABS.find(tab => tab.id === tier.id)?.icon;
+                                                                return <img src={iconSrc} alt={tier.name} className="w-full h-full object-contain" />;
+                                                            })()}
                                                         </div>
-                                                        {isConnected ? (
-                                                            <button
-                                                                onClick={disconnectWallet}
-                                                                className="w-full max-w-[160px] py-2.5 rounded-lg bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-tektur font-medium text-sm tracking-wide transition-all shadow-[0_0_10px_rgba(74,222,128,0.2)]"
-                                                            >
-                                                                {address?.slice(0, 4)}...{address?.slice(-4)}
-                                                            </button>
-                                                        ) : (
-                                                            <button
-                                                                onClick={openWalletModal}
-                                                                className="w-full max-w-[160px] py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white font-tektur font-medium text-sm tracking-wide transition-all shadow-lg active:scale-95"
-                                                            >
-                                                                Connect Wallet
-                                                            </button>
-                                                        )}
-                                                    </div>
 
+                                                        {/* Right: Invest + Button */}
+                                                        <div className="flex flex-col items-end gap-3 ml-4 flex-1 mr-2">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
+                                                                <span className={`font-bold text-xl ${tier.color}`}>{tier.price}</span>
+                                                            </div>
+                                                            {isConnected ? (
+                                                                <button
+                                                                    onClick={disconnectWallet}
+                                                                    className="w-full max-w-[160px] py-2.5 rounded-lg bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-tektur font-medium text-sm tracking-wide transition-all shadow-[0_0_10px_rgba(74,222,128,0.2)]"
+                                                                >
+                                                                    {address?.slice(0, 4)}...{address?.slice(-4)}
+                                                                </button>
+                                                            ) : (
+                                                                <button
+                                                                    onClick={openWalletModal}
+                                                                    className="w-full max-w-[160px] py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white font-tektur font-medium text-sm tracking-wide transition-all shadow-lg active:scale-95"
+                                                                >
+                                                                    Connect Wallet
+                                                                </button>
+                                                            )}
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
@@ -401,6 +409,6 @@ export default function Hero() {
                 </div>
 
             </div>
-        </section>
+        </section >
     );
 }
