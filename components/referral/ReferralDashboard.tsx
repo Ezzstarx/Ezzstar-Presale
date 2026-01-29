@@ -89,7 +89,7 @@ export default function ReferralDashboard() {
                     <div className="text-center mb-6">
                         {/* Ref-referred Icon */}
                         <div className="flex justify-center mb-2">
-                            <Image src="/assets/images/Ref-referred.png" alt="Referred" width={50} height={50} className="object-contain" />
+                            <Image src="/assets/images/Ref-Referred.png" alt="Referred" width={50} height={50} className="object-contain" />
                         </div>
                         <h4 className="inline-flex items-center gap-2 text-2xl font-tektur font-medium">
                             Referred <span className="text-yellow-500">(03)</span>
