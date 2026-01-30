@@ -123,7 +123,7 @@ export default function Hero() {
                 </div>
 
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
-                <div className="hidden lg:grid w-full grid-cols-12 gap-8 items-start justify-center relative min-h-[600px]">
+                <div className="hidden lg:grid w-full grid-cols-12 gap-8 items-start justify-center relative min-h-[500px]">
                     {/* LEFT: Presale Widget */}
                     <div className="col-span-4 flex justify-start z-40 ml-[90px]">
                         <PresaleWidget />
@@ -363,8 +363,8 @@ export default function Hero() {
                 </div>
 
                 {/* Promo Text & Socials - Moved from About Section */}
-                <div className="flex flex-col items-center w-full mb-20 mt-8">
-                    <p className="text-[16px] font-tektur font-medium text-gray-300 text-center tracking-wide mb-16 mt-0">
+                <div className="flex flex-col items-center w-full mb-12 mt-4">
+                    <p className="text-[16px] font-tektur font-medium text-gray-300 text-center tracking-wide mb-10 mt-0">
                         Don't miss out! Invest in <span className="text-[#FF00FF] font-medium">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-medium">Exclusive NFT Signature</span> directly in your wallet.
                     </p>
 
