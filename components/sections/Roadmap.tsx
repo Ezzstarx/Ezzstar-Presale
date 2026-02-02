@@ -135,7 +135,7 @@ export default function Roadmap() {
                 >
 
                     {/* Left: Details Card - DYNAMIC DIMENSIONS */}
-                    <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-[#0a0a0c]/40 backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
+                    <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
                         style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
                     >
                         {/* Status Badge */}

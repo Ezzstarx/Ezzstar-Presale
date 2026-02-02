@@ -11,13 +11,13 @@ const teamMembers = [
     { name: "Aman Prajapati", role: "CTO, Co-Founder", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/" },
     { name: "Tushar Goyal", role: "Blockchain Developer", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
     { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", linkedin: "https://www.linkedin.com/in/fateen-catzero/" },
-    { name: "Rabiya Javed", role: "Graphic Designer", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/" },
-    { name: "Saachi Singh", role: "Product Designer", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/" },
-    { name: "M. Arbaaz", role: "Partnership Manager", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/" },
+    { name: "Rabiya Javed", role: "Graphic Designer", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/Rabiya.jpeg" },
+    { name: "Saachi Singh", role: "Product Designer", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/Saachi.jpeg" },
+    { name: "M. Arbaaz", role: "Partnership Manager", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/Arbaaz.jpeg" },
     { name: "Ali Abdullah", role: "Community Builder", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/" },
-    { name: "Harsh Upadhyay", role: "Full Stack Developer", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/" },
+    { name: "Harsh Upadhyay", role: "Full Stack Developer", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/Harsh.jpeg" },
     { name: "Abdullah Khan", role: "Web Developer", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/" },
-    { name: "Misbah Iftikhar", role: "2D Concept Artist", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/" },
+    { name: "Misbah Iftikhar", role: "2D Concept Artist", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/Misbah.jpeg" },
     { name: "Ayush Kumar", role: "Level Designer", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/" },
 ];
 
@@ -112,7 +112,7 @@ export default function Team() {
                                             <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
                                                 <div className="relative aspect-square w-full border-b border-white/10 cursor-pointer">
                                                     <NextImage
-                                                        src="/assets/images/TeamPics.png"
+                                                        src={member.image || "/assets/images/TeamPics.png"}
                                                         alt={member.name}
                                                         fill
                                                         className="object-cover"

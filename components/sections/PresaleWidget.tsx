@@ -53,10 +53,10 @@ export default function PresaleWidget() {
     };
 
     return (
-        <div className="relative w-[422px] h-[431px] mx-auto lg:mx-0">
-            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-8 shadow-2xl h-full flex flex-col justify-center">
+        <div className="relative w-[422px] h-[400px] mx-auto lg:mx-0">
+            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 shadow-2xl h-full flex flex-col justify-center">
                 {/* Title */}
-                <div className="text-left mb-6">
+                <div className="text-left mb-4">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
                         1 SPCA = 0.004 USDT
                     </h3>
@@ -77,7 +77,7 @@ export default function PresaleWidget() {
                         animation: glowTravel 4s infinite linear;
                     }
                 `}</style>
-                <div className="mb-6 w-full flex flex-col items-center">
+                <div className="mb-4 w-full flex flex-col items-center">
                     <div className="relative w-[376px] h-[10px] bg-black border border-white rounded-full overflow-hidden">
                         {/* Thin Progress Line with Gradient */}
                         <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-cyan-400/60 via-purple-400/60 to-purple-500/60 rounded-full">
@@ -90,7 +90,7 @@ export default function PresaleWidget() {
                             }}>
                         </div>
                     </div>
-                    <div className="w-[376px] flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-3">
+                    <div className="w-[376px] flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-2">
                         <span>75%</span>
                         <span>$9M</span>
                     </div>
@@ -102,7 +102,7 @@ export default function PresaleWidget() {
                 </div>
 
                 {/* Input Fields - Unified Dark */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                     {/* Pay Input */}
                     <div className="bg-[#050507] border-[0.5px] border-white/30 rounded-xl p-1.5 flex items-center gap-3">
                         <div className="w-6 h-6 flex items-center justify-center">
@@ -144,7 +144,7 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-center mt-4 mb-4 w-full">
+                <div className="flex items-center justify-center mt-3 mb-3 w-full">
                     <div className="flex items-center w-[350px] h-[38px] bg-black/40">
                         {CURRENCIES.map((curr) => (
                             <button

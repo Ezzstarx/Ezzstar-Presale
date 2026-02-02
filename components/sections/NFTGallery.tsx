@@ -11,7 +11,7 @@ const nfts = [
         id: 3,
         name: "Lily",
         role: "Scout", // Keeping role if needed, or can remove
-        image: "/assets/images/Lily $50.jpg",
+        image: "/assets/images/Lily.jpg",
         price: "$50",
         color: "text-green-500",
         // borderColor: "border-green-500", // Removed literal border class
@@ -22,7 +22,7 @@ const nfts = [
         id: 1,
         name: "Spica NFT",
         role: "Commander",
-        image: "/assets/images/Spica.png",
+        image: "/assets/images/Spica.jpg",
         price: "$150",
         color: "text-[#BF5AF2]",
         // borderColor: "border-[#BF5AF2]",
@@ -33,7 +33,7 @@ const nfts = [
         id: 2,
         name: "Buffo NFT",
         role: "Tank",
-        image: "/assets/images/Buffo $100.jpg",
+        image: "/assets/images/Buffo.jpg",
         price: "$100",
         color: "text-red-500",
         // borderColor: "border-red-500",
@@ -73,8 +73,8 @@ export default function NFTGallery() {
                                         {/* Placeholder */}
                                         <div className={`absolute inset-0 bg-gradient-to-b ${nft.bgGradient} opacity-60`}></div>
 
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="relative w-full h-full">
+                                        <div className="absolute inset-0 flex items-center justify-center p-2 bg-black">
+                                            <div className="relative w-full h-full rounded-lg overflow-hidden border border-white/10">
                                                 <Image src={nft.image} alt={nft.name} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                                             </div>
                                         </div>

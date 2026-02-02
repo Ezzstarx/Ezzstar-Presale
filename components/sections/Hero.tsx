@@ -16,7 +16,7 @@ const NFT_TIERS = [
         id: "lily",
         name: "Lily NFT",
         price: "$50",
-        image: "/assets/images/product-2.jpg",
+        image: "/assets/images/Lily.jpg",
         badge: "/assets/images/LilyBadge.png",
         color: "text-[#4ADE80]",
         borderColor: "border-[#4ADE80]",
@@ -35,7 +35,7 @@ const NFT_TIERS = [
         id: "spica",
         name: "Spica NFT",
         price: "$150",
-        image: "/assets/images/product-1.jpg",
+        image: "/assets/images/Spica.jpg",
         badge: "/assets/images/SpicaBadge.png",
         color: "text-[#D946EF]",
         borderColor: "border-[#D946EF]",
@@ -54,7 +54,7 @@ const NFT_TIERS = [
         id: "buffo",
         name: "Buffo NFT",
         price: "$100",
-        image: "/assets/images/product-3.jpg",
+        image: "/assets/images/Buffo.jpg",
         badge: "/assets/images/BuffoBadge.png",
         color: "text-[#EF4444]",
         borderColor: "border-[#EF4444]",
@@ -140,7 +140,7 @@ export default function Hero() {
                                     animate={{ width: 340, opacity: 1, marginRight: 20 }}
                                     exit={{ width: 0, opacity: 0, marginRight: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="overflow-hidden flex-shrink-0 h-[500px] bg-[#0a0a0c]/95 backdrop-blur-md border border-white/10 rounded-2xl relative z-30 shadow-2xl"
+                                    className="overflow-hidden flex-shrink-0 h-[400px] bg-[#0a0a0c]/95 backdrop-blur-md border border-white/10 rounded-2xl relative z-30 shadow-2xl"
                                 >
                                     <div className="w-[340px] p-8 h-full flex flex-col items-center justify-center text-left">
                                         <h3 className={`text-2xl font-tektur font-medium mb-6 ${selectedTier.color}`}>
@@ -161,7 +161,7 @@ export default function Hero() {
 
                         {/* RIGHT: NFT Cards Deck */}
                         <motion.div
-                            className="flex flex-row items-center relative h-[420px] w-[582px]"
+                            className="flex flex-row items-center relative h-[400px] w-[582px]"
                             layout
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
@@ -179,7 +179,7 @@ export default function Hero() {
                                         key={tier.id}
                                         onMouseEnter={() => setHoveredTierId(tier.id)}
                                         onMouseLeave={() => setHoveredTierId(null)}
-                                        className="relative w-[300px] h-[420px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
+                                        className="relative w-[300px] h-[400px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
                                         style={{
                                             zIndex: activeZIndex,
                                             background: tier.borderGradient
@@ -197,9 +197,8 @@ export default function Hero() {
                                     >
                                         <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
                                             {/* Image Section */}
-                                            <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-900 to-black overflow-hidden">
-                                                <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center" />
-                                                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
+                                            <div className="relative w-full h-[58%] bg-black p-3 overflow-hidden">
+                                                <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center border border-white/10" />
                                             </div>
                                             {/* Content Section */}
                                             <div className="h-[42%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
