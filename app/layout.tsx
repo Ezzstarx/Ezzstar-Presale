@@ -22,6 +22,12 @@ export const metadata: Metadata = {
   description: 'The official presale platform for Ezzstar (SPICA) token.',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {

@@ -7,18 +7,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Mock Data - 15 Members
 const teamMembers = [
-    { name: "Muzammil Moosa", role: "CEO, Founder", linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/" },
-    { name: "Aman Prajapati", role: "CTO, Co-Founder", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/" },
-    { name: "Tushar Goyal", role: "Blockchain Developer", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
-    { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", linkedin: "https://www.linkedin.com/in/fateen-catzero/" },
-    { name: "Rabiya Javed", role: "Graphic Designer", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/Rabiya.jpeg" },
-    { name: "Saachi Singh", role: "Product Designer", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/Saachi.jpeg" },
-    { name: "M. Arbaaz", role: "Partnership Manager", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/Arbaaz.jpeg" },
-    { name: "Ali Abdullah", role: "Community Builder", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/" },
-    { name: "Harsh Upadhyay", role: "Full Stack Developer", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/Harsh.jpeg" },
-    { name: "Abdullah Khan", role: "Web Developer", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/" },
-    { name: "Misbah Iftikhar", role: "2D Concept Artist", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/Misbah.jpeg" },
-    { name: "Ayush Kumar", role: "Level Designer", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/" },
+    { name: "Muzammil Moosa", role: "CEO, Founder", linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/", image: "/assets/images/team/Muzammil.jpeg" },
+    { name: "Aman Prajapati", role: "CTO, Co-Founder", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/", image: "/assets/images/team/team-1.jpeg" },
+    { name: "Tushar Goyal", role: "Blockchain Developer", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", image: "/assets/images/team/team-2.jpeg" },
+    { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", linkedin: "https://www.linkedin.com/in/fateen-catzero/", image: "/assets/images/team/team-3.jpeg" },
+    { name: "Rabiya Javed", role: "Graphic Designer", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/team/Rabiya.jpeg" },
+    { name: "Saachi Singh", role: "Product Designer", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/team/Saachi.jpeg" },
+    { name: "M. Arbaaz", role: "Partnership Manager", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/team/Arbaaz.jpeg" },
+    { name: "Ali Abdullah", role: "Community Builder", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/", image: "/assets/images/team/team-4.jpeg" },
+    { name: "Harsh Upadhyay", role: "Full Stack Developer", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/team/Harsh.jpeg" },
+    { name: "Abdullah Khan", role: "Web Developer", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", image: "/assets/images/team/Abdullah-Khan.jpeg" },
+    { name: "Misbah Iftikhar", role: "2D Concept Artist", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/team/Misbah.jpeg" },
+    { name: "Ayush Kumar", role: "Level Designer", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", image: "/assets/images/team/team-5.jpeg" },
 ];
 
 export default function Team() {

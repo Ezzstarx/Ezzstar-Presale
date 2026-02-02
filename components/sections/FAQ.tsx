@@ -30,8 +30,8 @@ const faqs = [
 ];
 
 export default function FAQ() {
-    // Default open ALL items
-    const [openIndices, setOpenIndices] = useState<number[]>(faqs.map((_, i) => i));
+    // Default open ALL items -> CHANGED to default closed
+    const [openIndices, setOpenIndices] = useState<number[]>([]);
 
     const toggleFAQ = (index: number) => {
         setOpenIndices(prev =>
