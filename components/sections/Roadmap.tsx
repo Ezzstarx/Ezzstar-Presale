@@ -125,136 +125,140 @@ export default function Roadmap() {
 
             <div className="max-w-7xl mx-auto flex flex-col gap-6">
 
-                {/* Main Content Area: Details + Image */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px] relative z-10"
-                >
+                {/* Content Wrapper */}
+                <div className="border-[0.5px] border-white/10 bg-transparent relative rounded-xl p-4 md:p-8 w-full">
 
-                    {/* Left: Details Card - DYNAMIC DIMENSIONS */}
-                    <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
-                        style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
+                    {/* Main Content Area: Details + Image */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px] relative z-10"
                     >
-                        {/* Status Badge */}
-                        <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 tracking-wide w-fit ${activePhase.badgeColor}`}>
-                            {activePhase.status}
-                        </div>
 
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`content-${activePhase.id}`}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                {/* Title & Period */}
-                                <h2 className="text-3xl md:text-4xl font-tektur font-medium text-white mb-2 tracking-tighter uppercase">
-                                    {activePhase.title} <span className="text-base font-medium text-white/50 ml-2 tracking-normal font-tektur">{activePhase.period}</span>
-                                </h2>
-
-                                {/* Heading */}
-                                <h3 className="text-base font-tektur font-medium text-white/90 mb-4">
-                                    {activePhase.heading}
-                                </h3>
-
-                                {/* List Points */}
-                                <ul className="space-y-2">
-                                    {activePhase.points.map((point, idx) => (
-                                        <li key={idx} className="flex items-center gap-2.5 group">
-                                            {/* Custom Bullet: AlienCons 't' */}
-                                            <span className="mt-0.5 min-w-[14px] font-aliencons text-[16px]" style={{ color: point.color, textShadow: `0 0 5px ${point.color}` }}>
-                                                t
-                                            </span>
-                                            <span className="text-white/80 font-satoshi text-sm group-hover:text-white transition-colors duration-300">
-                                                {point.text}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* Subtle background glow inside card */}
-                        <div className="absolute inset-0 -z-10 bg-white/5 blur-3xl opacity-20 rounded-full pointer-events-none"></div>
-                    </div>
-
-
-                    {/* Right: Large Image Display - FIXED DIMENSIONS */}
-                    <div className="w-[562px] h-[525px] relative flex items-center justify-center p-4 shrink-0">
-
-                        {/* Tech Frame/Corners - Just L-Shaped Lines, Long & Less Curved */}
-                        <div className="absolute inset-4 pointer-events-none">
-                            {/* Top Left */}
-                            <div className="absolute top-0 left-0 w-32 h-32 border-t-[1px] border-l-[1px] border-[#3EE1F0] rounded-tl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
-                            {/* Top Right */}
-                            <div className="absolute top-0 right-0 w-32 h-32 border-t-[1px] border-r-[1px] border-[#3EE1F0] rounded-tr-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
-                            {/* Bottom Left */}
-                            <div className="absolute bottom-0 left-0 w-32 h-32 border-b-[1px] border-l-[1px] border-[#3EE1F0] rounded-bl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
-                            {/* Bottom Right */}
-                            <div className="absolute bottom-0 right-0 w-32 h-32 border-b-[1px] border-r-[1px] border-[#3EE1F0] rounded-br-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
-                        </div>
-
-                        {/* START: Inner Background added per request - Made smaller with larger inset & more transparent */}
-                        <div className="absolute inset-12 bg-white/[0.02] rounded-3xl z-0 pointer-events-none"></div>
-                        {/* END: Inner Background */}
-
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`image-${activePhase.id}`}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 1.05 }}
-                                transition={{ duration: 0.4 }}
-                                className="relative w-full h-full flex items-center justify-center p-12" // INCREASED PADDING
-                            >
-                                <img
-                                    src={activePhase.largeImage}
-                                    alt={activePhase.heading}
-                                    className={`max-w-full max-h-full object-contain drop-shadow-[0_0_30px_rgba(0,255,204,0.15)] ${activePhase.id === 4 ? 'animate-[spin_12s_linear_infinite]' : ''}`}
-                                />
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-
-                </motion.div>
-
-
-                {/* Bottom: Phase Selectors - Aligned Left (with padding) */}
-                <div className="flex flex-nowrap overflow-x-auto justify-start items-start gap-6 md:gap-10 mt-4 pt-10 pl-4 lg:ml-12 w-full pb-4 scrollbar-hide relative z-30">
-                    {phases.map((phase) => (
-                        <div
-                            key={phase.id}
-                            onClick={() => setActivePhaseId(phase.id)}
-                            className="flex flex-col items-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[80px]"
+                        {/* Left: Details Card - DYNAMIC DIMENSIONS */}
+                        <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
+                            style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
                         >
-                            {/* Thumbnail - FIXED DIMENSIONS */}
-                            <div className="w-[130px] h-[127px] relative flex-shrink-0">
-                                <img
-                                    src={phase.thumbnail}
-                                    alt={phase.title}
-                                    className={`w-full h-full object-contain drop-shadow-md transition-all duration-300
+                            {/* Status Badge */}
+                            <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 tracking-wide w-fit ${activePhase.badgeColor}`}>
+                                {activePhase.status}
+                            </div>
+
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={`content-${activePhase.id}`}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 20 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    {/* Title & Period */}
+                                    <h2 className="text-3xl md:text-4xl font-tektur font-medium text-white mb-2 tracking-tighter uppercase">
+                                        {activePhase.title} <span className="text-base font-medium text-white/50 ml-2 tracking-normal font-tektur">{activePhase.period}</span>
+                                    </h2>
+
+                                    {/* Heading */}
+                                    <h3 className="text-base font-tektur font-medium text-white/90 mb-4">
+                                        {activePhase.heading}
+                                    </h3>
+
+                                    {/* List Points */}
+                                    <ul className="space-y-2">
+                                        {activePhase.points.map((point, idx) => (
+                                            <li key={idx} className="flex items-center gap-2.5 group">
+                                                {/* Custom Bullet: AlienCons 't' */}
+                                                <span className="mt-0.5 min-w-[14px] font-aliencons text-[16px]" style={{ color: point.color, textShadow: `0 0 5px ${point.color}` }}>
+                                                    t
+                                                </span>
+                                                <span className="text-white/80 font-satoshi text-sm group-hover:text-white transition-colors duration-300">
+                                                    {point.text}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            </AnimatePresence>
+
+                            {/* Subtle background glow inside card */}
+                            <div className="absolute inset-0 -z-10 bg-white/5 blur-3xl opacity-20 rounded-full pointer-events-none"></div>
+                        </div>
+
+
+                        {/* Right: Large Image Display - FIXED DIMENSIONS */}
+                        <div className="w-[562px] h-[525px] relative flex items-center justify-center p-4 shrink-0">
+
+                            {/* Tech Frame/Corners - Just L-Shaped Lines, Long & Less Curved */}
+                            <div className="absolute inset-4 pointer-events-none">
+                                {/* Top Left */}
+                                <div className="absolute top-0 left-0 w-32 h-32 border-t-[1px] border-l-[1px] border-[#3EE1F0] rounded-tl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                {/* Top Right */}
+                                <div className="absolute top-0 right-0 w-32 h-32 border-t-[1px] border-r-[1px] border-[#3EE1F0] rounded-tr-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                {/* Bottom Left */}
+                                <div className="absolute bottom-0 left-0 w-32 h-32 border-b-[1px] border-l-[1px] border-[#3EE1F0] rounded-bl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                {/* Bottom Right */}
+                                <div className="absolute bottom-0 right-0 w-32 h-32 border-b-[1px] border-r-[1px] border-[#3EE1F0] rounded-br-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                            </div>
+
+                            {/* START: Inner Background added per request - Made smaller with larger inset & more transparent */}
+                            <div className="absolute inset-12 bg-white/[0.02] rounded-3xl z-0 pointer-events-none"></div>
+                            {/* END: Inner Background */}
+
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={`image-${activePhase.id}`}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 1.05 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="relative w-full h-full flex items-center justify-center p-12" // INCREASED PADDING
+                                >
+                                    <img
+                                        src={activePhase.largeImage}
+                                        alt={activePhase.heading}
+                                        className={`max-w-full max-h-full object-contain drop-shadow-[0_0_30px_rgba(0,255,204,0.15)] ${activePhase.id === 4 ? 'animate-[spin_12s_linear_infinite]' : ''}`}
+                                    />
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+
+                    </motion.div>
+
+
+                    {/* Bottom: Phase Selectors - Aligned Left (with padding) */}
+                    <div className="flex flex-nowrap overflow-x-auto justify-start items-start gap-6 md:gap-10 mt-4 pt-10 pl-4 lg:ml-12 w-full pb-4 scrollbar-hide relative z-30">
+                        {phases.map((phase) => (
+                            <div
+                                key={phase.id}
+                                onClick={() => setActivePhaseId(phase.id)}
+                                className="flex flex-col items-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[80px]"
+                            >
+                                {/* Thumbnail - FIXED DIMENSIONS */}
+                                <div className="w-[130px] h-[127px] relative flex-shrink-0">
+                                    <img
+                                        src={phase.thumbnail}
+                                        alt={phase.title}
+                                        className={`w-full h-full object-contain drop-shadow-md transition-all duration-300
                                         ${phase.id === 4 ? 'animate-[spin_12s_linear_infinite]' : ''} 
                                         ${activePhaseId === phase.id ? 'brightness-110 scale-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'brightness-75 opacity-70 hover:opacity-100 hover:brightness-100'}
                                     `}
-                                />
-                            </div>
+                                    />
+                                </div>
 
-                            {/* Label */}
-                            <div className="flex flex-col items-center min-w-[80px]">
-                                <span className={`font-tektur text-base uppercase tracking-wider transition-colors duration-300 text-center whitespace-nowrap
+                                {/* Label */}
+                                <div className="flex flex-col items-center min-w-[80px]">
+                                    <span className={`font-tektur text-base uppercase tracking-wider transition-colors duration-300 text-center whitespace-nowrap
                                     ${activePhaseId === phase.id ? 'text-white font-medium' : 'text-white/40 group-hover:text-white/80'}
                                 `}>
-                                    {phase.title}
-                                </span>
+                                        {phase.title}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
 
+                </div>
             </div >
         </section >
     );

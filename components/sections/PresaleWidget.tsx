@@ -11,13 +11,12 @@ export default function PresaleWidget() {
     const [amount, setAmount] = useState<string>("0.002");
     const [receiveAmount, setReceiveAmount] = useState<string>("0.5");
 
+    // Force Rebuild
     const RATES: Record<string, number> = {
         "USDT": 250,      // 1 USDT = 250 SPCA
-        "BTC": 24000000,  // 1 BTC = $96,000 = 24M SPCA
-        "ETH": 825000,    // 1 ETH = $3,300 = 825k SPCA
-        "SOL": 47500,     // 1 SOL = $190 = 47.5k SPCA
         "BNB": 162500,    // 1 BNB = $650 = 162.5k SPCA
-        "USDC": 250
+        "USDC": 250,
+        "DAI": 250        // 1 DAI = $1 = 250 SPCA,
     };
 
     const CURRENCIES = [
@@ -25,8 +24,6 @@ export default function PresaleWidget() {
         { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
         { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
         { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
-        { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
-        { id: "ETH", icon: "/assets/icons/crypto/icon-eth.png" }
     ];
 
     useEffect(() => {
@@ -53,8 +50,10 @@ export default function PresaleWidget() {
     };
 
     return (
-        <div className="relative w-[422px] h-[400px] mx-auto lg:mx-0">
-            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 shadow-2xl h-full flex flex-col justify-center">
+        <div className="relative w-[370px] h-[370px] mx-auto lg:mx-0 shrink-0">
+            <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 shadow-2xl h-full flex flex-col justify-center overflow-hidden">
+                {/* Gradient Bottom Border */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white via-50% to-transparent opacity-100" />
                 {/* Title */}
                 <div className="text-left mb-4">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
@@ -78,7 +77,7 @@ export default function PresaleWidget() {
                     }
                 `}</style>
                 <div className="mb-4 w-full flex flex-col items-center">
-                    <div className="relative w-[376px] h-[10px] bg-black border border-white rounded-full overflow-hidden">
+                    <div className="relative w-full h-[10px] bg-black border border-white rounded-full overflow-hidden">
                         {/* Thin Progress Line with Gradient */}
                         <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-cyan-400/60 via-purple-400/60 to-purple-500/60 rounded-full">
                         </div>
@@ -90,7 +89,7 @@ export default function PresaleWidget() {
                             }}>
                         </div>
                     </div>
-                    <div className="w-[376px] flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-2">
+                    <div className="w-full flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-2">
                         <span>75%</span>
                         <span>$9M</span>
                     </div>
@@ -145,7 +144,7 @@ export default function PresaleWidget() {
                 </div>
 
                 <div className="flex items-center justify-center mt-3 mb-3 w-full">
-                    <div className="flex items-center w-[350px] h-[38px] bg-black/40">
+                    <div className="flex items-center w-fit h-[38px] bg-black/40 px-1 rounded-full">
                         {CURRENCIES.map((curr) => (
                             <button
                                 key={curr.id}

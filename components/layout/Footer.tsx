@@ -34,7 +34,8 @@ const SocialButton = ({ href, icon: Icon, label, colorClass }: { href: string, i
 export default function Footer() {
     return (
         <footer className="relative bg-[radial-gradient(ellipse_at_top,_rgba(222,59,214,0.15)_0%,_#020205_50%,_#000000_100%)] pt-24 pb-6 border-t border-white/5 overflow-hidden">
-            {/* Top Purple Glow Effect - Removed as background handles it now */}
+            {/* Top Purple Glow Effect - Enhanced Center */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] bg-[#DE3BD6] blur-[90px] opacity-40 pointer-events-none" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-12">
@@ -70,7 +71,7 @@ export default function Footer() {
                     <div className="col-span-1 md:col-span-5 grid grid-cols-3 gap-2 md:gap-4 text-center md:text-left">
                         {/* Company */}
                         <div className="flex flex-col gap-5">
-                            <h3 className="font-tektur text-lg font-bold text-white mb-1">Company</h3>
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Company</h3>
                             <Link href="#about" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">About Us</Link>
                             <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Whitepaper</Link>
                             <Link href="#tokenomics" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Tokenomics</Link>
@@ -79,14 +80,14 @@ export default function Footer() {
 
                         {/* Support */}
                         <div className="flex flex-col gap-5">
-                            <h3 className="font-tektur text-lg font-bold text-white mb-1">Support</h3>
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Support</h3>
                             <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Discord</Link>
                             <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Telegram</Link>
                         </div>
 
                         {/* Service */}
                         <div className="flex flex-col gap-5">
-                            <h3 className="font-tektur text-lg font-bold text-white mb-1">Service</h3>
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Service</h3>
                             <Link href="#referral" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Referral</Link>
                             <Link href="/staking" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Staking</Link>
                         </div>
@@ -96,7 +97,7 @@ export default function Footer() {
                 {/* Bottom Section */}
                 <div className="border-t border-white/10 pt-5 flex flex-col items-center gap-2 text-center">
                     <p className="text-gray-500 font-satoshi text-xs md:text-sm max-w-4xl mx-auto leading-relaxed opacity-70">
-                        <span className="font-bold text-gray-50">Disclaimer:</span> Cryptocurrency might not be regulated in your area. Its value can fluctuate, and profits could be taxed according to your local laws.
+                        <span className=" text-gray-50">Disclaimer:</span> Cryptocurrency might not be regulated in your area. Its value can fluctuate, and profits could be taxed according to your local laws.
                     </p>
                     <p className="text-gray-500 font-satoshi text-sm">
                         <span className="text-[#FF00FF] font-medium">© 2025 Ezzstar All Rights reserved.</span>

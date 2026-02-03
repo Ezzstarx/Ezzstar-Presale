@@ -24,7 +24,7 @@ interface Project {
 const projects: Project[] = [
     {
         id: 1,
-        title: "Upcoming Social Website",
+        title: "Social Website",
         cardImages: [
             "/assets/images/Upcoming/Up-SocialSite-1.png"
         ],
@@ -37,7 +37,7 @@ const projects: Project[] = [
     },
     {
         id: 2,
-        title: "Web3 Social Media App Concept",
+        title: "Web3 Social Media App",
         cardImages: [
             "/assets/images/Upcoming/Up-SocialApp-2.1.png",
             "/assets/images/Upcoming/Up-SocialApp-2.2.png",
@@ -75,7 +75,7 @@ const projects: Project[] = [
     },
     {
         id: 3,
-        title: "NFT Character Concept",
+        title: "3D NFT Character",
         cardImages: [
             "/assets/images/Upcoming/3D-NFTChar.png"
         ],
@@ -129,8 +129,8 @@ export default function UpcomingProjects() {
     }, [currentIndex]);
 
     return (
-        <section id="upcoming-projects" className="py-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#C243FE]/20 to-transparent" />
+        <section id="upcoming-projects" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
+
             <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#C243FE]/5 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10 w-full">
@@ -152,8 +152,49 @@ export default function UpcomingProjects() {
                         >
                             {projects.map((project) => (
                                 <div key={project.id} className="min-w-full px-4" onClick={() => setSelectedProject(project)}>
-                                    <div className="relative group/card bg-[#0a0a0c]/60 border border-white/10 rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer backdrop-blur-md">
-                                        <div className="relative h-[200px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
+                                    <div
+                                        className="relative group/card magic-card rounded-lg overflow-hidden flex flex-col h-full cursor-pointer backdrop-blur-md p-[1px]"
+                                        style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
+                                    >
+                                        <div className="w-full h-full rounded-lg overflow-hidden flex flex-col bg-[#0a0a0c] border-[5px] border-black">
+                                            <div className="relative h-[260px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
+                                                {project.cardImages.map((img, idx) => (
+                                                    <div key={idx} className="relative flex-1 h-full">
+                                                        <Image src={img} alt={project.title} fill className="object-cover" />
+                                                    </div>
+                                                ))}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-40 pointer-events-none" />
+                                            </div>
+                                            <div className="p-4 flex flex-col flex-grow text-center">
+                                                <h3 className="text-2xl font-tektur font-medium mb-1 text-[#DE3BD6]">{project.title}</h3>
+                                                <p
+                                                    className="text-sm text-gray-400 font-satoshi leading-relaxed mb-2"
+                                                    style={{
+                                                        display: '-webkit-box',
+                                                        WebkitLineClamp: project.id === 2 ? 2 : 3,
+                                                        WebkitBoxOrient: 'vertical',
+                                                        overflow: 'hidden'
+                                                    }}
+                                                >
+                                                    {project.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+
+                        <div className="hidden md:grid md:grid-cols-3 gap-8 w-full">
+                            {projects.map((project) => (
+                                <div
+                                    key={project.id}
+                                    className="relative group/card magic-card rounded-lg overflow-hidden flex flex-col cursor-pointer backdrop-blur-md p-[1px]"
+                                    style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
+                                    onClick={() => setSelectedProject(project)}
+                                >
+                                    <div className="w-full h-full rounded-lg overflow-hidden flex flex-col bg-[#0a0a0c] border-[5px] border-black">
+                                        <div className="relative h-[300px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
                                             {project.cardImages.map((img, idx) => (
                                                 <div key={idx} className="relative flex-1 h-full">
                                                     <Image src={img} alt={project.title} fill className="object-cover" />
@@ -161,38 +202,20 @@ export default function UpcomingProjects() {
                                             ))}
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-40 pointer-events-none" />
                                         </div>
-                                        <div className="p-6 flex flex-col flex-grow text-center">
-                                            <h3 className="text-xl font-tektur font-medium mb-3 text-[#DE3BD6]">{project.title}</h3>
-                                            <p className="text-sm text-gray-400 font-satoshi leading-relaxed mb-4 flex-grow line-clamp-3">
+                                        <div className="p-4 flex flex-col flex-grow text-center">
+                                            <h3 className="text-2xl font-tektur font-medium mb-1 text-[#DE3BD6]">{project.title}</h3>
+                                            <p
+                                                className="text-xs text-gray-400 font-satoshi leading-relaxed"
+                                                style={{
+                                                    display: '-webkit-box',
+                                                    WebkitLineClamp: project.id === 2 ? 2 : 3,
+                                                    WebkitBoxOrient: 'vertical',
+                                                    overflow: 'hidden'
+                                                }}
+                                            >
                                                 {project.description}
                                             </p>
                                         </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </motion.div>
-
-                        {/* Desktop Grid View */}
-                        <div className="hidden md:grid md:grid-cols-3 gap-8 w-full">
-                            {projects.map((project) => (
-                                <div
-                                    key={project.id}
-                                    className="relative group/card bg-[#0a0a0c]/60 border border-white/10 rounded-2xl overflow-hidden flex flex-col cursor-pointer backdrop-blur-md hover:border-[#DE3BD6]/20 transition-colors"
-                                    onClick={() => setSelectedProject(project)}
-                                >
-                                    <div className="relative h-[220px] w-full overflow-hidden bg-black/40 p-0 flex gap-0">
-                                        {project.cardImages.map((img, idx) => (
-                                            <div key={idx} className="relative flex-1 h-full">
-                                                <Image src={img} alt={project.title} fill className="object-cover" />
-                                            </div>
-                                        ))}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent opacity-40 pointer-events-none" />
-                                    </div>
-                                    <div className="p-6 flex flex-col flex-grow text-center">
-                                        <h3 className="text-lg font-tektur font-medium mb-2 text-[#DE3BD6]">{project.title}</h3>
-                                        <p className="text-xs text-gray-400 font-satoshi leading-relaxed flex-grow line-clamp-4">
-                                            {project.description}
-                                        </p>
                                     </div>
                                 </div>
                             ))}

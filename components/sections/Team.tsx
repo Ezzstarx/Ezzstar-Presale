@@ -76,7 +76,7 @@ export default function Team() {
     // Auto-slide effect removed - manual navigation only
 
     return (
-        <section id="team" className="py-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
+        <section id="team" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             <div className="relative z-10 w-full">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
                     <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
@@ -85,7 +85,7 @@ export default function Team() {
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
                 </div>
 
-                <div className="relative w-full max-w-[936px] mx-auto group">
+                <div className="relative w-full max-w-[904px] mx-auto group">
                     {/* Carousel Window */}
                     <div className="overflow-hidden w-full">
                         <motion.div
@@ -108,9 +108,20 @@ export default function Team() {
                                         rel="noopener noreferrer"
                                         className="relative group/card h-full block"
                                     >
-                                        <div className="relative rounded-2xl p-0.5 bg-gradient-to-b from-[#00ffcc]/50 to-purple-600/50 h-full">
-                                            <div className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden relative h-full flex flex-col">
-                                                <div className="relative aspect-square w-full border-b border-white/10 cursor-pointer">
+                                        <div className="relative rounded-2xl h-full">
+                                            {/* Gradient Border Mask */}
+                                            <div
+                                                className="absolute inset-0 rounded-2xl p-[1px] pointer-events-none z-20"
+                                                style={{
+                                                    background: 'linear-gradient(to bottom, rgba(0,255,204,0.5), rgba(147,51,234,0.5))',
+                                                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                                    maskComposite: 'exclude',
+                                                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                                    WebkitMaskComposite: 'xor'
+                                                }}
+                                            />
+                                            <div className="bg-transparent rounded-xl overflow-hidden relative h-full flex flex-col z-10">
+                                                <div className="relative aspect-square w-full cursor-pointer">
                                                     <NextImage
                                                         src={member.image || "/assets/images/TeamPics.png"}
                                                         alt={member.name}
@@ -119,7 +130,7 @@ export default function Team() {
                                                     />
                                                     <div className="absolute inset-0 bg-transparent opacity-20 mix-blend-overlay pointer-events-none"></div>
                                                 </div>
-                                                <div className="p-4 flex flex-col justify-end flex-grow bg-black/40 backdrop-blur-sm">
+                                                <div className="p-4 flex flex-col justify-end flex-grow bg-transparent">
                                                     <h3 className="text-xl font-tektur font-medium text-white mb-1">
                                                         {member.name}
                                                     </h3>

@@ -123,37 +123,86 @@ export default function Hero() {
                 </div>
 
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
-                <div className="hidden lg:grid w-full grid-cols-12 gap-8 items-start justify-center relative min-h-[500px]">
+                <div className="hidden lg:grid w-full grid-cols-12 gap-4 items-center justify-center relative min-h-[500px]">
                     {/* LEFT: Presale Widget */}
-                    <div className="col-span-4 flex justify-start z-40 ml-[90px]">
+                    <div className="col-span-4 flex justify-start z-40 ml-[50px]">
                         <PresaleWidget />
                     </div>
 
                     {/* RIGHT AREA: Dynamic Interaction Zone */}
-                    <div className="col-span-8 flex flex-row items-center justify-start relative h-[420px] mx-[160px]">
+                    <div
+                        className={`col-span-8 flex flex-row items-center relative h-[420px] w-full transition-all duration-500 ease-in-out ${selectedTier ? 'justify-end pr-0 translate-x-20' : 'justify-start pl-[140px] translate-x-0'}`}
+                    >
                         {/* CENTER PANEL: Benefits */}
                         <AnimatePresence mode="popLayout">
                             {selectedTier && (
                                 <motion.div
                                     key="benefits-panel"
                                     initial={{ width: 0, opacity: 0, marginRight: 0 }}
-                                    animate={{ width: 340, opacity: 1, marginRight: 20 }}
+                                    animate={{ width: 380, opacity: 1, marginRight: 16 }} // Restored 380px, Tightened gap
                                     exit={{ width: 0, opacity: 0, marginRight: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="overflow-hidden flex-shrink-0 h-[400px] bg-[#0a0a0c]/95 backdrop-blur-md border border-white/10 rounded-2xl relative z-30 shadow-2xl"
+                                    // Dynamic Border Color
+                                    className={`overflow-hidden flex-shrink-0 h-[360px] backdrop-blur-md w-full relative z-30 shadow-2xl`}
+                                    style={{
+                                        backgroundColor: `${selectedTier.color.replace('text-[', '').replace(']', '')}0D` // 7% opacity
+                                    }}
                                 >
-                                    <div className="w-[340px] p-8 h-full flex flex-col items-center justify-center text-left">
-                                        <h3 className={`text-2xl font-tektur font-medium mb-6 ${selectedTier.color}`}>
-                                            {selectedTier.name} Benefits
-                                        </h3>
-                                        <ul className="space-y-4 w-full">
+                                    {/* Manual Override for border opacity since "border-[#...]/30" might not work if not JIT optimized perfectly on the fly, but usually fine.
+                                        Let's use inline style for border-color to ensure we can control opacity if needed, OR just trust the tailwind class provided in the object. 
+                                        The object has "borderColor: 'border-[#...]'"
+                                    */}
+                                    <div className={`w-full h-full absolute inset-0 border ${selectedTier.borderColor} opacity-30 pointer-events-none`} />
+
+                                    <div className="w-[360px] px-3 py-5 h-full flex flex-col items-start justify-center relative z-10">
+
+                                        {/* Header Section - No Divider, Larger Text, Single Line Forced */}
+                                        <div className="flex flex-row justify-between items-center w-full mb-4 whitespace-nowrap">
+                                            {/* Left: Badge + Title */}
+                                            <div className="flex items-center gap-1.5">
+                                                {/* Actual NFT Badge */}
+                                                <img
+                                                    src={selectedTier.badge}
+                                                    alt="Badge"
+                                                    className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                                                />
+                                                {/* Semibold Tektur, No Glow */}
+                                                <h3 className={`text-3xl font-tektur font-semibold uppercase tracking-wide ${selectedTier.color}`}>
+                                                    {selectedTier.name}
+                                                </h3>
+                                            </div>
+
+                                            {/* Right: Price */}
+                                            <div className="flex items-center gap-1.5">
+                                                {/* Regular Satoshi */}
+                                                <span className="text-white text-base font-satoshi font-normal opacity-80">Invest:</span>
+                                                {/* Semibold Tektur, No Glow */}
+                                                <span className={`text-3xl font-tektur font-semibold ${selectedTier.color}`}>
+                                                    {selectedTier.price}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Benefits List */}
+                                        <ul className="space-y-0.5 w-full pl-1">
                                             {selectedTier.benefits.map((benefit, idx) => (
-                                                <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
-                                                    <img src={selectedTier.badge} alt="Badge" className="w-5 h-5 object-contain mt-0.5" />
-                                                    <span>{benefit}</span>
+                                                <li key={idx} className="flex items-start gap-3">
+                                                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                    {/* Regular Satoshi */}
+                                                    <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
+                                                        {benefit}
+                                                    </span>
                                                 </li>
                                             ))}
+                                            {/* Auto-Calculated Receive Amount - No Glow */}
+                                            <li className="flex items-start gap-3 pt-1">
+                                                <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
+                                                    Receive: <span className={`font-bold ${selectedTier.color}`}>{(parseInt(selectedTier!.price.replace('$', '')) / 0.004).toLocaleString()} SPCA</span>
+                                                </span>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </motion.div>
                             )}
@@ -167,8 +216,8 @@ export default function Hero() {
                         >
                             {NFT_TIERS.map((tier, index) => {
                                 const isDetailsOpen = !!selectedTierId;
-                                const defaultMargin = index === 0 ? 0 : -100;
-                                const collapsedMargin = index === 0 ? 0 : -220;
+                                const defaultMargin = index === 0 ? 0 : -120; // Adjusted overlap
+                                const collapsedMargin = index === 0 ? 0 : -200; // Tighter collapse
                                 const currentMargin = isDetailsOpen ? collapsedMargin : defaultMargin;
                                 const activeZIndex = hoveredTierId === tier.id ? 50 : tier.zIndex;
                                 const isOtherCardActive = !!selectedTierId && selectedTierId !== tier.id;
@@ -179,15 +228,16 @@ export default function Hero() {
                                         key={tier.id}
                                         onMouseEnter={() => setHoveredTierId(tier.id)}
                                         onMouseLeave={() => setHoveredTierId(null)}
-                                        className="relative w-[300px] h-[400px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
+                                        // RESIZED CARDS: w-[260px] h-[360px]
+                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
                                         style={{
                                             zIndex: activeZIndex,
                                             background: tier.borderGradient
                                         }}
                                         whileHover={{ scale: 1.05 }}
                                         animate={{
-                                            marginLeft: isOtherCardActive ? 0 : (selectedTierId === tier.id ? 20 : currentMargin),
-                                            width: isOtherCardActive ? 0 : 300,
+                                            marginLeft: isOtherCardActive ? 0 : (selectedTierId === tier.id ? 0 : currentMargin), // Removed the +20 gap when active to keep it tight
+                                            width: isOtherCardActive ? 0 : 260,
                                             opacity: isOtherCardActive ? 0 : 1,
                                             scale: isDetailsOpen ? 1 : 1,
                                             padding: isOtherCardActive ? 0 : '',
@@ -197,23 +247,23 @@ export default function Hero() {
                                     >
                                         <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
                                             {/* Image Section */}
-                                            <div className="relative w-full h-[58%] bg-black p-3 overflow-hidden">
+                                            <div className="relative w-full h-[72%] bg-black p-3 overflow-hidden">
                                                 <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center border border-white/10" />
                                             </div>
                                             {/* Content Section */}
-                                            <div className="h-[42%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-2 pb-6 px-4 relative z-10">
-                                                <div className="flex items-center gap-3 mb-2 justify-center w-full">
-                                                    <img src={tier.badge} alt="Badge" className="w-14 h-14 object-contain" />
-                                                    <h3 className={`text-2xl font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                            <div className="h-[28%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-1 pb-2 px-4 relative z-10">
+                                                <div className="flex items-center gap-2 mb-[2px] justify-center w-full">
+                                                    <img src={tier.badge} alt="Badge" className="w-6 h-6 object-contain" />
+                                                    <h3 className={`text-[17px] font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
                                                 </div>
-                                                <div className="flex items-center gap-2 mb-4">
-                                                    <span className="text-gray-400 text-[18px] font-satoshi">Invest:</span>
-                                                    <span className={`font-medium text-xl ${tier.color}`}>{tier.price}</span>
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="text-gray-400 text-xs font-satoshi">Invest:</span>
+                                                    <span className={`font-medium text-[15px] ${tier.color}`}>{tier.price}</span>
                                                 </div>
                                                 <MagicButton
                                                     onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
                                                     style={{ '--mask-bg': '#000000' } as React.CSSProperties}
-                                                    className={`w-[157px] h-[54px] rounded-xl border-[0.5px] border-white/30 font-tektur font-medium text-[16px] text-[#888888] hover:text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
+                                                    className={`w-[124px] h-[30px] rounded-lg border-[0.5px] border-white/30 font-tektur font-medium text-xs text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
                                                 >
                                                     {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
                                                 </MagicButton>

@@ -14,7 +14,7 @@ export default function Tokenomics() {
     };
 
     return (
-        <section id="tokenomics" className="py-12 relative overflow-hidden">
+        <section id="tokenomics" className="pb-12 relative overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image

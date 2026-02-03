@@ -186,3 +186,39 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+
+/* Magic Card Animation (Larger version for cards) */
+.magic-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.magic-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  /* Increased size for cards */
+  height: 1000px;
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 230deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 310deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 7s linear infinite;
+}
+
+.magic-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--mask-bg, #0a0a0c);
+  z-index: -1;
+}

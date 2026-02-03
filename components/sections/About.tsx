@@ -95,7 +95,7 @@ export default function About() {
 
                     {/* Bottom Section: Video Content */}
                     {/* Bottom Section: Video Content */}
-                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden border-[3px] border-[#1e1e3f] shadow-[0_25px_50px_rgba(60,60,150,0.65)] rounded-b-2xl">
+                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden border-[3px] border-indigo-400/60 shadow-[0_25px_50px_rgba(60,60,150,0.65)] rounded-b-2xl">
                         {/* Video Content */}
                         <video
                             className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1] scale-[1.35]"
