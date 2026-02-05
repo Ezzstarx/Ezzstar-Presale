@@ -30,11 +30,11 @@ export default function StakingHero() {
                     <div className="flex gap-4 justify-center items-center">
                         <MagicButton
                             className="w-40 py-3 cursor-default h-auto rounded-xl flex-shrink-0"
-                            style={{ "--mask-bg": "#DE3BD6" } as React.CSSProperties}
+                            style={{ "--mask-bg": "radial-gradient(circle at center, rgb(222, 59, 214) 0%, rgb(100, 30, 95) 90%)" } as React.CSSProperties}
                         >
                             <div className="flex flex-col items-center justify-center pointer-events-none">
                                 <span className="text-white text-base font-tektur font-medium leading-tight">100%</span>
-                                <span className="text-gray-400 text-[18px] font-tektur font-medium tracking-tight leading-tight">Estimated APR</span>
+                                <span className="text-white text-[16px] font-tektur font-medium tracking-tight leading-tight">Estimated APR</span>
                             </div>
                         </MagicButton>
 
@@ -44,7 +44,7 @@ export default function StakingHero() {
                         >
                             <div className="flex flex-col items-center justify-center pointer-events-none">
                                 <span className="text-white text-base font-tektur font-medium leading-tight">174.71M</span>
-                                <span className="text-gray-400 text-[18px] font-tektur font-medium tracking-tight leading-tight">SPCA Staked</span>
+                                <span className="text-white text-[16px] font-tektur font-medium tracking-tight leading-tight">SPCA Staked</span>
                             </div>
                         </MagicButton>
                     </div>

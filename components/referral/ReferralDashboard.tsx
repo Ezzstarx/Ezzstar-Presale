@@ -35,7 +35,8 @@ export default function ReferralDashboard() {
         <div className="max-w-[1000px] mx-auto">
             <div className="grid md:grid-cols-[2.7fr_2.3fr] gap-8">
                 {/* Link Box */}
-                <div className="glass-card rounded-xl p-8 bg-black/40 border border-white/10">
+                <div className="relative glass-card rounded-md p-8 bg-black/10 border border-white/10 group">
+                    <div className="magic-ring" />
                     <h4 className="text-[25px] text-accent-pink font-tektur font-medium mb-4">Share the referral link</h4>
                     <p className="text-xs text-gray-200 mb-4">Share your referral link by copying and sending it to your friends or sharing it on social media.</p>
 
@@ -46,7 +47,7 @@ export default function ReferralDashboard() {
                                 <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-400 focus:outline-none" />
                                 <MagicButton
                                     onClick={openWalletModal}
-                                    className="px-4 py-1 rounded-md text-white/80 text-lg font-medium transition-colors"
+                                    className="px-5 py-0.1 rounded-md text-white/80 text-lg font-medium border border-white/20 transition-colors"
                                     style={{ "--mask-bg": "#000000" } as React.CSSProperties}
                                 >
                                     Connect Wallet
@@ -72,24 +73,35 @@ export default function ReferralDashboard() {
 
                     {/* Social Icons */}
                     <div>
-                        <p className="text-sm text-gray-400 mb-3">Invite via:</p>
-                        <div className="flex gap-4 items-center text-gray-400">
-                            <DiscordIcon className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
-                            <Send className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
-                            <XIcon className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
-                            <Facebook className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
-                            <Instagram className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
-                            <Linkedin className="w-5 h-5 cursor-pointer hover:text-white transition-colors" />
+                        <p className="text-sm text-white mb-3">Invite via:</p>
+                        <div className="flex gap-4 items-center text-white">
+                            <DiscordIcon className="w-5 h-5 cursor-pointer transition-colors" />
+                            <Send className="w-5 h-5 cursor-pointer transition-colors" />
+                            <XIcon className="w-5 h-5 cursor-pointer transition-colors" />
+                            <Facebook className="w-5 h-5 cursor-pointer transition-colors" />
+                            <Instagram className="w-5 h-5 cursor-pointer transition-colors" />
+                            <Linkedin className="w-5 h-5 cursor-pointer transition-colors" />
                         </div>
                     </div>
                 </div>
 
                 {/* Stats Box */}
-                <div className="glass-card rounded-xl p-5 bg-black/40 border border-white/10">
+                <div className="relative glass-card rounded-md p-5 bg-black/10 border border-white/10 group">
+                    <div className="magic-ring" />
                     <div className="text-center mb-6">
-                        {/* Ref-referred Icon */}
+                        {/* Ref-Heart Icon with Background */}
                         <div className="flex justify-center mb-2">
-                            <Image src="/assets/images/Ref-Referred.png" alt="Referred" width={50} height={50} className="object-contain" />
+                            <div className="relative" style={{ width: 50, height: 50 }}>
+                                {/* Background layer */}
+                                <Image
+                                    src="/assets/images/Ref-Heart-bg.png"
+                                    alt="Heart Background"
+                                    fill
+                                    className="object-contain"
+                                />
+                                {/* Animated heart layer - scaled down */}
+                                <div className="color-cycle-heart absolute" style={{ top: '30%', left: '30%', right: '30%', bottom: '30%' }} />
+                            </div>
                         </div>
                         <h4 className="inline-flex items-center gap-2 text-2xl font-tektur font-medium">
                             Referred <span className="text-yellow-500">(03)</span>
@@ -106,17 +118,17 @@ export default function ReferralDashboard() {
                         </div>
                         <div className="bg-gradient-to-r from-[#DE3BD6]/40 to-[#01F1E3]/40 p-[1px]">
                             <div className="bg-black">
-                                <div className="flex flex-col bg-white/5">
-                                    {['7oeFZe....rW7C', '7oeFZe....rW7C', '7oeFZe....rW7C'].map((addr, i) => (
+                                <div className="flex flex-col bg-white/5 max-h-[110px] overflow-y-auto custom-scrollbar pr-1">
+                                    {Array(10).fill(null).map((_, i) => (
                                         <div key={i} className="flex flex-col">
-                                            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-xs text-gray-400 py-[2px] px-8">
-                                                <span className="text-left">{addr}</span>
+                                            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-xs text-gray-400 py-[4px] px-8">
+                                                <span className="text-left">7oeFZe....rW7C</span>
                                                 <span className="text-xl text-gray-600 text-center">-</span>
-                                                <span className="text-center">{(10 - i * 5)} USDT</span>
+                                                <span className="text-center">{(10 - (i % 3) * 2)} USDT</span>
                                                 <span className="text-xl text-gray-600 text-center">-</span>
                                                 <span className="text-right">01/08/25</span>
                                             </div>
-                                            {(i < 2) && (
+                                            {(i < 9) && (
                                                 <div className="w-full h-[1px] bg-gradient-to-r from-[#DE3BD6]/30 to-[#01F1E3]/30"></div>
                                             )}
                                         </div>

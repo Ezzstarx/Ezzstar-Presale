@@ -8,7 +8,7 @@ import MagicButton from "@/components/ui/MagicButton";
 export default function SpicaStakingCard() {
     const { isConnected, connectWallet, openWalletModal } = useWallet();
     const [amount, setAmount] = useState<string>("10,000");
-    const [lockDays, setLockDays] = useState(1080);
+    const [lockDays, setLockDays] = useState(818); // Default 75%
     const [apr, setApr] = useState(100);
 
     // Mock Base Balances
@@ -26,6 +26,14 @@ export default function SpicaStakingCard() {
     // Calculate properties for UI rendering
     const MIN_DAYS = 30;
     const MAX_DAYS = 1080;
+    // Recalculate APR based on new default
+    // We need useEffect or just run calculation here if simple dependencies
+
+    // Initial APR calculation for default state needs to happen, but state init is scalar.
+    // Let's just initialize apr correctly too if needed, or rely on slider change.
+    // Actually, setting state 818 won't trigger handleSliderChange automatically on mount unless we use effect.
+    // But we can just calc the initial APR: ((818 - 30) / (1080 - 30)) * 100 ~= 75
+
     const progress = Math.max(0, Math.min(100, ((lockDays - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100));
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,56 +60,55 @@ export default function SpicaStakingCard() {
     };
 
     return (
-        <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[20px] p-5 md:p-6 pb-4 relative overflow-hidden w-full h-full flex flex-col">
+        <div className="bg-black border border-white/10 rounded-[20px] p-6 md:p-8 pb-6 relative w-full h-full flex flex-col justify-center">
             {/* Header */}
-            <h2 className="text-2xl md:text-3xl font-tektur mb-1 text-white">
+            <h2 className="text-3xl md:text-4xl font-tektur mb-2 text-white text-center">
                 <span className="text-[#FF00FF]">SPICA</span> <span className="text-white">Staking</span>
             </h2>
-            <p className="text-center text-gray-400 font-satoshi mb-4 text-[10px] md:text-xs px-2">
+            <p className="text-center text-white/80 font-satoshi mb-6 text-xs md:text-sm px-2">
                 Stake SPCA and enjoy variable returns that scale with community growth and ecosystem usage.
             </p>
 
             {/* Input Section */}
-            <div className="mb-4">
-                <div className="flex justify-between text-[10px] text-gray-400 mb-2 font-satoshi">
+            <div className="mb-6">
+                <div className="flex justify-between text-xs text-gray-400 mb-2 font-satoshi">
                     <span>Balance : {TOTAL_BALANCE.toLocaleString()} SPCA</span>
                 </div>
                 {/* Token Input Section */}
-                <div className="mb-4">
-                    <div className="flex items-center gap-2 mb-2">
-                        <Image src="/assets/images/Unique-1.png" alt="Spica" width={25} height={25} className="object-contain" />
+                <div className="mb-6">
+                    <div className="flex items-center gap-3 mb-2 bg-[#0f0f12] border border-white/10 rounded-sm p-2 transition-colors focus-within:border-[#FF00FF]/50">
+                        <Image src="/assets/images/Unique-1.png" alt="Spica" width={30} height={30} className="object-contain" />
                         <input
                             type="text"
                             value={amount}
                             onChange={handleAmountChange}
-                            className="bg-transparent border-none outline-none text-white text-base font-tektur w-full"
+                            className="bg-transparent border-none outline-none text-white text-lg font-tektur w-full"
                         />
                     </div>
                 </div>
             </div>
 
             {/* Stats Row */}
-            <div className="grid grid-cols-2 gap-3 mb-4">
-                <div className="bg-[#0f0f12] border border-white/5 rounded-xl p-3">
-                    <div className="text-xl font-tektur text-white mb-0.5">{stakedBalance.toLocaleString()}</div>
-                    <div className="text-gray-400 text-[10px] font-satoshi">Staked Balance</div>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-[#0f0f12] border border-white/10 rounded-sm p-3">
+                    <div className="text-3xl font-tektur text-white mb-1">{stakedBalance.toLocaleString()}</div>
+                    <div className="text-white text-xs font-satoshi">Staked Balance</div>
                 </div>
-                <div className="bg-[#0f0f12] border border-white/5 rounded-xl p-3">
-                    <div className="text-xl font-tektur text-white mb-0.5">{stakeableBalance.toLocaleString()}</div>
-                    <div className="text-gray-400 text-[10px] font-satoshi">Your Stakeable</div>
+                <div className="bg-[#0f0f12] border border-white/10 rounded-sm p-3">
+                    <div className="text-3xl font-tektur text-white mb-1">{stakeableBalance.toLocaleString()}</div>
+                    <div className="text-white text-xs font-satoshi">Your Stakeable</div>
                 </div>
             </div>
 
             {/* Slider Section */}
-            <div className="mb-6">
-                <div className="flex justify-between text-gray-400 text-[10px] font-satoshi mb-2">
+            <div className="mb-8">
+                <div className="flex justify-between text-gray-400 text-xs font-satoshi mb-3">
                     <span>Lock For : {lockDays} Days</span>
-                    <span>APR : {apr}%</span>
+                    <span>APR : {Math.round(((lockDays - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100)}%</span>
                 </div>
 
                 {/* Interactive Slider */}
-                {/* Container Size: scaled down lightly? 29px was fine, maybe just standardizing */}
-                <div className="relative w-full h-[29px] flex items-center justify-center">
+                <div className="relative w-full h-[28px] flex items-center justify-center rounded-sm border border-white">
                     <input
                         type="range"
                         min={MIN_DAYS}
@@ -118,18 +125,32 @@ export default function SpicaStakingCard() {
                     </div>
 
                     {/* The Sliding Line Track - Full Width now */}
-                    <div className="absolute left-0 w-full h-[6px] bg-white/10 rounded-[1px] overflow-hidden z-10 top-1/2 -translate-y-1/2">
-                        {/* Active fill */}
+                    <div className="absolute left-0 w-full h-[6px] bg-white/10 rounded-[1px] z-10 top-1/2 -translate-y-1/2">
+                        {/* Active fill Container (Transparent wrapper for sizing) */}
                         <div
-                            className="h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] shadow-[0_0_10px_#FF00FF]"
+                            className="h-full relative"
                             style={{ width: `${progress}%` }}
-                        ></div>
+                        >
+                            {/* 1. Static Gradient Glow (Behind everything) */}
+                            <div
+                                className="absolute top-[-10px] bottom-[-10px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[4px] opacity-60 z-0"
+                                style={{ animation: 'colorCycle 4s linear infinite' }}
+                            ></div>
+
+                            {/* 2. Animated Glow Stream (Behind white line) */}
+                            <div className="slider-glow-stream z-0"></div>
+
+                            {/* 3. The White Line Itself (On Top) */}
+                            <div className="absolute inset-0 bg-white z-10 rounded-[1px] shadow-[0_0_15px_rgba(255,0,255,0.7)]"></div>
+                        </div>
                     </div>
 
                     {/* Thumb */}
                     <div
-                        className="absolute w-4 h-4 bg-[#FF00FF] border border-white rounded-full shadow-[0_0_10px_#FF00FF] z-30 pointer-events-none transition-all duration-75"
+                        className="absolute w-4 h-4 rounded-full z-30 pointer-events-none transition-all duration-75"
                         style={{
+                            background: 'radial-gradient(circle at center, #DE3BD6 0%, #FFFFFF 100%)',
+                            border: '1px solid white',
                             // left: Start (0) to End (100% - 16px)
                             left: `calc(${progress}% - ${progress * 0.16}px)`
                         }}
@@ -138,17 +159,13 @@ export default function SpicaStakingCard() {
             </div>
 
             {/* Action Button */}
-            <button
+            <MagicButton
                 onClick={handleAction}
-                className="w-full py-3 rounded-xl font-tektur font-medium text-base text-white transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)] border border-white/10 relative overflow-hidden group mb-0"
-                style={{
-                    background: "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.00) 100%)"
-                }}
+                className="w-full py-3 rounded-md font-tektur font-medium text-xl text-white mb-0 border border-white/30"
+                style={{ '--mask-bg': '#1E1E1E' } as React.CSSProperties}
             >
-                <span className="relative z-10 text-gray-200 group-hover:text-white transition-colors">Connect Wallet</span>
-                {/* Hover Glow */}
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
+                Connect Wallet
+            </MagicButton>
 
         </div>
     );

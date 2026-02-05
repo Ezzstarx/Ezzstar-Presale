@@ -26,76 +26,90 @@ export default function StakingCalculator() {
 
 
     return (
-        <div className="bg-[#0a0a0c]/60 border border-white/10 rounded-[20px] p-5 md:p-6 relative overflow-hidden w-full h-full flex flex-col justify-center">
+        <div className="bg-black border border-white/10 rounded-[20px] p-6 md:p-8 relative overflow-hidden w-full h-full flex flex-col justify-center">
             {/* Header */}
-            <h2 className="text-3xl text-center font-tektur mb-3 text-white">
+            <h2 className="text-3xl md:text-4xl text-center font-tektur mb-3 text-white">
                 Staking Calculator
             </h2>
-            <p className="text-center text-gray-400 font-satoshi mb-6 text-xs md:text-sm px-2">
+            <p className="text-center text-white/80 font-satoshi mb-8 text-xs md:text-sm px-2">
                 Maximize your gains, use our staking calculator to preview your SPCA rewards in seconds.
             </p>
 
             {/* Input Amount */}
-            <div className="mb-4">
-                <label className="text-gray-400 font-satoshi text-xs mb-2 block">Enter Staking SPCA Amount</label>
+            <div className="mb-6">
+                <label className="text-[#A1A3A9] font-satoshi text-xs md:text-sm mb-2 block">Enter Staking SPCA Amount</label>
                 <input
                     type="number"
                     value={calcAmount}
                     onChange={(e) => setCalcAmount(e.target.value)}
-                    placeholder="0.00"
-                    className="w-full bg-[#0f0f12] border border-white/10 rounded-xl p-3 text-white font-tektur text-sm focus:border-[#FF00FF] transition-colors outline-none placeholder:text-gray-600"
+                    placeholder="Enter Amount"
+                    className="w-full bg-[#0f0f12] border border-white/10 rounded-md p-4 text-white font-tektur text-base focus:border-[#FF00FF]/50 transition-colors outline-none placeholder:text-[#A1A3A9]"
                 />
             </div>
 
             {/* Period Slider */}
-            <div className="mb-4">
-                <label className="text-gray-400 font-satoshi text-xs mb-3 block">Select the staking period</label>
+            <div className="mb-6">
+                <label className="text-[#A1A3A9] font-tektur text-xs md:text-sm mb-3 block">Select the staking period</label>
 
-                <div className="relative w-full h-2 mb-6">
+                <div className="relative w-full h-[18px] mb-3 flex items-center">
                     <input
                         type="range"
                         min="1"
                         max="365"
                         value={periodDays}
                         onChange={(e) => setPeriodDays(parseInt(e.target.value))}
-                        className="absolute w-full h-full opacity-0 z-20 cursor-pointer"
+                        className="absolute w-full h-full opacity-0 z-30 cursor-pointer"
                     />
-                    {/* Visual Track */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-gray-800 rounded-full z-10 overflow-hidden">
+
+                    {/* Track Container */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-black border border-white/20 rounded-sm z-10 overflow-hidden">
+                        {/* Active Fill */}
                         <div
-                            className="h-full bg-[#00FFF0] shadow-[0_0_10px_cyan]"
+                            className="h-full bg-[#00FFF0] shadow-[0_0_10px_#00FFF0]"
                             style={{ width: `${(periodDays / 365) * 100}%` }}
                         ></div>
                     </div>
-                    {/* Thumb Label */}
+
+                    {/* Custom Thumb - Navigation Arrow Style */}
                     <div
-                        className="absolute -top-4 -translate-x-1/2 bg-[#FFD700] text-black px-2 py-0.5 rounded-full font-bold shadow-[0_0_10px_#FFD700] text-xs z-10 whitespace-nowrap pointer-events-none transition-all duration-75"
+                        className="absolute h-6 w-7 bg-[#1E1E1E] border border-white rounded-md flex items-center justify-center z-20 pointer-events-none shadow-lg transition-all duration-75"
+                        style={{
+                            left: `calc(${(periodDays / 365) * 100}% - 18px)` // Center the thumb
+                        }}
+                    >
+                        {/* < > arrows */}
+                        <span className="text-white text-[14px] tracking-widest">{"< >"}</span>
+                    </div>
+
+                    {/* Floating Label - Below */}
+                    <div
+                        className="absolute -bottom-10 -translate-x-1/2 bg-[#FFD700] text-black px-6 py-0.5 rounded-md font-bold text-xs md:text-sm z-20 whitespace-nowrap pointer-events-none transition-all duration-75 border border-white"
                         style={{ left: `${(periodDays / 365) * 100}%` }}
                     >
                         {formatDuration(periodDays)}
                     </div>
                 </div>
 
-                <div className="flex justify-between items-center text-gray-400 font-tektur text-xs ">
+                <div className="flex justify-between items-center text-white font-tektur text-xs md:text-sm ">
                     <span>1d</span>
                     <span>1yr</span>
                 </div>
             </div>
 
             {/* Earnings Display */}
-            <div className="mt-auto">
-                <div className="text-gray-400 font-tektur text-xs mb-2 text-left">You Receive</div>
-                <div className="flex justify-between items-center gap-3">
+            <div className="mt-4">
+                <div className="text-[#A1A3A9] font-tektur text-xs md:text-sm mb-2 text-left">You Receive</div>
+                <div className="flex justify-between items-center gap-4">
                     {/* Left Side: 1d Earnings */}
-                    <div className="w-[190px] h-[64px] bg-[#DE3BD6] shadow-[0_0_20px_rgba(222,59,214,0.3)] flex flex-col justify-center items-start px-4">
-                        <h3 className="text-black font-bold font-tektur mb-0 text-sm tracking-wide">1d Earnings</h3>
-                        <div className="text-black text-xl font-tektur font-bold">{oneDayEarnings > 0 ? oneDayEarnings.toFixed(4) : "0.00"}</div>
+                    <div className="flex-1 h-[80px] bg-[#DE3BD6] shadow-[0_0_20px_rgba(222,59,214,0.3)] flex flex-col justify-center items-start px-6">
+                        <h3 className="text-black font-satoshi mb-0 text-base tracking-wide">1d Earnings</h3>
+                        <div className="text-black text-3xl font-tektur font-medium">{oneDayEarnings > 0 ? oneDayEarnings.toFixed(4) : "0.00"}</div>
                     </div>
 
                     {/* Right Side: Total Earnings */}
-                    <div className="w-[190px] h-[64px] flex flex-col justify-center items-start">
-                        <div className="text-gray-400 text-xs font-satoshi mb-0.5 text-left tracking-wider">{formatDuration(periodDays)} Earnings</div>
-                        <div className="text-[#00FFF0] text-2xl font-tektur font-bold text-shadow-glow text-left leading-none">{totalEarnings > 0 ? totalEarnings.toFixed(2) : "0.00"}</div>
+                    <div className="flex-1 h-[80px] flex flex-col justify-center items-start">
+                        <div className="text-[#A1A3A9] text-sm font-satoshi mb-0.5 text-left tracking-wider">{formatDuration(periodDays)} Earnings</div>
+                        <div className="text-[#00FFF0] text-3xl font-tektur font-medium text-shadow-glow text-left leading-none">{totalEarnings > 0 ? totalEarnings.toFixed(2) : "0.00"}</div>
                     </div>
                 </div>
             </div>

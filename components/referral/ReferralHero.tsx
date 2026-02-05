@@ -53,7 +53,7 @@ export default function ReferralHero() {
 
     return (
         <div className="w-full max-w-[1000px] min-h-[423px] mx-auto">
-            <div className="glass-card rounded-xl p-8 md:p-12 relative overflow-hidden z-10 h-full flex flex-col justify-center">
+            <div className="glass-card rounded-sm p-8 md:p-12 relative overflow-hidden z-10 h-full flex flex-col justify-center">
                 {/* Header Content */}
                 <div className="mb-24 relative z-10 w-full text-left">
                     <div className="w-full mb-4">

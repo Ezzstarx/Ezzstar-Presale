@@ -153,17 +153,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 400px;
-  height: 400px;
+  width: 200%;
+  height: 500%;
+  min-width: 1000px;
+  min-height: 1000px;
   border-radius: inherit;
   z-index: -1;
   background: conic-gradient(from 0deg,
       rgba(255, 0, 0, 0) 0deg,
-      rgba(255, 0, 0, 0) 250deg,
+      rgba(255, 0, 0, 0) 230deg,
       rgba(255, 255, 255, 0.9) 270deg,
-      rgba(255, 0, 0, 0) 290deg,
+      rgba(255, 0, 0, 0) 310deg,
       rgba(255, 0, 0, 0) 360deg);
-  animation: rotateBorder 5s linear infinite;
+  animation: rotateBorder 7s linear infinite;
 }
 
 /* Inner mask to keep only border visible */
@@ -214,11 +216,140 @@
   animation: rotateBorder 7s linear infinite;
 }
 
-.magic-card::after {
+
+
+/* Magic Ring: For transparent containers with magic border */
+.magic-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  /* Border thickness */
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.magic-ring::before {
   content: "";
   position: absolute;
-  inset: 1px;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 500%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 230deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 310deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 7s linear infinite;
+}
+
+/* Color Cycle Animation for Heart Icon - Using Mask */
+.color-cycle-heart {
+  background: linear-gradient(90deg,
+      #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #ff6b6b);
+  background-size: 700% 100%;
+  -webkit-mask-image: url('/assets/images/Ref-Heart.png');
+  mask-image: url('/assets/images/Ref-Heart.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  animation: colorCycleHeart 10s linear infinite;
+}
+
+@keyframes colorCycleHeart {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Slider Glow Animation */
+@keyframes streamMove {
+  0% {
+    background-position: 100% 0;
+    /* Star at Right (Thumb) */
+  }
+
+  100% {
+    background-position: 0% 0;
+    /* End at Left */
+  }
+}
+
+@keyframes colorCycle {
+  0% {
+    filter: hue-rotate(0deg) blur(4px);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) blur(4px);
+  }
+}
+
+.slider-glow-stream {
+  position: absolute;
+  inset: -6px;
+  /* Clip left side at 0 (parent) by offsetting the -6px inset */
+  clip-path: inset(-50px -50px -50px 6px);
+
+  /* Oval White Cluster */
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 85%);
+
+  background-size: 60px 100%;
+  /* Slightly larger to account for blur spreading */
+  background-repeat: no-repeat;
   border-radius: inherit;
-  background: var(--mask-bg, #0a0a0c);
   z-index: -1;
+  animation: streamMove 2s linear infinite;
+  opacity: 1;
+  filter: blur(8px);
+  /* Makes it a soft glow */
+  will-change: background-position;
+}
+
+/* Custom Scrollbar for Transaction List */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(173, 122, 255, 0.4);
+  /* #AD7AFF with opacity */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 122, 255, 0.6);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(173, 122, 255, 0.4) rgba(255, 255, 255, 0.05);
 }

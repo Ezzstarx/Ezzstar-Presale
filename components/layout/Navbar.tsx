@@ -120,7 +120,7 @@ export default function Navbar() {
                     ) : (
                         <button
                             onClick={openWalletModal}
-                            className="relative group px-8 py-1.5 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur font-normal text-white tracking-wide hover:brightness-110 shadow-[0_0_45px_12px_rgba(139,92,246,0.7)] transition-all transform hover:scale-105 text-base"
+                            className="relative group px-8 py-1.5 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur font-normal text-white tracking-wide hover:brightness-110 shadow-[0_0_45px_12px_rgba(139,92,246,0.65)] transition-all transform hover:scale-105 text-base"
                         >
                             Connect Wallet
                         </button>
@@ -186,7 +186,7 @@ export default function Navbar() {
                                             openWalletModal();
                                             setMobileMenuOpen(false);
                                         }}
-                                        className="w-full px-8 py-1.5 bg-gradient-to-r from-secondary to-primary rounded-lg font-tektur text-white font-bold tracking-wide shadow-[0_0_35px_8px_rgba(139,92,246,0.7)] hover:shadow-[0_0_40px_12px_rgba(139,92,246,0.9)] transition-all text-sm"
+                                        className="w-full px-8 py-1.5 bg-gradient-to-r from-secondary to-primary rounded-lg font-tektur text-white font-bold tracking-wide shadow-[0_0_35px_10px_rgba(139,92,246,0.65)] hover:shadow-[0_0_45px_12px_rgba(139,92,246,0.75)] transition-all text-sm"
                                     >
                                         Connect Wallet
                                     </button>
