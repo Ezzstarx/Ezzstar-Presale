@@ -20,19 +20,9 @@ export default function SpicaStakingCard() {
     const stakedBalance = INITIAL_STAKED + numericAmount;
     const stakeableBalance = Math.max(0, TOTAL_BALANCE - numericAmount);
 
-    // Calculate APR based on lock days (Example logic: Base 20% + bonus per day)
-    // 1080 days = 100% (Max)
-    // Linear interpolation for demo
-    // Calculate properties for UI rendering
+    // APR Calculation Constants
     const MIN_DAYS = 30;
     const MAX_DAYS = 1080;
-    // Recalculate APR based on new default
-    // We need useEffect or just run calculation here if simple dependencies
-
-    // Initial APR calculation for default state needs to happen, but state init is scalar.
-    // Let's just initialize apr correctly too if needed, or rely on slider change.
-    // Actually, setting state 818 won't trigger handleSliderChange automatically on mount unless we use effect.
-    // But we can just calc the initial APR: ((818 - 30) / (1080 - 30)) * 100 ~= 75
 
     const progress = Math.max(0, Math.min(100, ((lockDays - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100));
 

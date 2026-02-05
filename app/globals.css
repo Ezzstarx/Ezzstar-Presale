@@ -3,7 +3,6 @@
 @font-face {
   font-family: 'AlienCons TFB';
   src: url('/fonts/AlienCons-TFB.ttf') format('truetype');
-  /* Ensure this file exists in public/fonts */
   font-weight: normal;
   font-style: normal;
 }
@@ -173,7 +172,6 @@
   content: "";
   position: absolute;
   inset: 1px;
-  /* Controls border thickness visually */
   border-radius: inherit;
   background: var(--mask-bg, black);
   z-index: -1;
@@ -203,7 +201,6 @@
   top: 50%;
   left: 50%;
   width: 1000px;
-  /* Increased size for cards */
   height: 1000px;
   border-radius: inherit;
   z-index: -1;
@@ -224,7 +221,6 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  /* Border thickness */
   background: transparent;
   pointer-events: none;
   z-index: 0;
@@ -285,12 +281,10 @@
 @keyframes streamMove {
   0% {
     background-position: 100% 0;
-    /* Star at Right (Thumb) */
   }
 
   100% {
     background-position: 0% 0;
-    /* End at Left */
   }
 }
 
@@ -341,7 +335,6 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(173, 122, 255, 0.4);
-  /* #AD7AFF with opacity */
   border-radius: 10px;
 }
 

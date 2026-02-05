@@ -166,7 +166,6 @@ export default function ReferralHero() {
                                 {/* Button 3: Withdraw */}
                                 <button
                                     onClick={() => setIsWithdrawOpen(true)}
-                                    // disabled // Enabled for now based on logic structure, or keep disabled if original code had it
                                     className="px-4 py-2 md:px-8 md:py-2.5 rounded-full bg-[#C243FE]/20 hover:bg-[#C243FE]/40 text-[#C243FE] border border-[#C243FE]/50 font-tektur font-medium cursor-pointer text-[10px] md:text-base whitespace-nowrap transition-all"
                                 >
                                     Withdraw Reward
