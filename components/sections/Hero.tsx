@@ -77,6 +77,27 @@ import { useWallet } from "../providers/WalletProvider";
 import NextImage from "next/image";
 
 export default function Hero() {
+    // Card Swap State
+    const [tiers, setTiers] = useState(NFT_TIERS);
+
+    const handleCardHover = (tierId: string) => {
+        setHoveredTierId(tierId);
+
+        const hoverIndex = tiers.findIndex(t => t.id === tierId);
+        // If hovering over a side card (not center), swap it with center
+        if (hoverIndex !== 1) {
+            const newTiers = [...tiers];
+            const centerCard = newTiers[1];
+            const hoveredCard = newTiers[hoverIndex];
+
+            // Swap
+            newTiers[1] = hoveredCard;
+            newTiers[hoverIndex] = centerCard;
+
+            setTiers(newTiers);
+        }
+    };
+
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
     const [hoveredTierId, setHoveredTierId] = useState<string | null>(null);
@@ -113,19 +134,21 @@ export default function Hero() {
                         <MagicButton className="w-[155px] h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[16px] font-medium font-tektur bg-black border-[0.5px] border-white/30 text-[#888888] hover:text-white">
                             Presale is Live
                         </MagicButton>
-                        <MagicButton
-                            style={{ '--mask-bg': '#2C2C2C' } as React.CSSProperties}
-                            className="w-[155px] h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[16px] font-medium font-tektur bg-[#2C2C2C] border-[0.5px] border-white/30 text-[#888888] hover:text-white"
-                        >
-                            Whitepaper
-                        </MagicButton>
+                        <a href="https://ezzstar.gitbook.io/ezzstar-gitbook" target="_blank" rel="noopener noreferrer">
+                            <MagicButton
+                                style={{ '--mask-bg': '#2C2C2C' } as React.CSSProperties}
+                                className="w-[155px] h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[16px] font-medium font-tektur bg-[#2C2C2C] border-[0.5px] border-white/30 text-[#888888] hover:text-white"
+                            >
+                                Whitepaper
+                            </MagicButton>
+                        </a>
                     </div>
                 </div>
 
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
                 <div className="hidden lg:grid w-full grid-cols-12 gap-4 items-center justify-center relative min-h-[500px]">
                     {/* LEFT: Presale Widget */}
-                    <div className="col-span-4 flex justify-start z-40 ml-[50px]">
+                    <div className="col-span-4 flex justify-start z-40 ml-[100px]">
                         <PresaleWidget />
                     </div>
 
@@ -212,24 +235,64 @@ export default function Hero() {
                         <motion.div
                             className="flex flex-row items-center relative h-[400px] w-[582px]"
                             layout
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            onMouseLeave={() => {
+                                setHoveredTierId(null);
+                                setTiers(NFT_TIERS); // Reset to default order
+                            }}
+                            onMouseMove={(e) => {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const width = rect.width;
+
+                                // Zoning Logic: 
+                                // Left Zone (< 33%): Swap Left (Lily) to Center
+                                // Right Zone (> 66%): Swap Right (Buffo) to Center
+                                // Center Zone: Default (Spica at Center)
+
+                                let targetId = null;
+                                if (x < width * 0.33) targetId = "lily";
+                                else if (x > width * 0.66) targetId = "buffo";
+                                // Center zone: keep current card (sticky)
+
+                                // Only swap if we have a target and it's different
+                                if (targetId && targetId !== tiers[1].id) {
+                                    const newTiers = [...NFT_TIERS]; // Start from base
+
+                                    if (targetId === "lily") {
+                                        // Swap Lily (0) with Spica (1)
+                                        [newTiers[0], newTiers[1]] = [newTiers[1], newTiers[0]];
+                                    } else if (targetId === "buffo") {
+                                        // Swap Buffo (2) with Spica (1)
+                                        [newTiers[2], newTiers[1]] = [newTiers[1], newTiers[2]];
+                                    }
+                                    // If 'spica', it remains default NFT_TIERS
+
+                                    setTiers(newTiers);
+                                }
+                            }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
                         >
-                            {NFT_TIERS.map((tier, index) => {
+                            {tiers.map((tier, index) => {
                                 const isDetailsOpen = !!selectedTierId;
                                 const defaultMargin = index === 0 ? 0 : -120; // Adjusted overlap
                                 const collapsedMargin = index === 0 ? 0 : -200; // Tighter collapse
                                 const currentMargin = isDetailsOpen ? collapsedMargin : defaultMargin;
-                                const activeZIndex = hoveredTierId === tier.id ? 50 : tier.zIndex;
+
+                                // Position-based Z-Index (Center=30, Right=20, Left=10)
+                                let baseZIndex = 10;
+                                if (index === 1) baseZIndex = 30; // Center
+                                else if (index === 2) baseZIndex = 20; // Right
+
+                                const activeZIndex = hoveredTierId === tier.id ? 50 : baseZIndex;
                                 const isOtherCardActive = !!selectedTierId && selectedTierId !== tier.id;
 
                                 return (
                                     <motion.div
                                         layout
                                         key={tier.id}
-                                        onMouseEnter={() => setHoveredTierId(tier.id)}
-                                        onMouseLeave={() => setHoveredTierId(null)}
+                                        // Removed individual hover handlers to prevent flickering
                                         // RESIZED CARDS: w-[260px] h-[360px]
-                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300"
+                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300 transform-gpu"
                                         style={{
                                             zIndex: activeZIndex,
                                             background: tier.borderGradient
@@ -243,7 +306,7 @@ export default function Hero() {
                                             padding: isOtherCardActive ? 0 : '',
                                             marginRight: isOtherCardActive ? 0 : '',
                                         }}
-                                        transition={{ duration: 0.4 }}
+                                        transition={{ duration: 0.8, ease: "easeInOut" }}
                                     >
                                         <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
                                             {/* Image Section */}
@@ -419,13 +482,13 @@ export default function Hero() {
 
                     <div className="flex items-center gap-8 md:gap-14 opacity-80 mt-8">
                         {/* LinkedIn */}
-                        <a href="#" className="hover:scale-110 transition-transform">
+                        <a href="https://www.linkedin.com/company/ezzstar/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
                             <div className="relative w-12 h-12 md:w-16 md:h-16">
                                 <NextImage src="/assets/images/Social-LinkedIn.png" alt="LinkedIn" fill className="object-contain" />
                             </div>
                         </a>
                         {/* X (Twitter) */}
-                        <a href="#" className="hover:scale-110 transition-transform">
+                        <a href="https://x.com/ezzstarx?s=21" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
                             <div className="relative w-5 h-5 md:w-7 md:h-7">
                                 <NextImage src="/assets/images/Social-X.png" alt="X" fill className="object-contain" />
                             </div>
@@ -437,13 +500,13 @@ export default function Hero() {
                             </div>
                         </a>
                         {/* Discord (Wordmark) */}
-                        <a href="#" className="hover:scale-105 transition-transform">
+                        <a href="https://discord.gg/sY3gsZVyeg" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform">
                             <div className="relative w-28 h-7 md:w-40 md:h-10">
                                 <NextImage src="/assets/images/Social-Discord.png" alt="Discord" fill className="object-contain" />
                             </div>
                         </a>
                         {/* Telegram */}
-                        <a href="#" className="hover:scale-110 transition-transform">
+                        <a href="https://t.me/EzzstarSPCA" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
                             <div className="relative w-6 h-6 md:w-8 md:h-8">
                                 <NextImage src="/assets/images/Social-Telegram.png" alt="Telegram" fill className="object-contain" />
                             </div>

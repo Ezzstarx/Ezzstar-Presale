@@ -8,7 +8,7 @@ interface MagicButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 const MagicButton: React.FC<MagicButtonProps> = ({ children, className = '', ...props }) => {
     return (
         <button
-            className={`magic relative inline-flex items-center justify-center transition-all duration-300 ${className}`}
+            className={`magic relative inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${className}`}
             {...props}
         >
             <span className="relative z-10">{children}</span>

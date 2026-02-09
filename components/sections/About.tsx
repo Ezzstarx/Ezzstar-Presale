@@ -53,7 +53,7 @@ export default function About() {
                 </div>
 
                 {/* Stylized Black Box Content with Exact Dimensions */}
-                <div className="relative flex flex-col items-center bg-[#050507]/30 border border-white/5 rounded-2xl overflow-hidden shadow-2xl w-full max-w-[707px] md:w-[707px] md:h-[809px] h-auto">
+                <div className="relative flex flex-col items-center bg-[#050507]/30 border border-white/5 rounded-2xl shadow-2xl w-full max-w-[707px] md:w-[707px] md:h-[809px] h-auto">
 
                     {/* Top Section: Text Content */}
                     <div className="w-full flex flex-col items-center justify-center px-6 md:px-12 pt-8 md:pt-12 pb-8 md:pb-4 h-auto md:h-[417px]">
@@ -95,7 +95,7 @@ export default function About() {
 
                     {/* Bottom Section: Video Content */}
                     {/* Bottom Section: Video Content */}
-                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden border-[3px] border-indigo-400/60 shadow-[0_25px_50px_rgba(60,60,150,0.65)] rounded-b-2xl">
+                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden border-[3px] border-indigo-400/60 shadow-[0_0_50px_rgba(79,70,229,0.25)] rounded-b-2xl">
                         {/* Video Content */}
                         <video
                             className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1] scale-[1.35]"

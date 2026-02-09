@@ -13,15 +13,19 @@ export default function PresaleWidget() {
 
     // Force Rebuild
     const RATES: Record<string, number> = {
+        "ETH": 650000,    // 1 ETH = $2600 = 650k SPCA
         "USDT": 250,      // 1 USDT = 250 SPCA
         "BNB": 162500,    // 1 BNB = $650 = 162.5k SPCA
+        "SOL": 37500,     // 1 SOL = $150 = 37.5k SPCA
         "USDC": 250,
         "DAI": 250        // 1 DAI = $1 = 250 SPCA,
     };
 
     const CURRENCIES = [
+        { id: "ETH", icon: "/assets/icons/crypto/icon-eth.png" },
         { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-v2.png" },
         { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
+        { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
         { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
         { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
     ];
@@ -61,31 +65,38 @@ export default function PresaleWidget() {
                     </h3>
                 </div>
 
-                {/* Progress Bar - Thin, Bright & Traveling Glow */}
+                {/* Progress Bar - Thin Line with Traveling Glow */}
                 <style>{`
                     @keyframes glowTravel {
                         0% {
                             left: 0;
+                            opacity: 0.6;
+                            filter: brightness(1.2);
+                            transform: translateY(-50%) scale(0.9);
                         }
                         100% {
-                            left: calc(75% - 20px);
+                            left: calc(75% - 25px);
+                            opacity: 1;
+                            filter: brightness(2.7);
+                            transform: translateY(-50%) scale(1.1);
                         }
                     }
                     
-                    .glow-travel {
-                        animation: glowTravel 4s infinite linear;
+                    .glow-travel-presale {
+                        animation: glowTravel 3s infinite ease-in;
                     }
                 `}</style>
                 <div className="mb-4 w-full flex flex-col items-center">
                     <div className="relative w-full h-[10px] bg-black border border-white rounded-full overflow-hidden">
                         {/* Thin Progress Line with Gradient */}
-                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-cyan-400/60 via-purple-400/60 to-purple-500/60 rounded-full">
+                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-[#FF00FF] via-[#00FFF0] to-[#FF00FF] rounded-full shadow-[0_0_8px_rgba(255,0,255,0.5)]">
                         </div>
-                        {/* Traveling Glow Spot */}
-                        <div className="glow-travel absolute top-1/2 -translate-y-1/2 w-[20px] h-[2px] rounded-full"
+                        {/* Traveling Glow Spot - Centered */}
+                        <div className="glow-travel-presale absolute top-1/2 -translate-y-1/2 w-[25px] h-[2px] rounded-full"
                             style={{
-                                boxShadow: '0 0 20px 6px rgba(34, 211, 238, 0.8), 0 0 35px 10px rgba(168, 85, 247, 0.6), 0 0 50px 15px rgba(236, 72, 153, 0.4)',
-                                filter: 'brightness(2)'
+                                background: 'radial-gradient(ellipse at center, rgba(0,255,240,1) 0%, transparent 70%)',
+                                boxShadow: '0 0 10px 2px rgba(0,255,240,0.8), 0 0 20px 4px rgba(255,0,255,0.4)',
+                                filter: 'brightness(2.1)'
                             }}>
                         </div>
                     </div>
@@ -150,7 +161,7 @@ export default function PresaleWidget() {
                                 key={curr.id}
                                 onClick={() => setPayCurrency(curr.id)}
                                 className={`relative flex items-center justify-center transition-all duration-300 h-[37px] ${payCurrency === curr.id
-                                    ? "w-[110px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                                    ? "w-[100px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
                                     : "w-[48px]"
                                     }`}
                             >

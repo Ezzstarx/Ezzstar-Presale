@@ -75,12 +75,24 @@ export default function ReferralDashboard() {
                     <div>
                         <p className="text-sm text-white mb-3">Invite via:</p>
                         <div className="flex gap-4 items-center text-white">
-                            <DiscordIcon className="w-5 h-5 cursor-pointer transition-colors" />
-                            <Send className="w-5 h-5 cursor-pointer transition-colors" />
-                            <XIcon className="w-5 h-5 cursor-pointer transition-colors" />
-                            <Facebook className="w-5 h-5 cursor-pointer transition-colors" />
-                            <Instagram className="w-5 h-5 cursor-pointer transition-colors" />
-                            <Linkedin className="w-5 h-5 cursor-pointer transition-colors" />
+                            <a href="https://discord.gg/sY3gsZVyeg" target="_blank" rel="noopener noreferrer">
+                                <DiscordIcon className="w-5 h-5 cursor-pointer transition-colors hover:text-[#5865F2]" />
+                            </a>
+                            <a href="https://t.me/EzzstarSPCA" target="_blank" rel="noopener noreferrer">
+                                <Send className="w-5 h-5 cursor-pointer transition-colors hover:text-[#0088cc]" />
+                            </a>
+                            <a href="https://x.com/ezzstarx?s=21" target="_blank" rel="noopener noreferrer">
+                                <XIcon className="w-5 h-5 cursor-pointer transition-colors hover:text-white" />
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <Facebook className="w-5 h-5 cursor-pointer transition-colors hover:text-[#1877F2]" />
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <Instagram className="w-5 h-5 cursor-pointer transition-colors hover:text-[#E1306C]" />
+                            </a>
+                            <a href="https://www.linkedin.com/company/ezzstar/" target="_blank" rel="noopener noreferrer">
+                                <Linkedin className="w-5 h-5 cursor-pointer transition-colors hover:text-[#0077b5]" />
+                            </a>
                         </div>
                     </div>
                 </div>

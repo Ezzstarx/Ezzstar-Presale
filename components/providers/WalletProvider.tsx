@@ -26,7 +26,10 @@ const config = defaultWagmiConfig({
     projectId,
     metadata,
     ssr: true,
-
+    enableEmail: false,
+    enableInjected: true,
+    enableCoinbase: true,
+    enableWalletConnect: true
 })
 
 // 3. Create modal - ONLY ON CLIENT
@@ -35,7 +38,12 @@ if (typeof window !== 'undefined') {
         wagmiConfig: config,
         projectId,
         enableAnalytics: true,
-        enableOnramp: true
+        features: {
+            email: false,
+            socials: false,
+            onramp: false,
+            swaps: false
+        }
     })
 }
 
@@ -45,6 +53,9 @@ interface WalletContextType {
     connectWallet: () => void;
     disconnectWallet: () => void;
     openWalletModal: () => void;
+    isCustomModalOpen: boolean;
+    openCustomModal: () => void;
+    closeCustomModal: () => void;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -64,6 +75,7 @@ function Web3ModalManager() {
 
 function WalletInternalProvider({ children }: { children: ReactNode }) {
     const [mounted, setMounted] = useState(false);
+    const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
     const { address, isConnected } = useAccount();
     const { disconnect } = useDisconnect();
 
@@ -80,6 +92,12 @@ function WalletInternalProvider({ children }: { children: ReactNode }) {
     const openWalletModal = () => {
         if (mounted) openModalGlobal();
     };
+    const openCustomModal = () => {
+        if (mounted) setIsCustomModalOpen(true);
+    };
+    const closeCustomModal = () => {
+        setIsCustomModalOpen(false);
+    };
 
     return (
         <WalletContext.Provider value={{
@@ -87,7 +105,10 @@ function WalletInternalProvider({ children }: { children: ReactNode }) {
             address: mounted ? address : undefined,
             connectWallet,
             disconnectWallet,
-            openWalletModal
+            openWalletModal,
+            isCustomModalOpen,
+            openCustomModal,
+            closeCustomModal
         }}>
             {children}
             {mounted && <Web3ModalManager />}

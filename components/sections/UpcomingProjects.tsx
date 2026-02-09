@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import MagicButton from "@/components/ui/MagicButton";
 
 interface Project {
     id: number;
@@ -345,15 +346,14 @@ export default function UpcomingProjects() {
                                     {/* Purple Separator Line - Updated Color */}
                                     <div className="w-full max-w-3xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent shadow-[0_0_15px_rgba(222,59,214,0.9)] opacity-90 mb-6" />
 
-                                    {/* Cancel Button */}
                                     <div className="w-full flex justify-end px-4 mb-2">
-                                        <button
+                                        <MagicButton
                                             onClick={() => setSelectedProject(null)}
-                                            className="px-6 py-1 bg-white/5 backdrop-blur-md border border-white/20 rounded-[12px] text-white/70 font-tektur font-medium tracking-[2px] hover:bg-white/10 hover:border-white/40 hover:text-white transition-all shadow-lg active:scale-95 flex items-center justify-center min-w-[100px]"
-                                            style={{ fontSize: '18px' }}
+                                            style={{ '--mask-bg': '#000000' } as React.CSSProperties}
+                                            className="w-[124px] h-[30px] rounded-lg border-[0.5px] border-white/30 font-tektur font-medium text-lg text-white bg-white/20 transition-all hover:bg-white/30"
                                         >
-                                            Cancel
-                                        </button>
+                                            Close
+                                        </MagicButton>
                                     </div>
                                 </div>
                             </div>

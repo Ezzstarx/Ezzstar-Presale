@@ -98,6 +98,10 @@
     background-color: transparent;
     min-height: 100vh;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {

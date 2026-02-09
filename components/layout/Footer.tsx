@@ -56,11 +56,11 @@ export default function Footer() {
 
                         {/* Expanding Social Icons */}
                         <div className="flex items-center gap-2 text-gray-400">
-                            <SocialButton href="#" icon={DiscordIcon} label="Discord" colorClass="hover:text-[#5865F2]" />
-                            <SocialButton href="#" icon={Send} label="Telegram" colorClass="hover:text-[#0088cc]" />
-                            <SocialButton href="#" icon={XIcon} label="X" colorClass="hover:text-white" />
+                            <SocialButton href="https://discord.gg/sY3gsZVyeg" icon={DiscordIcon} label="Discord" colorClass="hover:text-[#5865F2]" />
+                            <SocialButton href="https://t.me/EzzstarSPCA" icon={Send} label="Telegram" colorClass="hover:text-[#0088cc]" />
+                            <SocialButton href="https://x.com/ezzstarx?s=21" icon={XIcon} label="X" colorClass="hover:text-white" />
                             <SocialButton href="#" icon={Instagram} label="Instagram" colorClass="hover:text-[#E1306C]" />
-                            <SocialButton href="#" icon={Linkedin} label="LinkedIn" colorClass="hover:text-[#0077b5]" />
+                            <SocialButton href="https://www.linkedin.com/company/ezzstar/" icon={Linkedin} label="LinkedIn" colorClass="hover:text-[#0077b5]" />
                         </div>
                     </div>
 
@@ -73,7 +73,7 @@ export default function Footer() {
                         <div className="flex flex-col gap-5">
                             <h3 className="font-tektur text-lg font-medium !text-white mb-1">Company</h3>
                             <Link href="#about" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">About Us</Link>
-                            <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Whitepaper</Link>
+                            <Link href="https://ezzstar.gitbook.io/ezzstar-gitbook" target="_blank" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Whitepaper</Link>
                             <Link href="#tokenomics" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Tokenomics</Link>
                             <Link href="#roadmap" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Roadmap</Link>
                         </div>
@@ -81,8 +81,8 @@ export default function Footer() {
                         {/* Support */}
                         <div className="flex flex-col gap-5">
                             <h3 className="font-tektur text-lg font-medium !text-white mb-1">Support</h3>
-                            <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Discord</Link>
-                            <Link href="#" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Telegram</Link>
+                            <Link href="https://discord.gg/sY3gsZVyeg" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Discord</Link>
+                            <Link href="https://t.me/EzzstarSPCA" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Telegram</Link>
                         </div>
 
                         {/* Service */}
