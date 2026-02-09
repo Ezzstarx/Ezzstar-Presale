@@ -26,10 +26,15 @@ const config = defaultWagmiConfig({
     projectId,
     metadata,
     ssr: true,
-    enableEmail: false,
     enableInjected: true,
     enableCoinbase: true,
-    enableWalletConnect: true
+    enableWalletConnect: true,
+    auth: {
+        email: false,
+        socials: [],
+        showWallets: false,
+        walletFeatures: false
+    }
 })
 
 // 3. Create modal - ONLY ON CLIENT
@@ -38,12 +43,8 @@ if (typeof window !== 'undefined') {
         wagmiConfig: config,
         projectId,
         enableAnalytics: true,
-        features: {
-            email: false,
-            socials: false,
-            onramp: false,
-            swaps: false
-        }
+        enableOnramp: false,
+        enableSwaps: false
     })
 }
 
