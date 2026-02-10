@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { History, RefreshCw } from "lucide-react";
+import Image from "next/image";
 
 type Tab = "unlock" | "history";
 
@@ -38,7 +38,13 @@ export default function StakingHistorySection() {
                                     : "bg-black text-white hover:text-[#AD7AFF]"
                                     }`}
                             >
-                                <RefreshCw size={16} />
+                                <Image
+                                    src="/assets/images/Unlock-Icon.png"
+                                    alt="Unlock Period"
+                                    width={20}
+                                    height={20}
+                                    className={`w-5 h-5 ${activeTab === "unlock" ? "" : "invert"}`}
+                                />
                                 <span className={activeTab === "unlock" ? "font-bold" : ""}>Unlock Period</span>
                             </button>
                             <button
@@ -48,7 +54,13 @@ export default function StakingHistorySection() {
                                     : "bg-black text-white hover:text-[#AD7AFF]"
                                     }`}
                             >
-                                <History size={16} />
+                                <Image
+                                    src="/assets/images/History-Icon.png"
+                                    alt="Staking History"
+                                    width={20}
+                                    height={20}
+                                    className={`w-5 h-5 ${activeTab === "history" ? "brightness-0" : ""}`}
+                                />
                                 <span>Staking History</span>
                             </button>
                         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useWallet } from "../providers/WalletProvider";
 import WithdrawModal from "../ui/WithdrawModal";
+import MagicButton from "../ui/MagicButton";
 
 const MagicIcon = ({ src, alt, color, reverse = false }: { src: string, alt: string, color: string, reverse?: boolean }) => {
     return (
@@ -153,23 +154,26 @@ export default function ReferralHero() {
                         ) : (
                             <div className="flex flex-row items-center justify-center gap-2 md:gap-6">
                                 {/* Button 1 */}
-                                <div className="px-3 py-2 md:px-6 md:py-2.5 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
-                                    <span className="text-white/80 font-tektur text-[10px] md:text-sm whitespace-nowrap">0.00 USDT</span>
-                                </div>
+                                <MagicButton className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[10px] md:text-sm font-tektur bg-black border-[0.5px] border-white/20 text-white/80">
+                                    EARNED: <span className="font-satoshi text-white ml-1">$500</span>
+                                </MagicButton>
 
                                 {/* Button 2 with Icon */}
-                                <div className="px-3 py-2 md:px-6 md:py-2.5 rounded-full border border-white/20 bg-white/5 flex items-center justify-center gap-1.5">
-                                    <span className="text-white/80 font-tektur text-[10px] md:text-sm whitespace-nowrap">0.00 SPICA</span>
-                                    <Image src="/assets/images/Ref-Connect.png" alt="icon" width={14} height={14} className="w-3 h-3 md:w-4 md:h-4" />
-                                </div>
+                                <MagicButton className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[10px] md:text-sm font-tektur bg-black border-[0.5px] border-white/20 text-white/80 hover:text-white">
+                                    <div className="flex items-center gap-1.5 whitespace-nowrap">
+                                        SPCA: <span className="font-satoshi text-white">5,791.59</span>
+                                        <Image src="/assets/icons/crypto/icon-spca.png" alt="SPCA" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 object-contain" />
+                                    </div>
+                                </MagicButton>
 
                                 {/* Button 3: Withdraw */}
-                                <button
+                                <MagicButton
                                     onClick={() => setIsWithdrawOpen(true)}
-                                    className="px-4 py-2 md:px-8 md:py-2.5 rounded-full bg-[#C243FE]/20 hover:bg-[#C243FE]/40 text-[#C243FE] border border-[#C243FE]/50 font-tektur font-medium cursor-pointer text-[10px] md:text-base whitespace-nowrap transition-all"
+                                    style={{ '--mask-bg': '#96428E' } as React.CSSProperties}
+                                    className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[14px] md:text-sm font-tektur text-white hover:brightness-110 transition-all tracking-wide"
                                 >
                                     Withdraw Reward
-                                </button>
+                                </MagicButton>
                             </div>
                         )}
                     </div>

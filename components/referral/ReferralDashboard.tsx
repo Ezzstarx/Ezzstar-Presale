@@ -61,12 +61,12 @@ export default function ReferralDashboard() {
                                     readOnly
                                     className="bg-transparent flex-1 px-3 text-sm text-gray-300 focus:outline-none font-mono"
                                 />
-                                <button
+                                <MagicButton
                                     onClick={handleCopy}
-                                    className="px-6 py-1 bg-black border border-white/20 rounded-md text-white/80 hover:text-white text-lg font-tektur uppercase tracking-wider hover:border-white/50 transition-all shadow-[0_0_10px_rgba(255,255,255,0.05)]"
+                                    className="px-6 h-[28px] rounded-md text-xs font-tektur bg-black border-[0.5px] border-white/20 text-white hover:text-white uppercase tracking-wider"
                                 >
                                     {copied ? "Copied!" : "Copy"}
-                                </button>
+                                </MagicButton>
                             </>
                         )}
                     </div>

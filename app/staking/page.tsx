@@ -9,7 +9,7 @@ export default function StakingPage() {
         <div className="min-h-screen bg-black text-white selection:bg-[#FF00FF] selection:text-white">
 
             <main className="pb-24">
-                <div className="bg-[url('/assets/images/background.png')] bg-cover bg-center pb-8 border-b border-white/5">
+                <div className="bg-[url('/assets/images/background.png')] bg-cover bg-center pb-8 relative">
                     <StakingHero />
 
                     <div className="container mx-auto px-6">
@@ -23,6 +23,8 @@ export default function StakingPage() {
                             </div>
                         </div>
                     </div>
+                    {/* Gradient Line */}
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FF00FF] to-transparent opacity-50" />
                 </div>
 
 
