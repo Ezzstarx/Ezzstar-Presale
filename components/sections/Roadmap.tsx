@@ -134,11 +134,11 @@ export default function Roadmap() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="flex flex-col lg:flex-row justify-center items-center gap-16 min-h-[525px] relative z-10"
+                        className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 min-h-[525px] relative z-10"
                     >
 
                         {/* Left: Details Card - DYNAMIC DIMENSIONS */}
-                        <div className="w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
+                        <div className="w-full max-w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
                             style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
                         >
                             {/* Status Badge */}
@@ -187,7 +187,7 @@ export default function Roadmap() {
 
 
                         {/* Right: Large Image Display - FIXED DIMENSIONS */}
-                        <div className="w-[562px] h-[525px] relative flex items-center justify-center p-4 shrink-0">
+                        <div className="w-full max-w-[562px] h-[300px] md:h-[525px] relative flex items-center justify-center p-4 shrink-0">
 
                             {/* Tech Frame/Corners - Just L-Shaped Lines, Long & Less Curved */}
                             <div className="absolute inset-4 pointer-events-none">

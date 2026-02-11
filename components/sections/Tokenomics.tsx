@@ -35,7 +35,7 @@ export default function Tokenomics() {
                 </div>
 
                 <div className="flex flex-col items-center gap-6">
-                    <div className="relative w-[1137px] h-[388px] mb-4 shrink-0">
+                    <div className="relative w-full max-w-[1137px] h-auto aspect-[1137/388] mb-4 shrink-0">
                         <Image
                             src="/assets/images/Tokenomics.png"
                             alt="Tokenomics Distribution"

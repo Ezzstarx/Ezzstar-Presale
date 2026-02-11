@@ -55,7 +55,7 @@ export default function NFTGallery() {
                 </h2>
 
                 {/* Grid container with AnimatePresence */}
-                <div className="relative w-full max-w-6xl mx-auto flex justify-center items-start min-h-[600px]">
+                <div className="relative w-full max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-start min-h-[600px] gap-6 lg:gap-0">
                     <AnimatePresence mode="popLayout">
                         {nfts.map((nft, index) => {
                             const isSelected = selectedId === nft.id;
@@ -77,9 +77,10 @@ export default function NFTGallery() {
                                         scale: isSelected ? 1.05 : 1,
                                         x: 0,
                                         zIndex: isSelected ? 50 : 1,
-                                        width: isSelected ? "100%" : "33%", // Expand width if selected (in flex)
-                                        maxWidth: isSelected ? "500px" : "380px"
+                                        // On mobile (stacked), width is always 100%. On desktop, it's 33% or 100%
+                                        width: isSelected ? "100%" : "100%",
                                     }}
+                                    // Use style for desktop media query overrides or classNames
                                     exit={{
                                         opacity: 0,
                                         scale: 0.8,
@@ -88,10 +89,9 @@ export default function NFTGallery() {
                                     }}
                                     transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 20 }}
                                     className={`relative rounded-2xl p-[2px] transition-shadow duration-300 ${isSelected ? 'mx-auto' : 'mx-4'} 
-                                        ${!isSelected && 'hover:-translate-y-2'} h-full min-h-[580px]`}
+                                        ${!isSelected && 'hover:-translate-y-2'} h-full min-h-[580px] lg:w-[33%] ${isSelected ? 'lg:w-full' : ''}`}
                                     style={{
                                         background: nft.borderGradient,
-                                        // If not using flex width, we might need fixed width
                                     }}
                                 >
                                     {/* Inner Card Content */}
