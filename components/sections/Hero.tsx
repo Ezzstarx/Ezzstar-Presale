@@ -80,19 +80,17 @@ export default function Hero() {
     // Card Swap State
     const [tiers, setTiers] = useState(NFT_TIERS);
 
-    const handleCardHover = (tierId: string) => {
-        setHoveredTierId(tierId);
-
-        const hoverIndex = tiers.findIndex(t => t.id === tierId);
-        // If hovering over a side card (not center), swap it with center
-        if (hoverIndex !== 1) {
+    const handleCardClick = (tierId: string) => {
+        const clickedIndex = tiers.findIndex(t => t.id === tierId);
+        // If clicking a side card (not center), swap it with center
+        if (clickedIndex !== 1) {
             const newTiers = [...tiers];
             const centerCard = newTiers[1];
-            const hoveredCard = newTiers[hoverIndex];
+            const clickedCard = newTiers[clickedIndex];
 
             // Swap
-            newTiers[1] = hoveredCard;
-            newTiers[hoverIndex] = centerCard;
+            newTiers[1] = clickedCard;
+            newTiers[clickedIndex] = centerCard;
 
             setTiers(newTiers);
         }
@@ -100,7 +98,7 @@ export default function Hero() {
 
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
-    const [hoveredTierId, setHoveredTierId] = useState<string | null>(null);
+    // Removed hoveredTierId state as we use click now
     const selectedTier = NFT_TIERS.find(t => t.id === selectedTierId);
 
     // Wallet State
@@ -235,41 +233,6 @@ export default function Hero() {
                         <motion.div
                             className="flex flex-row items-center relative h-[400px] w-[582px]"
                             layout
-                            onMouseLeave={() => {
-                                setHoveredTierId(null);
-                                setTiers(NFT_TIERS); // Reset to default order
-                            }}
-                            onMouseMove={(e) => {
-                                const rect = e.currentTarget.getBoundingClientRect();
-                                const x = e.clientX - rect.left;
-                                const width = rect.width;
-
-                                // Zoning Logic: 
-                                // Left Zone (< 33%): Swap Left (Lily) to Center
-                                // Right Zone (> 66%): Swap Right (Buffo) to Center
-                                // Center Zone: Default (Spica at Center)
-
-                                let targetId = null;
-                                if (x < width * 0.33) targetId = "lily";
-                                else if (x > width * 0.66) targetId = "buffo";
-                                // Center zone: keep current card (sticky)
-
-                                // Only swap if we have a target and it's different
-                                if (targetId && targetId !== tiers[1].id) {
-                                    const newTiers = [...NFT_TIERS]; // Start from base
-
-                                    if (targetId === "lily") {
-                                        // Swap Lily (0) with Spica (1)
-                                        [newTiers[0], newTiers[1]] = [newTiers[1], newTiers[0]];
-                                    } else if (targetId === "buffo") {
-                                        // Swap Buffo (2) with Spica (1)
-                                        [newTiers[2], newTiers[1]] = [newTiers[1], newTiers[2]];
-                                    }
-                                    // If 'spica', it remains default NFT_TIERS
-
-                                    setTiers(newTiers);
-                                }
-                            }}
                             transition={{ duration: 0.8, ease: "easeInOut" }}
                         >
                             {tiers.map((tier, index) => {
@@ -283,16 +246,16 @@ export default function Hero() {
                                 if (index === 1) baseZIndex = 30; // Center
                                 else if (index === 2) baseZIndex = 20; // Right
 
-                                const activeZIndex = hoveredTierId === tier.id ? 50 : baseZIndex;
+                                const activeZIndex = baseZIndex;
                                 const isOtherCardActive = !!selectedTierId && selectedTierId !== tier.id;
 
                                 return (
                                     <motion.div
                                         layout
                                         key={tier.id}
-                                        // Removed individual hover handlers to prevent flickering
+                                        onClick={() => handleCardClick(tier.id)}
                                         // RESIZED CARDS: w-[260px] h-[360px]
-                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300 transform-gpu"
+                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300 transform-gpu cursor-pointer"
                                         style={{
                                             zIndex: activeZIndex,
                                             background: tier.borderGradient
@@ -324,7 +287,10 @@ export default function Hero() {
                                                     <span className={`font-medium text-[15px] ${tier.color}`}>{tier.price}</span>
                                                 </div>
                                                 <MagicButton
-                                                    onClick={() => setSelectedTierId(selectedTierId === tier.id ? null : tier.id)}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedTierId(selectedTierId === tier.id ? null : tier.id);
+                                                    }}
                                                     style={{ '--mask-bg': '#000000' } as React.CSSProperties}
                                                     className={`w-[124px] h-[30px] rounded-lg border-[0.5px] border-white/30 font-tektur font-medium text-xs text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
                                                 >
