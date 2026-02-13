@@ -79,6 +79,7 @@ import NextImage from "next/image";
 export default function Hero() {
     // Carousel State: [leftIdx, centerIdx, rightIdx] into NFT_TIERS
     const [cardOrder, setCardOrder] = useState([0, 1, 2]);
+    const [wrappingIdx, setWrappingIdx] = useState<number | null>(null);
 
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
@@ -86,11 +87,17 @@ export default function Hero() {
 
     const rotateLeft = () => {
         if (selectedTierId) return;
+        const wrapping = cardOrder[0]; // Left card wraps to right
+        setWrappingIdx(wrapping);
         setCardOrder(prev => [prev[1], prev[2], prev[0]]);
+        setTimeout(() => setWrappingIdx(null), 600);
     };
     const rotateRight = () => {
         if (selectedTierId) return;
+        const wrapping = cardOrder[2]; // Right card wraps to left
+        setWrappingIdx(wrapping);
         setCardOrder(prev => [prev[2], prev[0], prev[1]]);
+        setTimeout(() => setWrappingIdx(null), 600);
     };
 
     // Fixed positions for the 3-card carousel
@@ -143,60 +150,47 @@ export default function Hero() {
                 </div>
 
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
-                <div className="hidden lg:grid w-full grid-cols-12 gap-4 items-center justify-center relative min-h-[500px]">
-                    {/* LEFT: Presale Widget */}
-                    <div className="col-span-5 flex justify-start z-40 ml-[100px]">
+                <div className="hidden lg:flex w-full items-center justify-between relative min-h-[500px] px-[100px]">
+                    {/* LEFT: Presale Widget - Never moves */}
+                    <div className="shrink-0 z-40">
                         <PresaleWidget />
                     </div>
 
-                    {/* RIGHT AREA: Dynamic Interaction Zone */}
-                    <div
-                        className={`col-span-7 flex flex-row items-center relative h-[420px] w-full transition-all duration-500 ease-in-out ${selectedTier ? 'justify-end pr-0 -translate-x-24' : 'justify-start pl-[60px] translate-x-0'}`}
-                    >
-                        {/* CENTER PANEL: Benefits */}
+                    {/* RIGHT GROUP: Benefits Panel + Cards */}
+                    <div className="flex items-center gap-2 shrink-0 transition-all duration-500 ease-in-out">
+                        {/* Benefits Panel (slides in when selected) */}
                         <AnimatePresence mode="popLayout">
                             {selectedTier && (
                                 <motion.div
                                     key="benefits-panel"
-                                    initial={{ width: 0, opacity: 0, marginRight: 0 }}
-                                    animate={{ width: 380, opacity: 1, marginRight: -30 }} // Reduced overlap
-                                    exit={{ width: 0, opacity: 0, marginRight: 0 }}
+                                    initial={{ width: 0, opacity: 0 }}
+                                    animate={{ width: 380, opacity: 1 }}
+                                    exit={{ width: 0, opacity: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    // Dynamic Border Color
-                                    className={`overflow-hidden flex-shrink-0 h-[360px] backdrop-blur-md w-full relative z-30 shadow-2xl`}
+                                    className={`overflow-hidden flex-shrink-0 h-[360px] backdrop-blur-md relative z-30 shadow-2xl`}
                                     style={{
-                                        backgroundColor: `${selectedTier.color.replace('text-[', '').replace(']', '')}0D` // 7% opacity
+                                        backgroundColor: `${selectedTier.color.replace('text-[', '').replace(']', '')}0D`
                                     }}
                                 >
-                                    {/* Manual Override for border opacity since "border-[#...]/30" might not work if not JIT optimized perfectly on the fly, but usually fine.
-                                        Let's use inline style for border-color to ensure we can control opacity if needed, OR just trust the tailwind class provided in the object. 
-                                        The object has "borderColor: 'border-[#...]'"
-                                    */}
                                     <div className={`w-full h-full absolute inset-0 border ${selectedTier.borderColor} opacity-30 pointer-events-none`} />
 
                                     <div className="w-[360px] px-3 py-5 h-full flex flex-col items-start justify-center relative z-10">
 
-                                        {/* Header Section - No Divider, Larger Text, Single Line Forced */}
+                                        {/* Header Section */}
                                         <div className="flex flex-row justify-between items-center w-full mb-4 whitespace-nowrap">
-                                            {/* Left: Badge + Title */}
                                             <div className="flex items-center gap-1.5">
-                                                {/* Actual NFT Badge */}
                                                 <img
                                                     src={selectedTier.badge}
                                                     alt="Badge"
                                                     className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
                                                 />
-                                                {/* Semibold Tektur, No Glow */}
                                                 <h3 className={`text-3xl font-tektur font-semibold uppercase tracking-wide ${selectedTier.color}`}>
                                                     {selectedTier.name}
                                                 </h3>
                                             </div>
 
-                                            {/* Right: Price */}
                                             <div className="flex items-center gap-1.5">
-                                                {/* Regular Satoshi */}
                                                 <span className="text-white text-base font-satoshi font-normal opacity-80">Invest:</span>
-                                                {/* Semibold Tektur, No Glow */}
                                                 <span className={`text-3xl font-tektur font-semibold ${selectedTier.color}`}>
                                                     {selectedTier.price}
                                                 </span>
@@ -208,13 +202,11 @@ export default function Hero() {
                                             {selectedTier.benefits.map((benefit, idx) => (
                                                 <li key={idx} className="flex items-start gap-3">
                                                     <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
-                                                    {/* Regular Satoshi */}
                                                     <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
                                                         {benefit}
                                                     </span>
                                                 </li>
                                             ))}
-                                            {/* Auto-Calculated Receive Amount - No Glow */}
                                             <li className="flex items-start gap-3 pt-1">
                                                 <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
                                                 <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
@@ -228,14 +220,18 @@ export default function Hero() {
                             )}
                         </AnimatePresence>
 
-                        {/* RIGHT: NFT Cards Carousel */}
-                        <div className="relative h-[400px] w-[582px] flex items-center justify-center">
+                        {/* NFT Cards Carousel - Dynamic width */}
+                        <motion.div
+                            className="relative h-[400px] flex items-center justify-center"
+                            animate={{ width: selectedTier ? 280 : 520 }}
+                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
                             {NFT_TIERS.map((tier, tierIdx) => {
                                 const posIdx = cardOrder.indexOf(tierIdx);
                                 const pos = CARD_POSITIONS[posIdx];
                                 const isDetailsOpen = !!selectedTierId;
                                 const isOtherCardActive = isDetailsOpen && selectedTierId !== tier.id;
-                                const isSelected = selectedTierId === tier.id;
+                                const isWrapping = tierIdx === wrappingIdx;
 
                                 return (
                                     <motion.div
@@ -249,23 +245,27 @@ export default function Hero() {
                                         }}
                                         className="absolute w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden cursor-grab active:cursor-grabbing"
                                         style={{
-                                            zIndex: isOtherCardActive ? 0 : pos.zIndex,
+                                            zIndex: isWrapping ? 1 : (isOtherCardActive ? 0 : pos.zIndex),
                                             background: tier.borderGradient,
                                             left: '50%',
                                             marginLeft: '-130px',
                                         }}
                                         animate={{
-                                            x: isDetailsOpen ? (isSelected ? 0 : 0) : pos.x,
-                                            scale: isOtherCardActive ? 0 : pos.scale,
-                                            opacity: isOtherCardActive ? 0 : 1,
+                                            x: isDetailsOpen ? 0 : pos.x,
+                                            y: isWrapping ? [0, -80, 0] : 0,
+                                            scale: isOtherCardActive ? 0 : (isWrapping ? 0.85 : pos.scale),
+                                            opacity: isOtherCardActive ? 0 : (isWrapping ? 0.6 : 1),
                                             width: isOtherCardActive ? 0 : 260,
                                         }}
-                                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                        transition={isWrapping
+                                            ? { duration: 0.6, ease: "easeInOut" }
+                                            : { type: "spring", stiffness: 200, damping: 25 }
+                                        }
                                     >
-                                        <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
+                                        <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl select-none">
                                             {/* Image Section */}
                                             <div className="relative w-full h-[72%] bg-black p-3 overflow-hidden">
-                                                <img src={tier.image} alt={tier.name} className="w-full h-full object-cover object-center border border-white/10" />
+                                                <img src={tier.image} alt={tier.name} draggable={false} className="w-full h-full object-cover object-center border border-white/10 pointer-events-none" />
                                             </div>
                                             {/* Content Section */}
                                             <div className="h-[28%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-1 pb-2 px-4 relative z-10">
@@ -292,7 +292,7 @@ export default function Hero() {
                                     </motion.div>
                                 );
                             })}
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 

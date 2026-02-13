@@ -327,6 +327,36 @@
   will-change: background-position;
 }
 
+/* Presale Widget Glow Stream - Left to Right */
+@keyframes streamMoveLeftToRight {
+  0% {
+    background-position: -60px 0;
+  }
+
+  100% {
+    background-position: calc(100% + 60px) 0;
+  }
+}
+
+.presale-glow-stream {
+  position: absolute;
+  inset: -6px;
+  clip-path: inset(-50px -50px -50px 6px);
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 85%);
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  border-radius: inherit;
+  z-index: -1;
+  animation: streamMoveLeftToRight 2.5s linear infinite;
+  opacity: 1;
+  filter: blur(6px);
+  will-change: background-position;
+}
+
 /* Custom Scrollbar for Transaction List */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;

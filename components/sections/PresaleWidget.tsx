@@ -66,38 +66,21 @@ export default function PresaleWidget() {
                 </div>
 
                 {/* Progress Bar - Thin Line with Traveling Glow */}
-                <style>{`
-                    @keyframes glowTravel {
-                        0% {
-                            left: 0;
-                            opacity: 0.6;
-                            filter: brightness(1.2);
-                            transform: translateY(-50%) scale(0.9);
-                        }
-                        100% {
-                            left: calc(75% - 25px);
-                            opacity: 1;
-                            filter: brightness(2.7);
-                            transform: translateY(-50%) scale(1.1);
-                        }
-                    }
-                    
-                    .glow-travel-presale {
-                        animation: glowTravel 3s infinite ease-in;
-                    }
-                `}</style>
                 <div className="mb-4 w-full flex flex-col items-center">
                     <div className="relative w-full h-[10px] bg-black border border-white rounded-full overflow-hidden">
-                        {/* Thin Progress Line with Gradient */}
-                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 bg-gradient-to-r from-[#FF00FF] via-[#00FFF0] to-[#FF00FF] rounded-full shadow-[0_0_8px_rgba(255,0,255,0.5)]">
-                        </div>
-                        {/* Traveling Glow Spot - Centered */}
-                        <div className="glow-travel-presale absolute top-1/2 -translate-y-1/2 w-[25px] h-[2px] rounded-full"
-                            style={{
-                                background: 'radial-gradient(ellipse at center, rgba(0,255,240,1) 0%, transparent 70%)',
-                                boxShadow: '0 0 10px 2px rgba(0,255,240,0.8), 0 0 20px 4px rgba(255,0,255,0.4)',
-                                filter: 'brightness(2.1)'
-                            }}>
+                        {/* Progress Fill Container */}
+                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 relative">
+                            {/* 1. Static Gradient Glow (Behind everything) */}
+                            <div
+                                className="absolute top-[-6px] bottom-[-6px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[4px] opacity-60 z-0"
+                                style={{ animation: 'colorCycle 4s linear infinite' }}
+                            ></div>
+
+                            {/* 2. Animated Glow Stream (Behind white line) - Left to Right */}
+                            <div className="presale-glow-stream z-0"></div>
+
+                            {/* 3. The White Line Itself (On Top) */}
+                            <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_15px_rgba(255,0,255,0.7)]"></div>
                         </div>
                     </div>
                     <div className="w-full flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-2">
