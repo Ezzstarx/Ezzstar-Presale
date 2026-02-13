@@ -54,7 +54,7 @@ export default function PresaleWidget() {
     };
 
     return (
-        <div className="relative w-full max-w-[370px] h-[370px] mx-auto lg:mx-0 shrink-0">
+        <div className="relative w-full max-w-[320px] lg:max-w-[340px] h-[370px] mx-auto lg:mx-0 shrink-0">
             <div className="relative bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 shadow-2xl h-full flex flex-col justify-center overflow-hidden">
                 {/* Gradient Bottom Border */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white via-50% to-transparent opacity-100" />

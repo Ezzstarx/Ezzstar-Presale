@@ -77,29 +77,28 @@ import { useWallet } from "../providers/WalletProvider";
 import NextImage from "next/image";
 
 export default function Hero() {
-    // Card Swap State
-    const [tiers, setTiers] = useState(NFT_TIERS);
-
-    const handleCardClick = (tierId: string) => {
-        const clickedIndex = tiers.findIndex(t => t.id === tierId);
-        // If clicking a side card (not center), swap it with center
-        if (clickedIndex !== 1) {
-            const newTiers = [...tiers];
-            const centerCard = newTiers[1];
-            const clickedCard = newTiers[clickedIndex];
-
-            // Swap
-            newTiers[1] = clickedCard;
-            newTiers[clickedIndex] = centerCard;
-
-            setTiers(newTiers);
-        }
-    };
+    // Carousel State: [leftIdx, centerIdx, rightIdx] into NFT_TIERS
+    const [cardOrder, setCardOrder] = useState([0, 1, 2]);
 
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
-    // Removed hoveredTierId state as we use click now
     const selectedTier = NFT_TIERS.find(t => t.id === selectedTierId);
+
+    const rotateLeft = () => {
+        if (selectedTierId) return;
+        setCardOrder(prev => [prev[1], prev[2], prev[0]]);
+    };
+    const rotateRight = () => {
+        if (selectedTierId) return;
+        setCardOrder(prev => [prev[2], prev[0], prev[1]]);
+    };
+
+    // Fixed positions for the 3-card carousel
+    const CARD_POSITIONS = [
+        { x: -130, scale: 1, zIndex: 10 },  // Left
+        { x: 0, scale: 1, zIndex: 30 },     // Center
+        { x: 130, scale: 1, zIndex: 20 },   // Right
+    ];
 
     // Wallet State
     const { isConnected, address, disconnectWallet, openWalletModal } = useWallet();
@@ -146,13 +145,13 @@ export default function Hero() {
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
                 <div className="hidden lg:grid w-full grid-cols-12 gap-4 items-center justify-center relative min-h-[500px]">
                     {/* LEFT: Presale Widget */}
-                    <div className="col-span-4 flex justify-start z-40 ml-[100px]">
+                    <div className="col-span-5 flex justify-start z-40 ml-[100px]">
                         <PresaleWidget />
                     </div>
 
                     {/* RIGHT AREA: Dynamic Interaction Zone */}
                     <div
-                        className={`col-span-8 flex flex-row items-center relative h-[420px] w-full transition-all duration-500 ease-in-out ${selectedTier ? 'justify-end pr-0 translate-x-20' : 'justify-start pl-[140px] translate-x-0'}`}
+                        className={`col-span-7 flex flex-row items-center relative h-[420px] w-full transition-all duration-500 ease-in-out ${selectedTier ? 'justify-end pr-0 -translate-x-24' : 'justify-start pl-[60px] translate-x-0'}`}
                     >
                         {/* CENTER PANEL: Benefits */}
                         <AnimatePresence mode="popLayout">
@@ -160,7 +159,7 @@ export default function Hero() {
                                 <motion.div
                                     key="benefits-panel"
                                     initial={{ width: 0, opacity: 0, marginRight: 0 }}
-                                    animate={{ width: 380, opacity: 1, marginRight: 16 }} // Restored 380px, Tightened gap
+                                    animate={{ width: 380, opacity: 1, marginRight: -30 }} // Reduced overlap
                                     exit={{ width: 0, opacity: 0, marginRight: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
                                     // Dynamic Border Color
@@ -229,47 +228,39 @@ export default function Hero() {
                             )}
                         </AnimatePresence>
 
-                        {/* RIGHT: NFT Cards Deck */}
-                        <motion.div
-                            className="flex flex-row items-center relative h-[400px] w-[582px]"
-                            layout
-                            transition={{ duration: 0.8, ease: "easeInOut" }}
-                        >
-                            {tiers.map((tier, index) => {
+                        {/* RIGHT: NFT Cards Carousel */}
+                        <div className="relative h-[400px] w-[582px] flex items-center justify-center">
+                            {NFT_TIERS.map((tier, tierIdx) => {
+                                const posIdx = cardOrder.indexOf(tierIdx);
+                                const pos = CARD_POSITIONS[posIdx];
                                 const isDetailsOpen = !!selectedTierId;
-                                const defaultMargin = index === 0 ? 0 : -120; // Adjusted overlap
-                                const collapsedMargin = index === 0 ? 0 : -200; // Tighter collapse
-                                const currentMargin = isDetailsOpen ? collapsedMargin : defaultMargin;
-
-                                // Position-based Z-Index (Center=30, Right=20, Left=10)
-                                let baseZIndex = 10;
-                                if (index === 1) baseZIndex = 30; // Center
-                                else if (index === 2) baseZIndex = 20; // Right
-
-                                const activeZIndex = baseZIndex;
-                                const isOtherCardActive = !!selectedTierId && selectedTierId !== tier.id;
+                                const isOtherCardActive = isDetailsOpen && selectedTierId !== tier.id;
+                                const isSelected = selectedTierId === tier.id;
 
                                 return (
                                     <motion.div
-                                        layout
                                         key={tier.id}
-                                        onClick={() => handleCardClick(tier.id)}
-                                        // RESIZED CARDS: w-[260px] h-[360px]
-                                        className="relative w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden transition-all duration-300 transform-gpu cursor-pointer"
+                                        drag={!isDetailsOpen ? "x" : false}
+                                        dragConstraints={{ left: -120, right: 120 }}
+                                        dragElastic={0.15}
+                                        onDragEnd={(_e, info) => {
+                                            if (info.offset.x < -60) rotateLeft();
+                                            else if (info.offset.x > 60) rotateRight();
+                                        }}
+                                        className="absolute w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden cursor-grab active:cursor-grabbing"
                                         style={{
-                                            zIndex: activeZIndex,
-                                            background: tier.borderGradient
+                                            zIndex: isOtherCardActive ? 0 : pos.zIndex,
+                                            background: tier.borderGradient,
+                                            left: '50%',
+                                            marginLeft: '-130px',
                                         }}
-                                        whileHover={{ scale: 1.05 }}
                                         animate={{
-                                            marginLeft: isOtherCardActive ? 0 : (selectedTierId === tier.id ? 0 : currentMargin), // Removed the +20 gap when active to keep it tight
-                                            width: isOtherCardActive ? 0 : 260,
+                                            x: isDetailsOpen ? (isSelected ? 0 : 0) : pos.x,
+                                            scale: isOtherCardActive ? 0 : pos.scale,
                                             opacity: isOtherCardActive ? 0 : 1,
-                                            scale: isDetailsOpen ? 1 : 1,
-                                            padding: isOtherCardActive ? 0 : '',
-                                            marginRight: isOtherCardActive ? 0 : '',
+                                            width: isOtherCardActive ? 0 : 260,
                                         }}
-                                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
                                     >
                                         <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl">
                                             {/* Image Section */}
@@ -301,7 +292,7 @@ export default function Hero() {
                                     </motion.div>
                                 );
                             })}
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
 

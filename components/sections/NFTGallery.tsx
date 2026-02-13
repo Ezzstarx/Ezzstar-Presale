@@ -49,13 +49,13 @@ export default function NFTGallery() {
 
     return (
         <section id="portfolios" className="py-24 relative overflow-hidden bg-transparent min-h-[800px]">
-            <div className="container mx-auto px-6">
-                <h2 className="text-5xl font-tektur font-bold text-center mb-16">
+            <div className="container mx-auto pl-0 pr-6">
+                <h2 className="text-5xl font-tektur font-bold text-center mb-16 pl-6">
                     Choose Your <span className="text-accent-cyan">Character</span>
                 </h2>
 
                 {/* Grid container with AnimatePresence */}
-                <div className="relative w-full max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-start min-h-[600px] gap-6 lg:gap-0">
+                <div className="relative w-full max-w-6xl mx-0 flex flex-col lg:flex-row justify-start items-start min-h-[600px] gap-6 lg:gap-0">
                     <AnimatePresence mode="popLayout">
                         {nfts.map((nft, index) => {
                             const isSelected = selectedId === nft.id;
