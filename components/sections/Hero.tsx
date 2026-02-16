@@ -79,7 +79,6 @@ import NextImage from "next/image";
 export default function Hero() {
     // Carousel State: [leftIdx, centerIdx, rightIdx] into NFT_TIERS
     const [cardOrder, setCardOrder] = useState([0, 1, 2]);
-    const [wrappingIdx, setWrappingIdx] = useState<number | null>(null);
 
     // Desktop State
     const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
@@ -87,17 +86,11 @@ export default function Hero() {
 
     const rotateLeft = () => {
         if (selectedTierId) return;
-        const wrapping = cardOrder[0]; // Left card wraps to right
-        setWrappingIdx(wrapping);
         setCardOrder(prev => [prev[1], prev[2], prev[0]]);
-        setTimeout(() => setWrappingIdx(null), 600);
     };
     const rotateRight = () => {
         if (selectedTierId) return;
-        const wrapping = cardOrder[2]; // Right card wraps to left
-        setWrappingIdx(wrapping);
         setCardOrder(prev => [prev[2], prev[0], prev[1]]);
-        setTimeout(() => setWrappingIdx(null), 600);
     };
 
     // Fixed positions for the 3-card carousel
@@ -231,7 +224,6 @@ export default function Hero() {
                                 const pos = CARD_POSITIONS[posIdx];
                                 const isDetailsOpen = !!selectedTierId;
                                 const isOtherCardActive = isDetailsOpen && selectedTierId !== tier.id;
-                                const isWrapping = tierIdx === wrappingIdx;
 
                                 return (
                                     <motion.div
@@ -245,22 +237,22 @@ export default function Hero() {
                                         }}
                                         className="absolute w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden cursor-grab active:cursor-grabbing"
                                         style={{
-                                            zIndex: isWrapping ? 1 : (isOtherCardActive ? 0 : pos.zIndex),
                                             background: tier.borderGradient,
                                             left: '50%',
                                             marginLeft: '-130px',
                                         }}
                                         animate={{
                                             x: isDetailsOpen ? 0 : pos.x,
-                                            y: isWrapping ? [0, -80, 0] : 0,
-                                            scale: isOtherCardActive ? 0 : (isWrapping ? 0.85 : pos.scale),
-                                            opacity: isOtherCardActive ? 0 : (isWrapping ? 0.6 : 1),
+                                            y: 0,
+                                            scale: isOtherCardActive ? 0 : pos.scale,
+                                            opacity: isOtherCardActive ? 0 : 1,
+                                            zIndex: isOtherCardActive ? 0 : pos.zIndex,
                                             width: isOtherCardActive ? 0 : 260,
                                         }}
-                                        transition={isWrapping
-                                            ? { duration: 0.6, ease: "easeInOut" }
-                                            : { type: "spring", stiffness: 200, damping: 25 }
-                                        }
+                                        transition={{
+                                            duration: 0.5,
+                                            ease: "easeInOut"
+                                        }}
                                     >
                                         <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl select-none">
                                             {/* Image Section */}

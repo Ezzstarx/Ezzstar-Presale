@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useConnect } from "wagmi";
+import { useWallet } from "../providers/WalletProvider";
 import MagicButton from "./MagicButton";
 
 interface CustomWalletModalProps {
@@ -24,10 +25,12 @@ const WALLETS = [
 
 export default function CustomWalletModal({ isOpen, onClose }: CustomWalletModalProps) {
     const { connectors, connect } = useConnect();
+    const { openNativeModal } = useWallet();
 
     const handleConnect = (walletId: string) => {
         if (walletId === "more") {
             onClose();
+            openNativeModal();
             return;
         }
 

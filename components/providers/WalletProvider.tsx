@@ -54,6 +54,7 @@ interface WalletContextType {
     connectWallet: () => void;
     disconnectWallet: () => void;
     openWalletModal: () => void;
+    openNativeModal: () => void; // Helper to force native modal
     isCustomModalOpen: boolean;
     openCustomModal: () => void;
     closeCustomModal: () => void;
@@ -90,8 +91,17 @@ function WalletInternalProvider({ children }: { children: ReactNode }) {
     const disconnectWallet = () => {
         if (mounted) disconnect();
     };
-    const openWalletModal = () => {
+    const openNativeModal = () => {
         if (mounted) openModalGlobal();
+    };
+    const openWalletModal = () => {
+        if (mounted) {
+            if (window.innerWidth >= 768) {
+                setIsCustomModalOpen(true);
+            } else {
+                openModalGlobal();
+            }
+        }
     };
     const openCustomModal = () => {
         if (mounted) setIsCustomModalOpen(true);
@@ -107,6 +117,7 @@ function WalletInternalProvider({ children }: { children: ReactNode }) {
             connectWallet,
             disconnectWallet,
             openWalletModal,
+            openNativeModal,
             isCustomModalOpen,
             openCustomModal,
             closeCustomModal
