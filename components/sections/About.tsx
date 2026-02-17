@@ -29,7 +29,7 @@ export default function About() {
 
                 {/* Animated Heading */}
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-16">
-                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] mb-0 flex items-center justify-center gap-2">
+                    <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] mb-0 flex items-center justify-center gap-2">
                         <span className="w-[160px] md:w-[300px] text-right">About</span>
                         <div className="relative h-[1.2em] w-[160px] md:w-[300px] flex items-center justify-start overflow-hidden">
                             <AnimatePresence mode="wait">

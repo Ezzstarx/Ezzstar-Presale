@@ -169,8 +169,7 @@ export default function Navbar() {
                                     ))}
                                 </div>
 
-                                {/* Divider */}
-                                <div className="h-px w-full bg-white/5" />
+
 
                                 {/* Wallet Button */}
                                 <div className="flex justify-center">
@@ -188,7 +187,7 @@ export default function Navbar() {
                                                 openWalletModal();
                                                 setMobileMenuOpen(false);
                                             }}
-                                            className="w-full px-8 py-1.5 bg-gradient-to-r from-secondary to-primary rounded-lg font-tektur text-white font-bold tracking-wide shadow-[0_0_35px_10px_rgba(139,92,246,0.65)] hover:shadow-[0_0_45px_12px_rgba(139,92,246,0.75)] transition-all text-sm"
+                                            className="w-fit mx-auto px-4 py-2 bg-gradient-to-r from-secondary to-primary rounded-full font-tektur text-white  tracking-wide shadow-[0_0_25px_5px_rgba(139,92,246,0.6)] hover:shadow-[0_0_35px_8px_rgba(139,92,246,0.7)] transition-all text-xs"
                                         >
                                             Connect Wallet
                                         </button>

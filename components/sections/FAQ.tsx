@@ -48,7 +48,7 @@ export default function FAQ() {
 
             <div className="container mx-auto px-6 max-w-5xl">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12">
-                    <h2 className="text-[32px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                    <h2 className="text-2xl md:text-[32px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white whitespace-nowrap">
                         Frequently Asked Questions
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>

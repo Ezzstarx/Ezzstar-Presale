@@ -18,7 +18,7 @@ export default function UniqueFeatures() {
                     <div className="w-full max-w-[1440px] h-auto pt-16 mx-auto bg-transparent relative flex items-center justify-center mb-6 md:mb-8">
                         {/* Top Gradient Line - Moved to absolute top of motion.div */}
                         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent z-20"></div>
-                        <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
+                        <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 whitespace-nowrap">
                             What makes Spica unique ?
                         </h2>
                         {/* Top Gradient Line - Moved to align with section container top if needed, but currently within this header block. 

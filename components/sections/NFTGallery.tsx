@@ -49,13 +49,13 @@ export default function NFTGallery() {
 
     return (
         <section id="portfolios" className="py-24 relative overflow-hidden bg-transparent min-h-[800px]">
-            <div className="container mx-auto pl-0 pr-6">
-                <h2 className="text-5xl font-tektur font-bold text-center mb-16 pl-6">
+            <div className="container mx-auto px-6">
+                <h2 className="text-5xl font-tektur font-bold text-center mb-16">
                     Choose Your <span className="text-accent-cyan">Character</span>
                 </h2>
 
                 {/* Grid container with AnimatePresence */}
-                <div className="relative w-full max-w-6xl mx-0 flex flex-col lg:flex-row justify-start items-start min-h-[600px] gap-6 lg:gap-0">
+                <div className="relative w-full max-w-6xl mx-auto flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start min-h-[600px] gap-6 lg:gap-0">
                     <AnimatePresence mode="popLayout">
                         {nfts.map((nft, index) => {
                             const isSelected = selectedId === nft.id;
@@ -88,8 +88,8 @@ export default function NFTGallery() {
                                         transition: { duration: 0.5, ease: "easeInOut" }
                                     }}
                                     transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 20 }}
-                                    className={`relative rounded-2xl p-[2px] transition-shadow duration-300 ${isSelected ? 'mx-auto' : 'mx-4'} 
-                                        ${!isSelected && 'hover:-translate-y-2'} h-full min-h-[580px] lg:w-[33%] ${isSelected ? 'lg:w-full' : ''}`}
+                                    className={`relative rounded-2xl p-[2px] transition-shadow duration-300 w-full max-w-md lg:max-w-none ${isSelected ? 'mx-auto' : 'mx-0 lg:mx-4'} 
+                                        ${!isSelected && 'hover:-translate-y-2'} h-full min-h-[500px] lg:min-h-[580px] lg:w-[33%] ${isSelected ? 'lg:w-full' : ''}`}
                                     style={{
                                         background: nft.borderGradient,
                                     }}

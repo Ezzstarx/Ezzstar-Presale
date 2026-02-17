@@ -76,37 +76,76 @@ export default function StakingHistorySection() {
                     </div>
 
                     {/* Content Area - Scrollable */}
-                    <div className="max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
+                    <div className="max-h-[360px] md:max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
                         <div className="flex flex-col gap-2">
                             {activeTab === "unlock" ? (
                                 UNLOCK_DATA.map((item) => (
-                                    <div key={item.id} className="relative bg-[#050505] border border-white rounded-md p-3 grid grid-cols-1 md:grid-cols-5 gap-4 items-center group hover:border-[#FF00FF]/50 transition-colors">
-                                        {/* ID with Bracket Corners - Smaller */}
-                                        <div className="col-span-1 flex justify-center">
-                                            <div className="relative w-8 h-8 flex items-center justify-center font-tektur font-bold text-white text-base">
-                                                {/* Corner accents - thinner */}
-                                                <div className="absolute top-0 left-0 w-2 h-2 border-t-[1px] border-l-[1px] border-gray-500 rounded-tl-[2px]"></div>
-                                                <div className="absolute top-0 right-0 w-2 h-2 border-t-[1px] border-r-[1px] border-gray-500 rounded-tr-[2px]"></div>
-                                                <div className="absolute bottom-0 left-0 w-2 h-2 border-b-[1px] border-l-[1px] border-gray-500 rounded-bl-[2px]"></div>
-                                                <div className="absolute bottom-0 right-0 w-2 h-2 border-b-[1px] border-r-[1px] border-gray-500 rounded-br-[2px]"></div>
-                                                {item.id}
+                                    <div key={item.id} className="relative md:bg-[#050505] bg-transparent md:border md:border-white border-transparent md:rounded-md rounded-none md:p-3 p-0 group hover:border-[#FF00FF]/50 transition-colors">
+                                        {/* Desktop Grid Layout */}
+                                        <div className="hidden md:grid grid-cols-5 gap-4 items-center">
+                                            {/* ID with Bracket Corners - Smaller */}
+                                            <div className="col-span-1 flex justify-center">
+                                                <div className="relative w-8 h-8 flex items-center justify-center font-tektur font-bold text-white text-base">
+                                                    {/* Corner accents - thinner */}
+                                                    <div className="absolute top-0 left-0 w-2 h-2 border-t-[1px] border-l-[1px] border-gray-500 rounded-tl-[2px]"></div>
+                                                    <div className="absolute top-0 right-0 w-2 h-2 border-t-[1px] border-r-[1px] border-gray-500 rounded-tr-[2px]"></div>
+                                                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b-[1px] border-l-[1px] border-gray-500 rounded-bl-[2px]"></div>
+                                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b-[1px] border-r-[1px] border-gray-500 rounded-br-[2px]"></div>
+                                                    {item.id}
+                                                </div>
+                                            </div>
+
+                                            <div className="col-span-1 text-white font-satoshi text-xs md:text-sm text-center md:text-left truncate">
+                                                {item.address}
+                                            </div>
+
+                                            <div className="col-span-1 text-white font-satoshi text-sm text-center">
+                                                {item.amount} <span className="text-[#FF00FF] font-tektur">SPCA</span>
+                                            </div>
+
+                                            <div className="col-span-1 text-white font-satoshi text-sm text-center">
+                                                {item.period}
+                                            </div>
+
+                                            <div className="col-span-1 text-white font-satoshi text-sm text-right">
+                                                {item.countdown}
                                             </div>
                                         </div>
 
-                                        <div className="col-span-1 text-white font-satoshi text-xs md:text-sm text-center md:text-left truncate">
-                                            {item.address}
-                                        </div>
+                                        {/* Mobile Card Layout */}
+                                        <div className="flex md:hidden items-center gap-3">
+                                            {/* ID Number (Outside) with Brackets */}
+                                            <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center font-tektur font-bold text-white text-base relative">
+                                                {/* Brackets around ID */}
+                                                <div className="absolute left-0 top-0 w-2 h-2 border-l-2 border-t-2 border-white/50 rounded-tl-sm"></div>
+                                                <div className="absolute left-0 bottom-0 w-2 h-2 border-l-2 border-b-2 border-white/50 rounded-bl-sm"></div>
 
-                                        <div className="col-span-1 text-white font-satoshi text-sm text-center">
-                                            {item.amount} <span className="text-[#FF00FF] font-tektur">SPCA</span>
-                                        </div>
+                                                {/* Right Brackets */}
+                                                <div className="absolute right-0 top-0 w-2 h-2 border-r-2 border-t-2 border-white/50 rounded-tr-sm"></div>
+                                                <div className="absolute right-0 bottom-0 w-2 h-2 border-r-2 border-b-2 border-white/50 rounded-br-sm"></div>
 
-                                        <div className="col-span-1 text-white font-satoshi text-sm text-center">
-                                            {item.period}
-                                        </div>
+                                                {item.id}
+                                            </div>
 
-                                        <div className="col-span-1 text-white font-satoshi text-sm text-right">
-                                            {item.countdown}
+                                            {/* Details Card */}
+                                            <div className="flex-1 flex flex-col gap-2 relative border border-white bg-[#050505] rounded-md p-3">
+                                                <div className="flex justify-between items-center text-xs">
+                                                    <span className="text-gray-400 font-satoshi">Address</span>
+                                                    <span className="text-white font-tektur">{item.address}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center text-xs">
+                                                    <span className="text-gray-400 font-satoshi">Staking Amount</span>
+                                                    <span className="text-white font-tektur">{item.amount} <span className="text-[#FF00FF] text-[10px]">SPCA</span></span>
+                                                </div>
+                                                <div className="flex justify-between items-center text-xs">
+                                                    <span className="text-gray-400 font-satoshi">Period</span>
+                                                    <span className="text-white font-tektur">{item.period}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center text-xs">
+                                                    <span className="text-gray-400 font-satoshi">Countdown</span>
+                                                    <span className="text-white font-tektur">{item.countdown}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 ))

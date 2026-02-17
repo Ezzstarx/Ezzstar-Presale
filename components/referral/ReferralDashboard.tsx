@@ -47,7 +47,7 @@ export default function ReferralDashboard() {
                                 <input type="text" value="Connect your wallet first" readOnly className="bg-transparent flex-1 px-3 text-sm text-gray-400 focus:outline-none" />
                                 <MagicButton
                                     onClick={openWalletModal}
-                                    className="px-5 py-0.1 rounded-md text-white/80 text-lg font-medium border border-white/20 transition-colors"
+                                    className="px-2 md:px-5 py-0.1 rounded-md text-white/80 text-sm md:text-lg font-medium border border-white/20 transition-colors"
                                     style={{ "--mask-bg": "#000000" } as React.CSSProperties}
                                 >
                                     Connect Wallet
@@ -63,7 +63,7 @@ export default function ReferralDashboard() {
                                 />
                                 <MagicButton
                                     onClick={handleCopy}
-                                    className="px-6 h-[28px] rounded-md text-xs font-tektur bg-black border-[0.5px] border-white/20 text-white hover:text-white uppercase tracking-wider"
+                                    className="px-3 md:px-6 h-[28px] rounded-md text-xs font-tektur bg-black border-[0.5px] border-white/20 text-white hover:text-white uppercase tracking-wider"
                                 >
                                     {copied ? "Copied!" : "Copy"}
                                 </MagicButton>
@@ -98,7 +98,7 @@ export default function ReferralDashboard() {
                 </div>
 
                 {/* Stats Box */}
-                <div className="relative glass-card rounded-md p-5 bg-black/10 border border-white/10 group">
+                <div className="relative glass-card rounded-md p-2 md:p-5 bg-black/10 border border-white/10 group">
                     <div className="magic-ring" />
                     <div className="text-center mb-6">
                         {/* Ref-Heart Icon with Background */}
@@ -121,7 +121,7 @@ export default function ReferralDashboard() {
                     </div>
 
                     <div className="space-y-0 font-satoshi">
-                        <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-sm text-[#3EE1F0] font-medium pb-0 px-8 mb-[2px]">
+                        <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-[10px] md:text-sm text-[#3EE1F0] font-medium pb-0 px-2 md:px-8 mb-[2px]">
                             <span className="text-left">Address</span>
                             <span className="text-lg text-[#3EE1F0] text-center">-</span>
                             <span className="text-center">Amount</span>
@@ -133,7 +133,7 @@ export default function ReferralDashboard() {
                                 <div className="flex flex-col bg-white/5 max-h-[110px] overflow-y-auto custom-scrollbar pr-1">
                                     {Array(10).fill(null).map((_, i) => (
                                         <div key={i} className="flex flex-col">
-                                            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-xs text-gray-400 py-[4px] px-8">
+                                            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center text-[10px] md:text-xs text-gray-400 py-[4px] px-2 md:px-8">
                                                 <span className="text-left">7oeFZe....rW7C</span>
                                                 <span className="text-xl text-gray-600 text-center">-</span>
                                                 <span className="text-center">{(10 - (i % 3) * 2)} USDT</span>

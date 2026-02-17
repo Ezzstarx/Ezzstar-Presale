@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -32,9 +32,42 @@ export default function Team() {
     const [currentIndex, setCurrentIndex] = useState(totalOriginal);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    // Card dimensions
-    const cardWidth = 280;
-    const gap = 32;
+    // Card dimensions state
+    const [cardWidth, setCardWidth] = useState(280);
+    const [gap, setGap] = useState(32);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.offsetWidth;
+
+                if (window.innerWidth < 768) {
+                    // Mobile: Gap 12px. We want 2 items exactly.
+                    // containerWidth is the width of the window-overflow-hidden div.
+                    const mobileGap = 12;
+                    // Calculate card width: (ContainerWidth - 1 Gap) / 2 Items
+                    const newCardWidth = (containerWidth - mobileGap) / 2;
+
+                    setCardWidth(newCardWidth);
+                    setGap(mobileGap);
+                } else {
+                    // Desktop
+                    setCardWidth(280);
+                    setGap(32);
+                }
+            }
+        };
+
+        // Initial
+        updateDimensions();
+
+        // Resize Listener
+        window.addEventListener('resize', updateDimensions);
+        return () => window.removeEventListener('resize', updateDimensions);
+    }, []);
+
     const itemFullWidth = cardWidth + gap;
 
     // Move to Next Slide
@@ -79,17 +112,18 @@ export default function Team() {
         <section id="team" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             <div className="relative z-10 w-full">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                    <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
                         Core <span className="text-[#00ffcc] text-shadow-glow">Team</span>
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
                 </div>
 
-                <div className="relative w-full max-w-[904px] mx-auto group">
+                <div className="relative w-full max-w-[960px] mx-auto group px-12 md:px-4">
                     {/* Carousel Window */}
-                    <div className="overflow-hidden w-full">
+                    <div className="overflow-hidden w-full" ref={containerRef}>
                         <motion.div
-                            className="flex gap-8"
+                            className="flex"
+                            style={{ gap: gap }}
                             initial={false}
                             animate={{ x: -(currentIndex * itemFullWidth) }}
                             transition={{
@@ -100,7 +134,8 @@ export default function Team() {
                             {extendedMembers.map((member, idx) => (
                                 <div
                                     key={idx}
-                                    className="flex-shrink-0 w-[240px] md:w-[280px]"
+                                    className="flex-shrink-0"
+                                    style={{ width: cardWidth }}
                                 >
                                     <a
                                         href={member.linkedin}
@@ -153,18 +188,18 @@ export default function Team() {
                     <button
                         onClick={prevSlide}
                         disabled={isTransitioning}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="absolute left-1 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-16 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Previous team member"
                     >
-                        <ChevronLeft className="w-6 h-6" />
+                        <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
                     </button>
                     <button
                         onClick={nextSlide}
                         disabled={isTransitioning}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="absolute right-1 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-16 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Next team member"
                     >
-                        <ChevronRight className="w-6 h-6" />
+                        <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
                     </button>
                 </div>
             </div>

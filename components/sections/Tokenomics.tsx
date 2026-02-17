@@ -28,7 +28,7 @@ export default function Tokenomics() {
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-[50px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                    <h2 className="text-3xl md:text-[50px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
                         Tokenomics & Distribution
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>

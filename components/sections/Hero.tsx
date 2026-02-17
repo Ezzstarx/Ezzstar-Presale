@@ -120,8 +120,8 @@ export default function Hero() {
 
                 {/* Header Content */}
                 <div className="mb-8 md:mb-12 space-y-4">
-                    <h1 className="text-[55px] font-tektur font-medium tracking-[-1px] leading-tight text-[#FAFAFA]">
-                        Empowering the Future of <br />
+                    <h1 className="text-2xl md:text-[55px] font-tektur font-medium tracking-[-1px] leading-tight text-[#FAFAFA]">
+                        <span className="whitespace-nowrap">Empowering the Future of</span> <br />
                         <span className="tracking-normal font-medium leading-none">
                             Digital <span className="text-transparent bg-clip-text bg-[linear-gradient(135deg,#FC009F_30%,#3EE1F0_70%)]">Aliens!</span>
                         </span>
@@ -289,10 +289,10 @@ export default function Hero() {
                 </div>
 
                 {/* MOBILE CONTENT (Visible on Mobile/Tablet) */}
-                <div className="flex lg:hidden flex-col w-full items-center gap-8 min-h-[600px] pb-12">
+                <div className="flex lg:hidden flex-col w-full items-center gap-4 min-h-0 pb-4">
 
                     {/* Content Display Area */}
-                    <div className="w-full flex justify-center items-start min-h-[480px]">
+                    <div className="w-full flex justify-center items-start min-h-0">
                         <AnimatePresence mode="wait">
                             {mobileTab === 'widget' ? (
                                 <motion.div
@@ -400,7 +400,7 @@ export default function Hero() {
                     </div>
 
                     {/* Mobile Tab Selector (Squared Rounded Buttons) */}
-                    <div className="grid grid-cols-4 gap-4 p-4 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl">
+                    <div className="grid grid-cols-4 gap-4 p-0 bg-transparent border-none my-4">
                         {MOBILE_TABS.map((tab) => (
                             <button
                                 key={tab.id}
@@ -429,40 +429,40 @@ export default function Hero() {
                         Don't miss out! Invest in <span className="text-[#FF00FF] font-medium">$SPCA</span> during our ongoing presale and receive an <span className="text-[#FFD700] font-medium">Exclusive NFT Signature</span> directly in your wallet.
                     </p>
 
-                    <div className="flex items-center gap-8 md:gap-14 opacity-80 mt-8">
+                    <div className="flex items-center justify-center gap-3 md:gap-14 opacity-80 mt-8">
                         {/* LinkedIn */}
                         <a href="https://www.linkedin.com/company/ezzstar/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                            <div className="relative w-12 h-12 md:w-16 md:h-16">
+                            <div className="relative w-8 h-8 md:w-16 md:h-16">
                                 <NextImage src="/assets/images/Social-LinkedIn.png" alt="LinkedIn" fill className="object-contain" />
                             </div>
                         </a>
                         {/* X (Twitter) */}
                         <a href="https://x.com/ezzstarx?s=21" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                            <div className="relative w-5 h-5 md:w-7 md:h-7">
+                            <div className="relative w-4 h-4 md:w-7 md:h-7">
                                 <NextImage src="/assets/images/Social-X.png" alt="X" fill className="object-contain" />
                             </div>
                         </a>
                         {/* Medium (Wordmark) */}
                         <a href="#" className="hover:scale-105 transition-transform">
-                            <div className="relative w-28 h-7 md:w-40 md:h-10">
+                            <div className="relative w-16 h-4 md:w-40 md:h-10">
                                 <NextImage src="/assets/images/Social-Medium.png" alt="Medium" fill className="object-contain" />
                             </div>
                         </a>
                         {/* Discord (Wordmark) */}
                         <a href="https://discord.gg/sY3gsZVyeg" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform">
-                            <div className="relative w-28 h-7 md:w-40 md:h-10">
+                            <div className="relative w-16 h-4 md:w-40 md:h-10">
                                 <NextImage src="/assets/images/Social-Discord.png" alt="Discord" fill className="object-contain" />
                             </div>
                         </a>
                         {/* Telegram */}
                         <a href="https://t.me/EzzstarSPCA" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                            <div className="relative w-6 h-6 md:w-8 md:h-8">
+                            <div className="relative w-4 h-4 md:w-8 md:h-8">
                                 <NextImage src="/assets/images/Social-Telegram.png" alt="Telegram" fill className="object-contain" />
                             </div>
                         </a>
                         {/* Instagram */}
                         <a href="#" className="hover:scale-110 transition-transform">
-                            <div className="relative w-6 h-6 md:w-8 md:h-8">
+                            <div className="relative w-4 h-4 md:w-8 md:h-8">
                                 <NextImage src="/assets/images/Social-Instagram.png" alt="Instagram" fill className="object-contain" />
                             </div>
                         </a>

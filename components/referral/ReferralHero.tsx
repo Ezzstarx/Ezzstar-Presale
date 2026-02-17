@@ -54,7 +54,7 @@ export default function ReferralHero() {
 
     return (
         <div className="w-full max-w-[1000px] min-h-[423px] mx-auto">
-            <div className="glass-card rounded-sm p-8 md:p-12 relative overflow-hidden z-10 h-full flex flex-col justify-center">
+            <div className="glass-card rounded-sm p-4 md:p-12 relative overflow-hidden z-10 h-full flex flex-col justify-center">
                 {/* Header Content */}
                 <div className="mb-24 relative z-10 w-full text-left">
                     <div className="w-full mb-4">
@@ -145,10 +145,10 @@ export default function ReferralHero() {
                     <div className="mt-12">
                         {!isConnected ? (
                             <div className="text-center">
-                                <button onClick={openWalletModal} className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full border border-white/40 bg-black text-white font-tektur text-sm hover:bg-white/5 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                                    <Image src="/assets/images/Ref-Connect.png" alt="" width={24} height={24} className="w-6 h-6" />
+                                <button onClick={openWalletModal} className="inline-flex items-center justify-center gap-1 md:gap-3 px-2 md:px-4 py-2 rounded-full border border-white/40 bg-black text-white font-tektur text-[10px] md:text-sm hover:bg-white/5 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.1)] whitespace-nowrap">
+                                    <Image src="/assets/images/Ref-Connect.png" alt="" width={24} height={24} className="w-4 h-4 md:w-6 md:h-6" />
                                     <span>Connect your wallet to access the referral system</span>
-                                    <Image src="/assets/images/Ref-Connect.png" alt="" width={24} height={24} className="w-6 h-6" />
+                                    <Image src="/assets/images/Ref-Connect.png" alt="" width={24} height={24} className="w-4 h-4 md:w-6 md:h-6" />
                                 </button>
                             </div>
                         ) : (

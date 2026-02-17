@@ -117,7 +117,7 @@ export default function Roadmap() {
 
             {/* Restored Heading */}
             <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-6">
-                <h2 className="text-[55px] font-tektur font-medium text-center mb-0 text-white tracking-[-1px]">
+                <h2 className="text-3xl md:text-[55px] font-tektur font-medium text-center mb-0 text-white tracking-[-1px]">
                     RoadMap
                 </h2>
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
@@ -138,7 +138,7 @@ export default function Roadmap() {
                     >
 
                         {/* Left: Details Card - DYNAMIC DIMENSIONS */}
-                        <div className="w-full max-w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0"
+                        <div className="w-full max-w-[483px] h-auto min-h-[347px] relative p-8 rounded-xl bg-transparent backdrop-blur-md border-2 transition-colors duration-500 flex flex-col justify-center shrink-0 order-2 lg:order-1"
                             style={{ borderColor: `${activePhase.themeColor}40`, boxShadow: `0 0 20px ${activePhase.themeColor}10` }}
                         >
                             {/* Status Badge */}
@@ -187,18 +187,18 @@ export default function Roadmap() {
 
 
                         {/* Right: Large Image Display - FIXED DIMENSIONS */}
-                        <div className="w-full max-w-[562px] h-[300px] md:h-[525px] relative flex items-center justify-center p-4 shrink-0">
+                        <div className="w-full max-w-[562px] h-[300px] md:h-[525px] relative flex items-center justify-center p-4 shrink-0 order-1 lg:order-2">
 
                             {/* Tech Frame/Corners - Just L-Shaped Lines, Long & Less Curved */}
                             <div className="absolute inset-4 pointer-events-none">
                                 {/* Top Left */}
-                                <div className="absolute top-0 left-0 w-32 h-32 border-t-[1px] border-l-[1px] border-[#3EE1F0] rounded-tl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32 border-t-[1px] border-l-[1px] border-[#3EE1F0] rounded-tl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
                                 {/* Top Right */}
-                                <div className="absolute top-0 right-0 w-32 h-32 border-t-[1px] border-r-[1px] border-[#3EE1F0] rounded-tr-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                <div className="absolute top-0 right-0 w-16 h-16 md:w-32 md:h-32 border-t-[1px] border-r-[1px] border-[#3EE1F0] rounded-tr-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
                                 {/* Bottom Left */}
-                                <div className="absolute bottom-0 left-0 w-32 h-32 border-b-[1px] border-l-[1px] border-[#3EE1F0] rounded-bl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                <div className="absolute bottom-0 left-0 w-16 h-16 md:w-32 md:h-32 border-b-[1px] border-l-[1px] border-[#3EE1F0] rounded-bl-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
                                 {/* Bottom Right */}
-                                <div className="absolute bottom-0 right-0 w-32 h-32 border-b-[1px] border-r-[1px] border-[#3EE1F0] rounded-br-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
+                                <div className="absolute bottom-0 right-0 w-16 h-16 md:w-32 md:h-32 border-b-[1px] border-r-[1px] border-[#3EE1F0] rounded-br-xl bg-transparent" style={{ filter: "drop-shadow(0 0 8px #3EE1F0)" }}></div>
                             </div>
 
                             {/* START: Inner Background added per request - Made smaller with larger inset & more transparent */}
@@ -227,15 +227,15 @@ export default function Roadmap() {
 
 
                     {/* Bottom: Phase Selectors - Aligned Left (with padding) */}
-                    <div className="flex flex-nowrap overflow-x-auto justify-start items-start gap-6 md:gap-10 mt-4 pt-10 pl-4 lg:ml-12 w-full pb-4 scrollbar-hide relative z-30">
+                    <div className="flex flex-nowrap overflow-x-auto justify-center md:justify-start items-start gap-2 md:gap-10 mt-4 pt-4 md:pt-10 pl-0 lg:ml-12 w-full pb-4 scrollbar-hide relative z-30">
                         {phases.map((phase) => (
                             <div
                                 key={phase.id}
                                 onClick={() => setActivePhaseId(phase.id)}
-                                className="flex flex-col items-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[80px]"
+                                className="flex flex-col items-center gap-2 md:gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[60px] md:min-w-[80px]"
                             >
                                 {/* Thumbnail - FIXED DIMENSIONS */}
-                                <div className="w-[130px] h-[127px] relative flex-shrink-0">
+                                <div className="w-[60px] h-[60px] md:w-[130px] md:h-[127px] relative flex-shrink-0">
                                     <img
                                         src={phase.thumbnail}
                                         alt={phase.title}
@@ -247,8 +247,8 @@ export default function Roadmap() {
                                 </div>
 
                                 {/* Label */}
-                                <div className="flex flex-col items-center min-w-[80px]">
-                                    <span className={`font-tektur text-base uppercase tracking-wider transition-colors duration-300 text-center whitespace-nowrap
+                                <div className="flex flex-col items-center min-w-[60px] md:min-w-[80px]">
+                                    <span className={`font-tektur text-[10px] md:text-base uppercase tracking-wider transition-colors duration-300 text-center whitespace-nowrap
                                     ${activePhaseId === phase.id ? 'text-white font-medium' : 'text-white/40 group-hover:text-white/80'}
                                 `}>
                                         {phase.title}
