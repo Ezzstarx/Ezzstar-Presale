@@ -45,7 +45,8 @@ export default function SpicaStakingCard() {
         if (!isConnected) {
             openWalletModal();
         } else {
-            console.log("Staking functionality is currently disabled.");
+            console.log("Stake Spica functionality is currently disabled.");
+            alert("Staking functionality is coming soon.");
         }
     };
 
@@ -154,7 +155,7 @@ export default function SpicaStakingCard() {
                 className="w-full py-3 rounded-md font-tektur font-medium text-xl text-white mb-0 border border-white/30"
                 style={{ '--mask-bg': '#1E1E1E' } as React.CSSProperties}
             >
-                Connect Wallet
+                {isConnected ? "Stake Spica" : "Connect Wallet"}
             </MagicButton>
 
         </div>

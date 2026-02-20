@@ -1,25 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 type Tab = "unlock" | "history";
 
-const UNLOCK_DATA = [
-    { id: 1, address: "0x1a98...1a34", amount: "5,791.59", period: "365 Days", countdown: "355d: 56m: 34s" },
-    { id: 2, address: "7oefXe...rW7C", amount: "5,791.59", period: "70 Days", countdown: "355d: 56m: 34s" },
-    { id: 3, address: "4iXWFr...XYMT", amount: "5,791.59", period: "1 Day", countdown: "355d: 56m: 34s" },
-    { id: 4, address: "0xd581...ec4b", amount: "5,791.59", period: "30 Days", countdown: "355d: 56m: 34s" },
-    { id: 5, address: "htB4iE...vVnN", amount: "5,791.59", period: "50 Days", countdown: "355d: 56m: 34s" },
-    { id: 6, address: "9xK2mP...zL9Q", amount: "1,200.00", period: "90 Days", countdown: "355d: 56m: 34s" },
-    { id: 7, address: "3bJ4nR...kM2P", amount: "3,500.50", period: "180 Days", countdown: "355d: 56m: 34s" },
-    { id: 8, address: "5cL7tS...wR1X", amount: "9,999.99", period: "365 Days", countdown: "355d: 56m: 34s" },
-    { id: 9, address: "2aH8vD...yU4N", amount: "500.00", period: "30 Days", countdown: "355d: 56m: 34s" },
-    { id: 10, address: "8fG1wE...qT6B", amount: "7,777.77", period: "120 Days", countdown: "355d: 56m: 34s" },
-];
+interface DummyStake {
+    id: number;
+    address: string;
+    amount: string;
+    period: string;
+    unlockTime: number; // timestamp
+}
 
 export default function StakingHistorySection() {
     const [activeTab, setActiveTab] = useState<Tab>("unlock"); // Default to unlock as requested
+    const [dummyStakes, setDummyStakes] = useState<DummyStake[]>([]);
+    const [now, setNow] = useState(Date.now());
+
+    useEffect(() => {
+        // Generate 55 dummy transactions
+        const generateDummyStakes = () => {
+            const list: DummyStake[] = [];
+            const nowTime = Date.now();
+            const periods = ["30 Days", "60 Days", "90 Days", "180 Days", "365 Days"];
+            for (let i = 1; i <= 55; i++) {
+                const randomAddress = `0x${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}...${Math.floor(Math.random() * 0xffff).toString(16).padStart(4, '0')}`;
+                const amount = (Math.random() * 10000 + 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const period = periods[Math.floor(Math.random() * periods.length)];
+
+                list.push({
+                    id: i,
+                    address: randomAddress,
+                    amount: amount,
+                    period: period,
+                    unlockTime: nowTime + Math.floor(Math.random() * 60 * 24 * 60 * 60 * 1000) + 3600000 // 1 hour to 60 days
+                });
+            }
+            return list;
+        };
+        setDummyStakes(generateDummyStakes());
+
+        // Update countdown every second
+        const interval = setInterval(() => {
+            setNow(Date.now());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatCountdown = (unlockTime: number, currentNow: number) => {
+        const diff = unlockTime - currentNow;
+        if (diff <= 0) return "Unlocked";
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        return `${days}d: ${hours.toString().padStart(2, '0')}h: ${minutes.toString().padStart(2, '0')}m: ${seconds.toString().padStart(2, '0')}s`;
+    };
 
     return (
         <section className="py-12 bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
@@ -79,7 +118,7 @@ export default function StakingHistorySection() {
                     <div className="max-h-[360px] md:max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
                         <div className="flex flex-col gap-2">
                             {activeTab === "unlock" ? (
-                                UNLOCK_DATA.map((item) => (
+                                dummyStakes.map((item) => (
                                     <div key={item.id} className="relative md:bg-[#050505] bg-transparent md:border md:border-white border-transparent md:rounded-md rounded-none md:p-3 p-0 group hover:border-[#FF00FF]/50 transition-colors">
                                         {/* Desktop Grid Layout */}
                                         <div className="hidden md:grid grid-cols-5 gap-4 items-center">
@@ -107,8 +146,8 @@ export default function StakingHistorySection() {
                                                 {item.period}
                                             </div>
 
-                                            <div className="col-span-1 text-white font-satoshi text-sm text-right">
-                                                {item.countdown}
+                                            <div className="col-span-1 text-white font-satoshi text-sm text-right font-mono">
+                                                {formatCountdown(item.unlockTime, now)}
                                             </div>
                                         </div>
 
@@ -143,7 +182,7 @@ export default function StakingHistorySection() {
                                                 </div>
                                                 <div className="flex justify-between items-center text-xs">
                                                     <span className="text-gray-400 font-satoshi">Countdown</span>
-                                                    <span className="text-white font-tektur">{item.countdown}</span>
+                                                    <span className="text-white font-tektur font-mono">{formatCountdown(item.unlockTime, now)}</span>
                                                 </div>
                                             </div>
                                         </div>

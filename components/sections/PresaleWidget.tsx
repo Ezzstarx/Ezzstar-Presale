@@ -4,19 +4,22 @@ import { useState, useEffect } from "react";
 import { ArrowDown, Loader2 } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
 import MagicButton from "@/components/ui/MagicButton";
+import { useWeb3Presale } from "@/hooks/useWeb3Presale";
 
 export default function PresaleWidget() {
     const { isConnected, openWalletModal } = useWallet();
+    const { buyWithToken } = useWeb3Presale();
     const [payCurrency, setPayCurrency] = useState<string>("USDT");
     const [amount, setAmount] = useState<string>("0.002");
-    const [receiveAmount, setReceiveAmount] = useState<string>("0.5");
+    const [receiveAmount, setReceiveAmount] = useState<string>("0.05");
+    const [isBuying, setIsBuying] = useState(false);
 
     // Force Rebuild
     const RATES: Record<string, number> = {
-        "USDT": 250,      // 1 USDT = 250 SPCA
-        "BNB": 162500,    // 1 BNB = $650 = 162.5k SPCA
-        "USDC": 250,
-        "DAI": 250        // 1 DAI = $1 = 250 SPCA,
+        "USDT": 25,      // 1 USDT = 25 SPCA
+        "BNB": 16250,    // 1 BNB = $650 = 16.25k SPCA
+        "USDC": 25,
+        "DAI": 25        // 1 DAI = $1 = 25 SPCA,
     };
 
     const CURRENCIES = [
@@ -45,8 +48,16 @@ export default function PresaleWidget() {
             openWalletModal();
             return;
         }
-        // Transaction logic disabled as per user request
-        console.log("Wallet already connected. Purchase functionality is currently disabled.");
+        setIsBuying(true);
+        try {
+            await buyWithToken(payCurrency as any, parseFloat(amount));
+            alert("Purchase successful!");
+        } catch (e: any) {
+            console.error(e);
+            alert("Purchase failed: " + e.message);
+        } finally {
+            setIsBuying(false);
+        }
     };
 
     return (
@@ -57,7 +68,7 @@ export default function PresaleWidget() {
                 {/* Title */}
                 <div className="text-left mb-4">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
-                        1 SPCA = 0.004 USDT
+                        1 SPCA = 0.04 USDT
                     </h3>
                 </div>
 
@@ -171,13 +182,14 @@ export default function PresaleWidget() {
                 <div className="flex flex-col gap-2">
                     <MagicButton
                         onClick={handleBuy}
+                        disabled={isBuying}
                         style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
                         className={`w-full py-2 border-[0.5px] border-white/30 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
-                            ? "bg-green-500/20 text-green-400 border-green-500/30 cursor-default"
+                            ? "bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30 font-bold"
                             : "bg-transparent text-white/60 hover:bg-white/5"
                             }`}
                     >
-                        {!isConnected ? "Connect Wallet" : "CONNECTED"}
+                        {!isConnected ? "Connect Wallet" : isBuying ? <><Loader2 className="animate-spin" size={16} /> Processing...</> : "Buy Now"}
                     </MagicButton>
                 </div>
             </div>

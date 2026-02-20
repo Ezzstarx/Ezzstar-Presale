@@ -14,7 +14,7 @@ interface PhaseData {
     id: number;
     title: string;
     period: string;
-    status: 'Live' | 'Underdevelopment' | 'Scheduled' | 'Future Development';
+    status: 'Completed' | 'Live' | 'Underdevelopment' | 'Scheduled' | 'Future Development';
     badgeColor: string; // Specific styling for the badge
     heading: string;
     points: PhasePoint[];
@@ -27,8 +27,8 @@ const phases: PhaseData[] = [
     {
         id: 1,
         title: "PHASE 1",
-        period: "(Q4 2024 - Q1 2025)",
-        status: "Live",
+        period: "(Q3 2025 - Q4 2025)",
+        status: "Completed",
         badgeColor: "bg-[#2ECC71]/20 text-[#2ECC71] border-2 border-[#2ECC71]/30",
         heading: "Foundation & Token Launch",
         points: [
@@ -47,9 +47,9 @@ const phases: PhaseData[] = [
     {
         id: 2,
         title: "PHASE 2",
-        period: "(Q2 - Q3 2025)",
-        status: "Underdevelopment",
-        badgeColor: "bg-[#F1C40F]/20 text-[#F1C40F] border-2 border-[#F1C40F]/30",
+        period: "(Q1 2026 - Q2 2026)",
+        status: "Live",
+        badgeColor: "bg-[#2ECC71]/20 text-[#2ECC71] border-2 border-[#2ECC71]/30",
         heading: "Ecosystem Development",
         points: [
             { text: "Launch of Social Website MVP", color: "#2ECC71" }, // Green
@@ -68,7 +68,7 @@ const phases: PhaseData[] = [
     {
         id: 3,
         title: "PHASE 3",
-        period: "(Q4 2025 - Q2 2026)",
+        period: "(Q3 2026 - Q1 2027)",
         status: "Scheduled",
         badgeColor: "bg-[#00E5FF]/20 text-[#00E5FF] border-2 border-[#00E5FF]/30 font-satoshi font-medium text-[14px]", // Cyan badge
         heading: "Game & Metaverse Expansion",
@@ -87,7 +87,7 @@ const phases: PhaseData[] = [
     {
         id: 4,
         title: "PHASE 4",
-        period: "(Q3 2026 - Beyond)",
+        period: "(Q2 2027 - Beyond)",
         status: "Future Development",
         badgeColor: "bg-[#FF3B30]/20 text-[#FF3B30] border-2 border-[#FF3B30]/30", // Red
         heading: "Mass Adoption & Ecosystem Launch",
@@ -105,9 +105,9 @@ const phases: PhaseData[] = [
 ];
 
 export default function Roadmap() {
-    const [activePhaseId, setActivePhaseId] = useState<number>(3);
+    const [activePhaseId, setActivePhaseId] = useState<number>(2);
 
-    const activePhase = phases.find(p => p.id === activePhaseId) || phases[2];
+    const activePhase = phases.find(p => p.id === activePhaseId) || phases[1];
 
     return (
         <section id="roadmap" className="relative w-full py-8 px-4 overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
