@@ -116,7 +116,7 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-start pt-24 pb-0 overflow-x-hidden text-center sm:px-6 bg-[url('/assets/images/background.png')] bg-cover bg-center">
-            <div className="container mx-auto max-w-[1400px] relative z-10 flex flex-col items-center">
+            <div className="container mx-auto max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] relative z-10 flex flex-col items-center">
 
                 {/* Header Content */}
                 <div className="mb-8 md:mb-12 space-y-4">
@@ -143,148 +143,150 @@ export default function Hero() {
                 </div>
 
                 {/* DESKTOP CONTENT (Hidden on Mobile) */}
-                <div className="hidden lg:flex w-full items-center justify-between relative min-h-[500px] px-[100px]">
-                    {/* LEFT: Presale Widget - Never moves */}
-                    <div className="shrink-0 z-40">
-                        <PresaleWidget />
-                    </div>
+                <div className="hidden lg:flex w-full items-center justify-center relative min-h-[500px] xl:min-h-[600px] 2xl:min-h-[700px] py-10">
+                    <div className="flex items-center justify-center gap-[60px] xl:gap-[80px] origin-center scale-[0.9] lg:scale-100 xl:scale-[1.15] 2xl:scale-[1.3] transition-transform duration-300">
+                        {/* LEFT: Presale Widget - Never moves */}
+                        <div className="shrink-0 z-40">
+                            <PresaleWidget />
+                        </div>
 
-                    {/* RIGHT GROUP: Benefits Panel + Cards */}
-                    <div className="flex items-center gap-2 shrink-0 transition-all duration-500 ease-in-out">
-                        {/* Benefits Panel (slides in when selected) */}
-                        <AnimatePresence mode="popLayout">
-                            {selectedTier && (
-                                <motion.div
-                                    key="benefits-panel"
-                                    initial={{ width: 0, opacity: 0 }}
-                                    animate={{ width: 380, opacity: 1 }}
-                                    exit={{ width: 0, opacity: 0 }}
-                                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className={`overflow-hidden flex-shrink-0 h-[360px] backdrop-blur-md relative z-30 shadow-2xl`}
-                                    style={{
-                                        backgroundColor: `${selectedTier.color.replace('text-[', '').replace(']', '')}0D`
-                                    }}
-                                >
-                                    <div className={`w-full h-full absolute inset-0 border ${selectedTier.borderColor} opacity-30 pointer-events-none`} />
-
-                                    <div className="w-[360px] px-3 py-5 h-full flex flex-col items-start justify-center relative z-10">
-
-                                        {/* Header Section */}
-                                        <div className="flex flex-row justify-between items-center w-full mb-4 whitespace-nowrap">
-                                            <div className="flex items-center gap-1.5">
-                                                <img
-                                                    src={selectedTier.badge}
-                                                    alt="Badge"
-                                                    className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-                                                />
-                                                <h3 className={`text-3xl font-tektur font-semibold uppercase tracking-wide ${selectedTier.color}`}>
-                                                    {selectedTier.name}
-                                                </h3>
-                                            </div>
-
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="text-white text-base font-satoshi font-normal opacity-80">Invest:</span>
-                                                <span className={`text-3xl font-tektur font-semibold ${selectedTier.color}`}>
-                                                    {selectedTier.price}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        {/* Benefits List */}
-                                        <ul className="space-y-0.5 w-full pl-1">
-                                            {selectedTier.benefits.map((benefit, idx) => (
-                                                <li key={idx} className="flex items-start gap-3">
-                                                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
-                                                    <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
-                                                        {benefit}
-                                                    </span>
-                                                </li>
-                                            ))}
-                                            <li className="flex items-start gap-3 pt-1">
-                                                <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
-                                                <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
-                                                    Receive: <span className={`font-bold ${selectedTier.color}`}>{(parseInt(selectedTier!.price.replace('$', '')) / 0.004).toLocaleString()} SPCA</span>
-                                                </span>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* NFT Cards Carousel - Dynamic width */}
-                        <motion.div
-                            className="relative h-[400px] flex items-center justify-center"
-                            animate={{ width: selectedTier ? 280 : 520 }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
-                        >
-                            {NFT_TIERS.map((tier, tierIdx) => {
-                                const posIdx = cardOrder.indexOf(tierIdx);
-                                const pos = CARD_POSITIONS[posIdx];
-                                const isDetailsOpen = !!selectedTierId;
-                                const isOtherCardActive = isDetailsOpen && selectedTierId !== tier.id;
-
-                                return (
+                        {/* RIGHT GROUP: Benefits Panel + Cards */}
+                        <div className="flex items-center gap-2 shrink-0 transition-all duration-500 ease-in-out">
+                            {/* Benefits Panel (slides in when selected) */}
+                            <AnimatePresence mode="popLayout">
+                                {selectedTier && (
                                     <motion.div
-                                        key={tier.id}
-                                        drag={!isDetailsOpen ? "x" : false}
-                                        dragConstraints={{ left: -120, right: 120 }}
-                                        dragElastic={0.15}
-                                        onDragEnd={(_e, info) => {
-                                            if (info.offset.x < -60) rotateLeft();
-                                            else if (info.offset.x > 60) rotateRight();
-                                        }}
-                                        className="absolute w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden cursor-grab active:cursor-grabbing"
+                                        key="benefits-panel"
+                                        initial={{ width: 0, opacity: 0 }}
+                                        animate={{ width: 380, opacity: 1 }}
+                                        exit={{ width: 0, opacity: 0 }}
+                                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                                        className={`overflow-hidden flex-shrink-0 h-[360px] backdrop-blur-md relative z-30 shadow-2xl`}
                                         style={{
-                                            background: tier.borderGradient,
-                                            left: '50%',
-                                            marginLeft: '-130px',
-                                        }}
-                                        animate={{
-                                            x: isDetailsOpen ? 0 : pos.x,
-                                            y: 0,
-                                            scale: isOtherCardActive ? 0 : pos.scale,
-                                            opacity: isOtherCardActive ? 0 : 1,
-                                            zIndex: isOtherCardActive ? 0 : pos.zIndex,
-                                            width: isOtherCardActive ? 0 : 260,
-                                        }}
-                                        transition={{
-                                            duration: 0.5,
-                                            ease: "easeInOut"
+                                            backgroundColor: `${selectedTier.color.replace('text-[', '').replace(']', '')}0D`
                                         }}
                                     >
-                                        <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl select-none">
-                                            {/* Image Section */}
-                                            <div className="relative w-full h-[72%] bg-black p-3 overflow-hidden">
-                                                <img src={tier.image} alt={tier.name} draggable={false} className="w-full h-full object-cover object-center border border-white/10 pointer-events-none" />
-                                            </div>
-                                            {/* Content Section */}
-                                            <div className="h-[28%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-1 pb-2 px-4 relative z-10">
-                                                <div className="flex items-center gap-2 mb-[2px] justify-center w-full">
-                                                    <img src={tier.badge} alt="Badge" className="w-6 h-6 object-contain" />
-                                                    <h3 className={`text-[17px] font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                        <div className={`w-full h-full absolute inset-0 border ${selectedTier.borderColor} opacity-30 pointer-events-none`} />
+
+                                        <div className="w-[360px] px-3 py-5 h-full flex flex-col items-start justify-center relative z-10">
+
+                                            {/* Header Section */}
+                                            <div className="flex flex-row justify-between items-center w-full mb-4 whitespace-nowrap">
+                                                <div className="flex items-center gap-1.5">
+                                                    <img
+                                                        src={selectedTier.badge}
+                                                        alt="Badge"
+                                                        className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                                                    />
+                                                    <h3 className={`text-3xl font-tektur font-semibold uppercase tracking-wide ${selectedTier.color}`}>
+                                                        {selectedTier.name}
+                                                    </h3>
                                                 </div>
-                                                <div className="flex items-center gap-2 mb-1">
-                                                    <span className="text-gray-400 text-xs font-satoshi">Invest:</span>
-                                                    <span className={`font-medium text-[15px] ${tier.color}`}>{tier.price}</span>
+
+                                                <div className="flex items-center gap-1.5">
+                                                    <span className="text-white text-base font-satoshi font-normal opacity-80">Invest:</span>
+                                                    <span className={`text-3xl font-tektur font-semibold ${selectedTier.color}`}>
+                                                        {selectedTier.price}
+                                                    </span>
                                                 </div>
-                                                <MagicButton
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setSelectedTierId(selectedTierId === tier.id ? null : tier.id);
-                                                    }}
-                                                    style={{ '--mask-bg': '#000000' } as React.CSSProperties}
-                                                    className={`w-[124px] h-[30px] rounded-lg border-[0.5px] border-white/30 font-tektur font-medium text-xs text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
-                                                >
-                                                    {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
-                                                </MagicButton>
                                             </div>
+
+                                            {/* Benefits List */}
+                                            <ul className="space-y-0.5 w-full pl-1">
+                                                {selectedTier.benefits.map((benefit, idx) => (
+                                                    <li key={idx} className="flex items-start gap-3">
+                                                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                        <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
+                                                            {benefit}
+                                                        </span>
+                                                    </li>
+                                                ))}
+                                                <li className="flex items-start gap-3 pt-1">
+                                                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                    <span className="text-white text-base font-normal font-satoshi leading-snug text-left">
+                                                        Receive: <span className={`font-bold ${selectedTier.color}`}>{(parseInt(selectedTier!.price.replace('$', '')) / 0.004).toLocaleString()} SPCA</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+
                                         </div>
                                     </motion.div>
-                                );
-                            })}
-                        </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* NFT Cards Carousel - Dynamic width */}
+                            <motion.div
+                                className="relative h-[400px] flex items-center justify-center"
+                                animate={{ width: selectedTier ? 280 : 520 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                            >
+                                {NFT_TIERS.map((tier, tierIdx) => {
+                                    const posIdx = cardOrder.indexOf(tierIdx);
+                                    const pos = CARD_POSITIONS[posIdx];
+                                    const isDetailsOpen = !!selectedTierId;
+                                    const isOtherCardActive = isDetailsOpen && selectedTierId !== tier.id;
+
+                                    return (
+                                        <motion.div
+                                            key={tier.id}
+                                            drag={!isDetailsOpen ? "x" : false}
+                                            dragConstraints={{ left: -120, right: 120 }}
+                                            dragElastic={0.15}
+                                            onDragEnd={(_e, info) => {
+                                                if (info.offset.x < -60) rotateLeft();
+                                                else if (info.offset.x > 60) rotateRight();
+                                            }}
+                                            className="absolute w-[260px] h-[360px] rounded-xl p-[2px] flex flex-col overflow-hidden cursor-grab active:cursor-grabbing"
+                                            style={{
+                                                background: tier.borderGradient,
+                                                left: '50%',
+                                                marginLeft: '-130px',
+                                            }}
+                                            animate={{
+                                                x: isDetailsOpen ? 0 : pos.x,
+                                                y: 0,
+                                                scale: isOtherCardActive ? 0 : pos.scale,
+                                                opacity: isOtherCardActive ? 0 : 1,
+                                                zIndex: isOtherCardActive ? 0 : pos.zIndex,
+                                                width: isOtherCardActive ? 0 : 260,
+                                            }}
+                                            transition={{
+                                                duration: 0.5,
+                                                ease: "easeInOut"
+                                            }}
+                                        >
+                                            <div className="relative h-full w-full bg-[#0a0a0c] rounded-[calc(0.75rem-1px)] overflow-hidden flex flex-col shadow-2xl select-none">
+                                                {/* Image Section */}
+                                                <div className="relative w-full h-[72%] bg-black p-3 overflow-hidden">
+                                                    <img src={tier.image} alt={tier.name} draggable={false} className="w-full h-full object-cover object-center border border-white/10 pointer-events-none" />
+                                                </div>
+                                                {/* Content Section */}
+                                                <div className="h-[28%] w-full flex flex-col items-center justify-center bg-black/60 backdrop-blur-md pt-1 pb-2 px-4 relative z-10">
+                                                    <div className="flex items-center gap-2 mb-[2px] justify-center w-full">
+                                                        <img src={tier.badge} alt="Badge" className="w-6 h-6 object-contain" />
+                                                        <h3 className={`text-[17px] font-medium font-tektur uppercase ${tier.color} tracking-wider`}>{tier.name}</h3>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="text-gray-400 text-xs font-satoshi">Invest:</span>
+                                                        <span className={`font-medium text-[15px] ${tier.color}`}>{tier.price}</span>
+                                                    </div>
+                                                    <MagicButton
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setSelectedTierId(selectedTierId === tier.id ? null : tier.id);
+                                                        }}
+                                                        style={{ '--mask-bg': '#000000' } as React.CSSProperties}
+                                                        className={`w-[124px] h-[30px] rounded-lg border-[0.5px] border-white/30 font-tektur font-medium text-xs text-white transition-all ${selectedTierId === tier.id ? 'bg-white/20' : 'bg-transparent'}`}
+                                                    >
+                                                        {selectedTierId === tier.id ? "Close Benefits" : "See Benefits"}
+                                                    </MagicButton>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
 
@@ -292,7 +294,7 @@ export default function Hero() {
                 <div className="flex lg:hidden flex-col w-full items-center gap-4 min-h-0 pb-4">
 
                     {/* Content Display Area */}
-                    <div className="w-full flex justify-center items-start min-h-0">
+                    <div className="w-full h-[550px] flex justify-center items-start">
                         <AnimatePresence mode="wait">
                             {mobileTab === 'widget' ? (
                                 <motion.div
@@ -314,7 +316,7 @@ export default function Hero() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.3 }}
-                                    className="w-full flex flex-col items-center justify-center px-4"
+                                    className="w-full h-full flex flex-col items-center justify-center px-4"
                                 >
                                     {(() => {
                                         const tier = NFT_TIERS.find(t => t.id === mobileTab);
@@ -326,7 +328,7 @@ export default function Hero() {
 
                                         return (
                                             <div
-                                                className="relative w-full max-w-[340px] rounded-[32px] p-[2px] flex flex-col items-start gap-6"
+                                                className="relative w-full h-[480px] max-w-[340px] rounded-[32px] p-[2px] flex flex-col items-start gap-6"
                                                 style={{ background: tier.borderGradient }}
                                             >
                                                 <div className="relative h-full w-full bg-[#0a0a0c]/90 backdrop-blur-xl rounded-[calc(2rem-1px)] p-6 overflow-hidden flex flex-col">
@@ -443,7 +445,7 @@ export default function Hero() {
                             </div>
                         </a>
                         {/* Medium (Wordmark) */}
-                        <a href="#" className="hover:scale-105 transition-transform">
+                        <a href="https://medium.com/@ezzstar" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform">
                             <div className="relative w-16 h-4 md:w-40 md:h-10">
                                 <NextImage src="/assets/images/Social-Medium.png" alt="Medium" fill className="object-contain" />
                             </div>
@@ -461,7 +463,7 @@ export default function Hero() {
                             </div>
                         </a>
                         {/* Instagram */}
-                        <a href="#" className="hover:scale-110 transition-transform">
+                        <a href="https://www.instagram.com/ezzstars/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
                             <div className="relative w-4 h-4 md:w-8 md:h-8">
                                 <NextImage src="/assets/images/Social-Instagram.png" alt="Instagram" fill className="object-contain" />
                             </div>

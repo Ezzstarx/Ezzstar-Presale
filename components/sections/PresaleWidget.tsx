@@ -13,19 +13,15 @@ export default function PresaleWidget() {
 
     // Force Rebuild
     const RATES: Record<string, number> = {
-        "ETH": 650000,    // 1 ETH = $2600 = 650k SPCA
         "USDT": 250,      // 1 USDT = 250 SPCA
         "BNB": 162500,    // 1 BNB = $650 = 162.5k SPCA
-        "SOL": 37500,     // 1 SOL = $150 = 37.5k SPCA
         "USDC": 250,
         "DAI": 250        // 1 DAI = $1 = 250 SPCA,
     };
 
     const CURRENCIES = [
-        { id: "ETH", icon: "/assets/icons/crypto/icon-eth.png" },
         { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-v2.png" },
         { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
-        { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
         { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
         { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
     ];

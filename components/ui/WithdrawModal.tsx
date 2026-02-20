@@ -13,10 +13,8 @@ interface WithdrawModalProps {
 const tokens = [
     { id: "usdc", name: "USDC", balance: "0.000", icon: "/assets/icons/crypto/icon-usdc.png" },
     { id: "bnb", name: "BNB", balance: "0.000", icon: "/assets/icons/crypto/icon-bnb.png" },
-    { id: "sol", name: "SOL", balance: "0.000", icon: "/assets/icons/crypto/icon-sol.png" },
     { id: "usdt", name: "USDT", balance: "0.000", icon: "/assets/icons/crypto/icon-usdt.png" },
     { id: "dai", name: "DAI", balance: "0.000", icon: "/assets/icons/crypto/icon-dai.png" },
-    { id: "eth", name: "ETH", balance: "0.000", icon: "/assets/icons/crypto/icon-eth.png" },
     { id: "spca", name: "SPCA", balance: "0.000", icon: "/assets/icons/crypto/icon-spca.png" },
 ];
 

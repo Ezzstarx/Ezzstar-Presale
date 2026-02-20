@@ -129,6 +129,20 @@ export default function UpcomingProjects() {
         return () => clearInterval(interval);
     }, [currentIndex]);
 
+    // Added Effect to Handle Body Scroll Locking when Modal is Open
+    useEffect(() => {
+        if (selectedProject) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        // Cleanup function in case component unmounts while modal is open
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedProject]);
+
     return (
         <section id="upcoming-projects" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
 

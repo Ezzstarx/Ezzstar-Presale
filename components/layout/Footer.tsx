@@ -16,6 +16,13 @@ const DiscordIcon = ({ size = 20, className = "" }: { size?: number, className?:
     </svg>
 );
 
+// Custom Medium Icon
+const MediumIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42zM24 12c0 3.06-.46 5.55-1.04 5.55-.58 0-1.04-2.49-1.04-5.55s.46-5.55 1.04-5.55c.58 0 1.04 2.49 1.04 5.55z" />
+    </svg>
+);
+
 // Helper Component for Expanding Social Button
 const SocialButton = ({ href, icon: Icon, label, colorClass }: { href: string, icon: any, label: string, colorClass: string }) => {
     return (
@@ -55,11 +62,12 @@ export default function Footer() {
                         </Link>
 
                         {/* Expanding Social Icons */}
-                        <div className="flex items-center gap-2 text-gray-400">
+                        <div className="flex flex-wrap items-center gap-2 text-gray-400">
                             <SocialButton href="https://discord.gg/sY3gsZVyeg" icon={DiscordIcon} label="Discord" colorClass="hover:text-[#5865F2]" />
                             <SocialButton href="https://t.me/EzzstarSPCA" icon={Send} label="Telegram" colorClass="hover:text-[#0088cc]" />
                             <SocialButton href="https://x.com/ezzstarx?s=21" icon={XIcon} label="X" colorClass="hover:text-white" />
-                            <SocialButton href="#" icon={Instagram} label="Instagram" colorClass="hover:text-[#E1306C]" />
+                            <SocialButton href="https://www.instagram.com/ezzstars/" icon={Instagram} label="Instagram" colorClass="hover:text-[#E1306C]" />
+                            <SocialButton href="https://medium.com/@ezzstar" icon={MediumIcon} label="Medium" colorClass="hover:text-white" />
                             <SocialButton href="https://www.linkedin.com/company/ezzstar/" icon={Linkedin} label="LinkedIn" colorClass="hover:text-[#0077b5]" />
                         </div>
                     </div>
