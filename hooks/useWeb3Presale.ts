@@ -126,7 +126,7 @@ export function useWeb3Presale() {
         if (!userAddress) return [];
         const leafHex = viemKeccak256(encodePacked(['address'], [getAddress(userAddress)]));
         const leaf = hexToBytes(leafHex);
-        return merkleTree.getHexProof(leaf) as `0x${string}`[];
+        return merkleTree.getHexProof(Buffer.from(leaf)) as `0x${string}`[];
     };
 
     const { writeContractAsync } = useWriteContract();
