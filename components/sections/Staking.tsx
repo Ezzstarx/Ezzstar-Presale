@@ -75,14 +75,14 @@ export default function Staking() {
 
     return (
         <section className="py-24 relative bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+            <div className="container mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
 
                 {/* Left Text */}
                 <div className="sticky top-24">
-                    <h2 className="text-5xl font-tektur font-bold mb-6">
+                    <h2 className="text-3xl md:text-5xl font-tektur font-bold mb-6">
                         Staking <span className="text-accent-pink">Calculator</span>
                     </h2>
-                    <p className="text-gray-400 font-satoshi text-lg mb-8">
+                    <p className="text-gray-400 font-satoshi text-base sm:text-lg mb-6 sm:mb-8">
                         Stake your SPICA tokens to earn passive rewards. The longer you lock, the higher the APY multiplier.
                     </p>
 

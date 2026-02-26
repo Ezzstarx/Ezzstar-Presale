@@ -26,9 +26,9 @@ export default function Tokenomics() {
                 />
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-3xl md:text-[50px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+                <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-6 sm:mb-8">
+                    <h2 className="text-2xl sm:text-3xl md:text-[50px] font-tektur font-medium tracking-[-0.5px] md:tracking-[-1px] text-center mb-0 text-white">
                         Tokenomics & Distribution
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
@@ -47,13 +47,13 @@ export default function Tokenomics() {
 
                     <div className="w-full max-w-6xl">
                         {/* Title */}
-                        <h3 className="text-2xl md:text-3xl font-satoshi text-center mb-6 text-white/90">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-satoshi text-center mb-4 sm:mb-6 text-white/90">
                             Total Supply: <span className="text-[#FF00FF]">5 Billion SPICA</span>
                         </h3>
 
                         {/* Distribution Grid - FIXED DIMENSIONS */}
                         {/* Distribution Grid - FULL WIDTH & RECTANGULAR */}
-                        <div className="grid grid-cols-6 md:grid-cols-5 gap-4 md:gap-0 bg-black/10 w-full">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-0 bg-black/10 w-full">
                             {[
                                 { pct: "5%", label: "Private-Sale" },
                                 { pct: "10%", label: "Pre-sale" },
@@ -69,7 +69,7 @@ export default function Tokenomics() {
                                 return (
                                     <Fragment key={idx}>
                                         <div
-                                            className={`relative p-4 flex flex-col gap-0 col-span-2 md:col-span-1 items-center md:items-start group/item border-t border-white/20`}
+                                            className={`relative p-4 flex flex-col gap-0 col-span-1 items-center md:items-start group/item border-t border-white/20`}
                                         >
                                             <span className="text-[24px] font-satoshi text-white mb-0 leading-tight">{item.pct}</span>
                                             <span className="text-gray-400 text-[14px] leading-tight font-satoshi text-center md:text-left">{item.label}</span>
@@ -89,7 +89,7 @@ export default function Tokenomics() {
 
                                         {/* Spacer for 3-2-3-2 Layout (Mobile) */}
                                         {idx === 4 && (
-                                            <div className="block md:hidden col-span-2 pointer-events-none"></div>
+                                            <div className="hidden col-span-2 pointer-events-none"></div>
                                         )}
                                     </Fragment>
                                 );
@@ -133,7 +133,7 @@ export default function Tokenomics() {
                             </div>
 
                             {/* Details Grid */}
-                            <div className="grid grid-cols-6 md:grid-cols-5 gap-4 md:gap-0 justify-items-center md:justify-items-start">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-0 justify-items-center md:justify-items-start">
                                 {[
                                     { value: "SPICA", label: "Name" },
                                     { value: "SPCA", label: "Symbol" },
@@ -144,7 +144,7 @@ export default function Tokenomics() {
                                     return (
                                         <div
                                             key={idx}
-                                            className="relative col-span-2 md:col-span-1 text-center md:text-left w-full flex flex-col items-center md:items-start p-4 border-t border-white/20"
+                                            className="relative col-span-1 text-center md:text-left w-full flex flex-col items-center md:items-start p-4 border-t border-white/20"
                                         >
                                             <span className="block text-[24px] font-satoshi text-white mb-0 leading-tight">{item.value}</span>
                                             <span className="text-gray-400 text-[14px] text-center md:text-left block w-full leading-tight font-satoshi">{item.label}</span>

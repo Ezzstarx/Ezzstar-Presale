@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function UniqueFeatures() {
     return (
         <section id="unique-features" className="pt-0 pb-24 relative overflow-hidden bg-[#09090F]">
-            <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
                 {/* New Section: Unique Features */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -15,9 +15,9 @@ export default function UniqueFeatures() {
                     transition={{ duration: 0.6 }}
                     className="w-full max-w-7xl px-6 md:px-4 flex flex-col items-center"
                 >
-                    <div className="w-full max-w-[1440px] h-auto pt-16 mx-auto bg-transparent relative flex items-center justify-center mb-6 md:mb-8">
+                    <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] pt-12 sm:pt-16 mx-auto bg-transparent relative flex items-center justify-center mb-6 md:mb-8">
                         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent z-20"></div>
-                        <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 whitespace-normal break-words sm:whitespace-nowrap">
+                        <h2 className="text-2xl sm:text-3xl md:text-[55px] font-tektur font-medium tracking-[-0.5px] md:tracking-[-1px] text-center mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 whitespace-normal break-words sm:whitespace-nowrap">
                             What makes Spica unique ?
                         </h2>
                         {/* Top Gradient Line - Moved to align with section container top if needed, but currently within this header block. 
@@ -80,7 +80,7 @@ export default function UniqueFeatures() {
 
                     {/* Single White Border Container */}
                     <div className="border-[0.5px] border-white/20 bg-transparent relative rounded-none p-2 md:p-4 w-full max-w-6xl mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                             {/* Card 1: What Is SPICA? */}
                             <div className="relative bg-transparent border border-white/5 rounded-none p-4 overflow-hidden">
                                 {/* Background Image */}

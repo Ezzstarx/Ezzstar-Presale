@@ -76,7 +76,7 @@ export default function Footer() {
                     <div className="hidden md:block col-span-1 md:col-span-3"></div>
 
                     {/* Right Columns: Links - Reduced to 5 Columns (pushed right) and reduced internal gap */}
-                    <div className="col-span-1 md:col-span-5 grid grid-cols-3 gap-2 md:gap-4 text-center md:text-left">
+                    <div className="col-span-1 md:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-4 text-center md:text-left">
                         {/* Company */}
                         <div className="flex flex-col gap-5">
                             <h3 className="font-tektur text-lg font-medium !text-white mb-1">Company</h3>

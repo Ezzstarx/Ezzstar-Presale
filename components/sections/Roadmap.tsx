@@ -110,14 +110,14 @@ export default function Roadmap() {
     const activePhase = phases.find(p => p.id === activePhaseId) || phases[1];
 
     return (
-        <section id="roadmap" className="relative w-full py-8 px-4 overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
+        <section id="roadmap" className="relative w-full py-8 px-3 sm:px-4 overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             {/* Background Glows */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00ffcc]/5 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#C243FE]/5 rounded-full blur-[120px] pointer-events-none" />
 
             {/* Restored Heading */}
-            <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-6">
-                <h2 className="text-3xl md:text-[55px] font-tektur font-medium text-center mb-0 text-white tracking-[-1px]">
+            <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-[55px] font-tektur font-medium text-center mb-0 text-white tracking-[-0.5px] md:tracking-[-1px]">
                     RoadMap
                 </h2>
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>

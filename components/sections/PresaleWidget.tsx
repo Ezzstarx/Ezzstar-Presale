@@ -61,19 +61,19 @@ export default function PresaleWidget() {
     };
 
     return (
-        <div className="relative w-full max-w-[320px] lg:max-w-[340px] h-[370px] mx-auto lg:mx-0 shrink-0">
-            <div className="relative bg-transparent lg:bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 shadow-2xl h-full flex flex-col justify-center overflow-hidden">
+        <div className="relative w-full max-w-[320px] lg:max-w-[340px] h-[480px] lg:h-[370px] mx-auto lg:mx-0 shrink-0">
+            <div className="relative bg-transparent lg:bg-[#0a0a0c]/80 backdrop-blur-2xl border border-white/5 rounded-xl p-6 lg:p-6 shadow-2xl h-full flex flex-col justify-center overflow-hidden">
                 {/* Gradient Bottom Border */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white via-50% to-transparent opacity-100" />
                 {/* Title */}
-                <div className="text-left mb-4">
+                <div className="text-left mb-5 lg:mb-4">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
                         1 SPCA = 0.04 USDT
                     </h3>
                 </div>
 
                 {/* Progress Bar - Thin Line with Traveling Glow */}
-                <div className="mb-4 w-full flex flex-col items-center">
+                <div className="mb-5 lg:mb-4 w-full flex flex-col items-center">
                     <div className="relative w-full h-[10px] bg-black border border-white rounded-full overflow-hidden">
                         {/* Progress Fill Container */}
                         <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 relative">
@@ -102,7 +102,7 @@ export default function PresaleWidget() {
                 </div>
 
                 {/* Input Fields - Unified Dark */}
-                <div className="space-y-1.5">
+                <div className="space-y-2 lg:space-y-1.5">
                     {/* Pay Input */}
                     <div className="bg-[#050507] border-[0.5px] border-white/30 rounded-xl p-1.5 flex items-center gap-3">
                         <div className="w-6 h-6 flex items-center justify-center">
@@ -144,7 +144,7 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-center mt-3 mb-3 w-full">
+                <div className="flex items-center justify-center mt-4 lg:mt-3 mb-4 lg:mb-3 w-full">
                     <div className="flex items-center w-fit h-[38px] bg-black/40 px-1 rounded-full">
                         {CURRENCIES.map((curr) => (
                             <button
@@ -184,7 +184,7 @@ export default function PresaleWidget() {
                         onClick={handleBuy}
                         disabled={isBuying}
                         style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
-                        className={`w-full py-2 border-[0.5px] border-white/30 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
+                        className={`w-full py-3 lg:py-2 border-[0.5px] border-white/30 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
                             ? "bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30 font-bold"
                             : "bg-transparent text-white/60 hover:bg-white/5"
                             }`}

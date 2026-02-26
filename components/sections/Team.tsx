@@ -111,8 +111,8 @@ export default function Team() {
     return (
         <section id="team" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             <div className="relative z-10 w-full">
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8">
-                    <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white">
+                <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-6 sm:mb-8">
+                    <h2 className="text-2xl sm:text-3xl md:text-[55px] font-tektur font-medium tracking-[-0.5px] md:tracking-[-1px] text-center mb-0 text-white">
                         Core <span className="text-[#00ffcc] text-shadow-glow">Team</span>
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>

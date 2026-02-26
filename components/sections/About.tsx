@@ -24,11 +24,11 @@ export default function About() {
             {/* Background Blurs */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-pink/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-            <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
 
 
                 {/* Animated Heading */}
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-16">
+                <div className="w-full max-w-[1440px] h-auto min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8 md:mb-16">
                     <h2 className="text-3xl md:text-[55px] font-tektur font-medium tracking-[-1px] mb-0 flex items-center justify-center gap-2">
                         <span className="w-[160px] md:w-[300px] text-right">About</span>
                         <div className="relative h-[1.2em] w-[160px] md:w-[300px] flex items-center justify-start overflow-hidden">
@@ -53,10 +53,10 @@ export default function About() {
                 </div>
 
                 {/* Stylized Black Box Content with Exact Dimensions */}
-                <div className="relative flex flex-col items-center bg-[#050507]/30 border border-white/5 rounded-2xl shadow-2xl w-full max-w-[707px] md:w-[707px] md:h-[809px] h-auto">
+                <div className="relative flex flex-col items-center bg-[#050507]/30 border border-white/5 rounded-2xl shadow-2xl w-full max-w-[707px] h-auto">
 
                     {/* Top Section: Text Content */}
-                    <div className="w-full flex flex-col items-center justify-center px-6 md:px-12 pt-8 md:pt-12 pb-8 md:pb-4 h-auto md:h-[417px]">
+                    <div className="w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-12 pt-6 sm:pt-8 md:pt-12 pb-6 sm:pb-8 md:pb-4 h-auto">
                         {/* Logo */}
                         <div className="mb-6">
                             <img
@@ -95,7 +95,7 @@ export default function About() {
 
                     {/* Bottom Section: Video Content */}
                     {/* Bottom Section: Video Content */}
-                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[300px] md:h-[390px] md:mt-[5px] overflow-hidden border-[3px] border-indigo-400/60 shadow-[0_0_50px_rgba(79,70,229,0.25)] rounded-b-2xl">
+                    <div className="w-full relative bg-black/40 backdrop-blur-md h-[200px] sm:h-[300px] md:h-[390px] overflow-hidden border-[3px] border-indigo-400/60 shadow-[0_0_50px_rgba(79,70,229,0.25)] rounded-b-2xl">
                         {/* Video Content */}
                         <video
                             className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1] scale-[1.35]"

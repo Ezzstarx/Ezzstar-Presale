@@ -46,9 +46,9 @@ export default function FAQ() {
             {/* Pink Top Line/Glow */}
 
 
-            <div className="container mx-auto px-6 max-w-5xl">
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12">
-                    <h2 className="text-2xl md:text-[32px] font-tektur font-medium tracking-[-1px] text-center mb-0 text-white whitespace-nowrap">
+            <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+                <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8 sm:mb-12">
+                    <h2 className="text-xl sm:text-2xl md:text-[32px] font-tektur font-medium tracking-[-0.5px] md:tracking-[-1px] text-center mb-0 text-white whitespace-normal sm:whitespace-nowrap">
                         Frequently Asked Questions
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
@@ -69,7 +69,7 @@ export default function FAQ() {
                                     onClick={() => toggleFAQ(i)}
                                     className="w-full flex items-center justify-between p-4 text-left group"
                                 >
-                                    <span className="font-satoshi font-medium text-lg text-white tracking-wide">{faq.q}</span>
+                                    <span className="font-satoshi font-medium text-base md:text-lg text-white tracking-wide">{faq.q}</span>
 
                                     {/* Close Icon (Circle with X) */}
                                     <div className={`

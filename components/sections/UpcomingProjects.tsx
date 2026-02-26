@@ -148,9 +148,9 @@ export default function UpcomingProjects() {
 
             <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#C243FE]/5 blur-[100px] rounded-full pointer-events-none" />
 
-            <div className="container mx-auto px-6 relative z-10 w-full">
-                <div className="w-full max-w-[1440px] h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-12">
-                    <h2 className="text-[40px] md:text-[50px] font-tektur font-medium tracking-tight text-center mb-0 text-white">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full">
+                <div className="w-full max-w-[1440px] h-auto min-h-[60px] sm:min-h-[80px] md:h-[119px] mx-auto bg-transparent relative flex items-center justify-center mb-8 sm:mb-12">
+                    <h2 className="text-[28px] sm:text-[40px] md:text-[50px] font-tektur font-medium tracking-tight text-center mb-0 text-white">
                         Upcoming Projects
                     </h2>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
@@ -255,7 +255,7 @@ export default function UpcomingProjects() {
                             initial={{ opacity: 0, scale: 0.95, y: 10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                            className="w-full max-w-5xl h-auto max-h-[90vh] bg-transparent border border-white/5 rounded-[40px] overflow-hidden shadow-2xl relative flex flex-col"
+                            className="w-full max-w-5xl h-auto max-h-[90vh] bg-transparent border border-white/5 rounded-[20px] md:rounded-[40px] overflow-hidden shadow-2xl relative flex flex-col"
                             style={{
                                 backgroundImage: "url('/assets/images/background.png')",
                                 backgroundSize: "cover",
