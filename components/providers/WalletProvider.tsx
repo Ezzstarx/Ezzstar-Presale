@@ -3,7 +3,7 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { WagmiProvider, useAccount, useDisconnect, createStorage } from 'wagmi'
-import { bsc, mainnet } from 'wagmi/chains'
+import { bsc, bscTestnet } from 'wagmi/chains'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 
@@ -20,7 +20,7 @@ const metadata = {
     icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const chains = [bsc, mainnet] as const
+const chains = [bsc, bscTestnet] as const
 const config = defaultWagmiConfig({
     chains,
     projectId,
