@@ -7,9 +7,9 @@ export const PRESALE_ADDRESS = "0x49AefFF551B1E68F6799E64c0b6F72BBbd176f2E";
 export const SPICA_ADDRESS = "0x28AbE997d4AB43d3f938D99DC0c074E463Bec7ed";
 
 export const TOKENS = {
-    USDT: "0x55d398326f99059fF775485246999027B3197955", // BSC Mainnet USDT
-    USDC: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // BSC Mainnet USDC
-    DAI: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",  // BSC Mainnet DAI
+    USDT: "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd", // BSC Testnet USDT
+    USDC: "0x64544969ed7EBf5f083679233325356EbE738930", // BSC Testnet USDC
+    DAI: "0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867",  // BSC Testnet DAI
 };
 
 export const PRESALE_ABI = [
@@ -69,6 +69,48 @@ export const PRESALE_ABI = [
         "name": "referrerOf",
         "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "name": "referralSpica",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "name": "referralBNB",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "name": "referralUSDT",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "name": "referralUSDC",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "name": "referralDAI",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "withdrawReferralRewards",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ] as const;
@@ -194,9 +236,43 @@ export function useWeb3Presale() {
         return tx;
     };
 
+    const withdrawRewards = async () => {
+        if (!address) throw new Error("Wallet not connected");
+        return await writeContractAsync({
+            address: PRESALE_ADDRESS,
+            abi: PRESALE_ABI,
+            functionName: 'withdrawReferralRewards',
+        });
+    };
+
     return {
         setupReferral,
         buyWithToken,
         getProof,
+        withdrawRewards,
     };
+}
+
+// Hook to read referral balances for a user
+import { useReadContracts } from 'wagmi';
+
+export function useReferralData(userAddress?: string) {
+    const presaleContract = {
+        address: PRESALE_ADDRESS as `0x${string}`,
+        abi: PRESALE_ABI,
+    };
+
+    return useReadContracts({
+        contracts: [
+            { ...presaleContract, functionName: 'referralSpica', args: [userAddress as `0x${string}`] },
+            { ...presaleContract, functionName: 'referralBNB', args: [userAddress as `0x${string}`] },
+            { ...presaleContract, functionName: 'referralUSDT', args: [userAddress as `0x${string}`] },
+            { ...presaleContract, functionName: 'referralUSDC', args: [userAddress as `0x${string}`] },
+            { ...presaleContract, functionName: 'referralDAI', args: [userAddress as `0x${string}`] },
+        ],
+        query: {
+            enabled: !!userAddress,
+            refetchInterval: 10000, // Refresh every 10 seconds
+        }
+    });
 }

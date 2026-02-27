@@ -3,9 +3,10 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { WagmiProvider, useAccount, useDisconnect, createStorage } from 'wagmi'
-import { bsc, bscTestnet } from 'wagmi/chains'
+import { bscTestnet } from 'wagmi/chains'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useReferralCapture } from '../../hooks/useReferralCapture';
 
 const queryClient = new QueryClient()
 
@@ -20,7 +21,7 @@ const metadata = {
     icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-const chains = [bsc, bscTestnet] as const
+const chains = [bscTestnet] as const
 const config = defaultWagmiConfig({
     chains,
     projectId,
@@ -80,6 +81,8 @@ function WalletInternalProvider({ children }: { children: ReactNode }) {
     const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
     const { address, isConnected } = useAccount();
     const { disconnect } = useDisconnect();
+
+    useReferralCapture();
 
     useEffect(() => {
         setMounted(true);

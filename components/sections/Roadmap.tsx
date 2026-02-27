@@ -14,7 +14,7 @@ interface PhaseData {
     id: number;
     title: string;
     period: string;
-    status: 'Completed' | 'Live' | 'Underdevelopment' | 'Scheduled' | 'Future Development';
+    status: 'Completed' | 'Live' | 'In Progress' | 'Underdevelopment' | 'Scheduled' | 'Future Development';
     badgeColor: string; // Specific styling for the badge
     heading: string;
     points: PhasePoint[];
@@ -28,7 +28,7 @@ const phases: PhaseData[] = [
         id: 1,
         title: "PHASE 1",
         period: "(Q3 2025 - Q4 2025)",
-        status: "Completed",
+        status: "Live",
         badgeColor: "bg-[#2ECC71]/20 text-[#2ECC71] border-2 border-[#2ECC71]/30",
         heading: "Foundation & Token Launch",
         points: [
@@ -48,7 +48,7 @@ const phases: PhaseData[] = [
         id: 2,
         title: "PHASE 2",
         period: "(Q1 2026 - Q2 2026)",
-        status: "Live",
+        status: "In Progress",
         badgeColor: "bg-[#2ECC71]/20 text-[#2ECC71] border-2 border-[#2ECC71]/30",
         heading: "Ecosystem Development",
         points: [

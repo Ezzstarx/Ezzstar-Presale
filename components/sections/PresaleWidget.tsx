@@ -16,10 +16,10 @@ export default function PresaleWidget() {
 
     // Force Rebuild
     const RATES: Record<string, number> = {
-        "USDT": 25,      // 1 USDT = 25 SPCA
-        "BNB": 16250,    // 1 BNB = $650 = 16.25k SPCA
-        "USDC": 25,
-        "DAI": 25        // 1 DAI = $1 = 25 SPCA,
+        "USDT": 250,      // 1 USDT = 250 SPCA
+        "BNB": 162500,    // 1 BNB = $650 = 162.5k SPCA
+        "USDC": 250,
+        "DAI": 250        // 1 DAI = $1 = 250 SPCA,
     };
 
     const CURRENCIES = [
@@ -68,7 +68,7 @@ export default function PresaleWidget() {
                 {/* Title */}
                 <div className="text-left mb-5 lg:mb-4">
                     <h3 className="text-base font-tektur font-medium text-[#DE3BD6]">
-                        1 SPCA = 0.04 USDT
+                        1 SPCA = 0.004 USDT
                     </h3>
                 </div>
 
@@ -185,11 +185,11 @@ export default function PresaleWidget() {
                         disabled={isBuying}
                         style={{ '--mask-bg': '#0a0a0c' } as React.CSSProperties}
                         className={`w-full py-3 lg:py-2 border-[0.5px] border-white/30 rounded-xl font-tektur text-sm transition-all flex items-center justify-center gap-2 ${isConnected
-                            ? "bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30 font-bold"
+                            ? "bg-cyan-500/20 border-cyan-500/30 hover:bg-cyan-500/30 font-bold"
                             : "bg-transparent text-white/60 hover:bg-white/5"
                             }`}
                     >
-                        {!isConnected ? "Connect Wallet" : isBuying ? <><Loader2 className="animate-spin" size={16} /> Processing...</> : "Buy Now"}
+                        {!isConnected ? "Connect Wallet" : isBuying ? <span className="inline-flex items-center gap-2 text-cyan-400"><Loader2 className="animate-spin" size={16} /> Processing...</span> : <span className="text-cyan-400">Buy Now</span>}
                     </MagicButton>
                 </div>
             </div>

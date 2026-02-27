@@ -32,7 +32,7 @@ export default function ReferralDashboard() {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
-        const link = `https://ezzstar.space/?ref=${address ? address.slice(0, 10) : '0878871527'}`;
+        const link = `https://ezzstar.space/?ref=${address || ''}`;
         navigator.clipboard.writeText(link);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -64,7 +64,7 @@ export default function ReferralDashboard() {
                             <>
                                 <input
                                     type="text"
-                                    value={`https://ezzstar.space/?ref=${address ? address.slice(0, 10) : '0878871527'}`}
+                                    value={`https://ezzstar.space/?ref=${address || ''}`}
                                     readOnly
                                     className="bg-transparent flex-1 px-3 text-sm text-gray-300 focus:outline-none font-mono"
                                 />

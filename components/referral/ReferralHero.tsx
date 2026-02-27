@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useWallet } from "../providers/WalletProvider";
 import WithdrawModal from "../ui/WithdrawModal";
 import MagicButton from "../ui/MagicButton";
+import { useWeb3Presale, useReferralData } from "@/hooks/useWeb3Presale";
+import { formatUnits } from "viem";
 
 const MagicIcon = ({ src, alt, color, reverse = false }: { src: string, alt: string, color: string, reverse?: boolean }) => {
     return (
@@ -49,8 +51,49 @@ const MagicIcon = ({ src, alt, color, reverse = false }: { src: string, alt: str
 };
 
 export default function ReferralHero() {
-    const { isConnected, openWalletModal } = useWallet();
+    const { isConnected, address, openWalletModal } = useWallet();
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+    const { setupReferral, withdrawRewards } = useWeb3Presale();
+    const { data: refData } = useReferralData(address);
+
+    const [isWithdrawing, setIsWithdrawing] = useState(false);
+
+    // Setup referral when wallet connects
+    useEffect(() => {
+        if (isConnected && address) {
+            setupReferral(address);
+        }
+    }, [isConnected, address]);
+
+    // Parse data safely
+    const spicaRaw = refData?.[0]?.result as bigint | undefined;
+    const bnbRaw = refData?.[1]?.result as bigint | undefined;
+    const usdtRaw = refData?.[2]?.result as bigint | undefined;
+    const usdcRaw = refData?.[3]?.result as bigint | undefined;
+    const daiRaw = refData?.[4]?.result as bigint | undefined;
+
+    const spicaFormatted = spicaRaw ? parseFloat(formatUnits(spicaRaw, 18)) : 0;
+
+    // Total stablecoins (assuming 18 decimals)
+    const totalStables =
+        (usdtRaw ? parseFloat(formatUnits(usdtRaw, 18)) : 0) +
+        (usdcRaw ? parseFloat(formatUnits(usdcRaw, 18)) : 0) +
+        (daiRaw ? parseFloat(formatUnits(daiRaw, 18)) : 0);
+
+    const handleWithdraw = async () => {
+        if (!isConnected) return;
+        setIsWithdrawing(true);
+        try {
+            const tx = await withdrawRewards();
+            alert("Withdraw transaction submitted!");
+        } catch (error: any) {
+            console.error(error);
+            alert("Withdraw failed: " + error.message);
+        } finally {
+            setIsWithdrawing(false);
+            setIsWithdrawOpen(false); // Can open a success modal instead if preferred
+        }
+    };
 
     return (
         <div className="w-full max-w-[1000px] min-h-[423px] mx-auto">
@@ -155,30 +198,32 @@ export default function ReferralHero() {
                             <div className="flex flex-row items-center justify-center gap-2 md:gap-6">
                                 {/* Button 1 */}
                                 <MagicButton className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[10px] md:text-sm font-tektur bg-black border-[0.5px] border-white/20 text-white/80">
-                                    EARNED: <span className="font-satoshi text-white ml-1">$500</span>
+                                    EARNED: <span className="font-satoshi text-white ml-1">${totalStables.toFixed(2)}</span>
                                 </MagicButton>
 
                                 {/* Button 2 with Icon */}
                                 <MagicButton className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[10px] md:text-sm font-tektur bg-black border-[0.5px] border-white/20 text-white/80 hover:text-white">
                                     <div className="flex items-center gap-1.5 whitespace-nowrap">
-                                        SPCA: <span className="font-satoshi text-white">5,791.59</span>
+                                        SPCA: <span className="font-satoshi text-white">{spicaFormatted.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                                         <Image src="/assets/icons/crypto/icon-spca.png" alt="SPCA" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 object-contain" />
                                     </div>
                                 </MagicButton>
 
                                 {/* Button 3: Withdraw */}
                                 <MagicButton
-                                    onClick={() => setIsWithdrawOpen(true)}
+                                    onClick={handleWithdraw}
+                                    disabled={isWithdrawing}
                                     style={{ '--mask-bg': '#96428E' } as React.CSSProperties}
                                     className="px-4 h-[32px] rounded-md shadow-md backdrop-blur-md text-[14px] md:text-sm font-tektur text-white hover:brightness-110 transition-all tracking-wide"
                                 >
-                                    Withdraw Reward
+                                    {isWithdrawing ? "Processing..." : "Withdraw Reward"}
                                 </MagicButton>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
+            {/* Keeping the WithdrawModal as a potential fallback or extended feature, though we use direct withdraw now */}
             <WithdrawModal isOpen={isWithdrawOpen} onClose={() => setIsWithdrawOpen(false)} />
         </div>
     );
