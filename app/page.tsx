@@ -7,6 +7,7 @@ import Tokenomics from "@/components/sections/Tokenomics";
 import UpcomingProjects from "@/components/sections/UpcomingProjects";
 
 import Team from "@/components/sections/Team";
+import Partners from "@/components/sections/Partners";
 import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/layout/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
       <Tokenomics />
       <UpcomingProjects />
       <Team />
+      <Partners />
 
       <FAQ />
       <Footer />

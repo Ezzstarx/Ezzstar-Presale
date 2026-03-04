@@ -49,7 +49,7 @@ const phases: PhaseData[] = [
         title: "PHASE 2",
         period: "(Q1 2026 - Q2 2026)",
         status: "In Progress",
-        badgeColor: "bg-[#2ECC71]/20 text-[#2ECC71] border-2 border-[#2ECC71]/30",
+        badgeColor: "bg-[#F1C40F]/20 text-[#F1C40F] border-2 border-[#F1C40F]/30",
         heading: "Ecosystem Development",
         points: [
             { text: "Launch of Social Website MVP", color: "#2ECC71" }, // Green

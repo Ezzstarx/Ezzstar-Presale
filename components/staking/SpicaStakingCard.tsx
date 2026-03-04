@@ -8,8 +8,16 @@ import MagicButton from "@/components/ui/MagicButton";
 export default function SpicaStakingCard() {
     const { isConnected, connectWallet, openWalletModal } = useWallet();
     const [amount, setAmount] = useState<string>("10,000");
-    const [lockDays, setLockDays] = useState(818); // Default 75%
-    const [apr, setApr] = useState(100);
+    const [lockDays, setLockDays] = useState(360);
+    const [apr, setApr] = useState(40);
+
+    // Staking Tiers
+    const STAKING_TIERS = [
+        { days: 360, apr: 40 },
+        { days: 720, apr: 60 },
+        { days: 1080, apr: 80 },
+        { days: 1440, apr: 100 },
+    ];
 
     // Mock Base Balances
     const TOTAL_BALANCE = 10000;
@@ -21,17 +29,17 @@ export default function SpicaStakingCard() {
     const stakeableBalance = Math.max(0, TOTAL_BALANCE - numericAmount);
 
     // APR Calculation Constants
-    const MIN_DAYS = 30;
-    const MAX_DAYS = 1080;
+    const MIN_DAYS = 360;
+    const MAX_DAYS = 1440;
 
     const progress = Math.max(0, Math.min(100, ((lockDays - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100));
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const days = parseInt(e.target.value);
         setLockDays(days);
-        // Logic: Map 30-1080 days directly to 0-100% APR
-        const calculatedApr = ((days - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100;
-        setApr(Math.round(calculatedApr));
+        // Look up APR from staking tiers
+        const tier = STAKING_TIERS.find(t => t.days === days);
+        setApr(tier ? tier.apr : 40);
     };
 
     // Handler for manual amount input to ensure it's editable
@@ -95,7 +103,7 @@ export default function SpicaStakingCard() {
             <div className="mb-8">
                 <div className="flex justify-between text-gray-400 text-xs font-satoshi mb-3">
                     <span>Lock For : {lockDays} Days</span>
-                    <span>APR : {Math.round(((lockDays - MIN_DAYS) / (MAX_DAYS - MIN_DAYS)) * 100)}%</span>
+                    <span>APR : {apr}%</span>
                 </div>
 
                 {/* Interactive Slider */}
@@ -104,6 +112,7 @@ export default function SpicaStakingCard() {
                         type="range"
                         min={MIN_DAYS}
                         max={MAX_DAYS}
+                        step={360}
                         value={lockDays}
                         onChange={handleSliderChange}
                         className="absolute w-full h-full opacity-0 z-20 cursor-pointer"
