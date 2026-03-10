@@ -105,8 +105,8 @@ export default function Hero() {
     // Fixed positions for the 3-card carousel
     const CARD_POSITIONS = [
         { x: -140, scale: 1, zIndex: 10, opacity: 1, brightness: 1 },  // Left
-        { x: 0, scale: 1, zIndex: 30, opacity: 1, brightness: 1 },     // Center
-        { x: 140, scale: 1, zIndex: 20, opacity: 1, brightness: 1 },   // Right
+        { x: 0, scale: 1, zIndex: 20, opacity: 1, brightness: 1 },     // Center
+        { x: 140, scale: 1, zIndex: 30, opacity: 1, brightness: 1 },   // Right
     ];
 
     // Wallet State
