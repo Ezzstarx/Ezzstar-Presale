@@ -12,6 +12,7 @@ const partners = [
     { name: "Collably Network", role: "Social", link: "https://x.com/CollablyNetwork/status/2019274063739564236?s=20", image: "/assets/images/partners/collably-network.png" },
     { name: "AWS", role: "Cloud", link: "#", image: "/assets/images/partners/aws.png" },
     { name: "GCB", role: "Gaming", link: "https://www.youtube.com/@greatchampionsbattle", image: "/assets/images/partners/gcb.png" },
+    { name: "CyreneAI", role: "AI", link: "#", image: "/assets/images/partners/cyreneai.png" },
 ];
 
 export default function Partners() {
@@ -24,12 +25,14 @@ export default function Partners() {
     // Start index at the beginning of the second set (Total Original)
     const [currentIndex, setCurrentIndex] = useState(totalOriginal);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
 
     // Card dimensions state
     const [cardWidth, setCardWidth] = useState(280);
     const [gap, setGap] = useState(32);
 
     const containerRef = useRef<HTMLDivElement>(null);
+    const nextSlideRef = useRef<() => void>(() => {});
 
     useEffect(() => {
         const updateDimensions = () => {
@@ -68,6 +71,11 @@ export default function Partners() {
         setCurrentIndex((prev) => prev + 1);
     }, [isTransitioning]);
 
+    // Keep ref in sync for auto-loop interval
+    useEffect(() => {
+        nextSlideRef.current = nextSlide;
+    }, [nextSlide]);
+
     // Move to Prev Slide
     const prevSlide = useCallback(() => {
         if (isTransitioning) return;
@@ -95,6 +103,15 @@ export default function Partners() {
         return () => clearTimeout(timeout);
     }, [currentIndex, isTransitioning, totalOriginal]);
 
+    // Auto-loop: rotate one card at a time every 3 seconds
+    useEffect(() => {
+        if (isPaused) return;
+        const interval = setInterval(() => {
+            nextSlideRef.current();
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [isPaused]);
+
     return (
         <section id="partners" className="pb-12 relative overflow-hidden bg-[url('/assets/images/background-main.png')] bg-cover bg-center">
             <div className="relative z-10 w-full">
@@ -105,7 +122,11 @@ export default function Partners() {
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-black via-[#FF00FF] to-black"></div>
                 </div>
 
-                <div className="relative w-full max-w-[960px] mx-auto group px-12 md:px-4">
+                <div
+                    className="relative w-full max-w-[960px] mx-auto group px-12 md:px-4"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                >
                     {/* Carousel Window */}
                     <div className="overflow-hidden w-full" ref={containerRef}>
                         <motion.div
@@ -148,7 +169,7 @@ export default function Partners() {
                                                         src={partner.image}
                                                         alt={partner.name}
                                                         fill
-                                                        className="object-contain p-6"
+                                                        className={`object-contain ${partner.name === 'Collably Network' ? 'p-3' : 'p-6'}`}
                                                     />
                                                     <div className="absolute inset-0 bg-transparent opacity-20 mix-blend-overlay pointer-events-none"></div>
                                                 </div>
@@ -171,23 +192,7 @@ export default function Partners() {
                         </motion.div>
                     </div>
 
-                    {/* Navigation Buttons */}
-                    <button
-                        onClick={prevSlide}
-                        disabled={isTransitioning}
-                        className="absolute left-1 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-16 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label="Previous partner"
-                    >
-                        <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-                    </button>
-                    <button
-                        onClick={nextSlide}
-                        disabled={isTransitioning}
-                        className="absolute right-1 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-16 z-20 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-[#00ffcc] to-purple-600 text-black font-bold text-xl hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label="Next partner"
-                    >
-                        <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-                    </button>
+
                 </div>
             </div>
         </section>

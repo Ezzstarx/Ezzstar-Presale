@@ -76,7 +76,7 @@ export default function PresaleWidget() {
                 <div className="mb-5 lg:mb-4 w-full flex flex-col items-center">
                     <div className="relative w-full h-[10px] bg-black border border-white rounded-full overflow-hidden">
                         {/* Progress Fill Container */}
-                        <div className="absolute top-1/2 left-0 w-[75%] h-[2px] -translate-y-1/2 relative">
+                        <div className="absolute top-1/2 left-0 w-[25%] h-[2px] -translate-y-1/2 relative">
                             {/* 1. Static Gradient Glow (Behind everything) */}
                             <div
                                 className="absolute top-[-6px] bottom-[-6px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[4px] opacity-60 z-0"
@@ -91,8 +91,8 @@ export default function PresaleWidget() {
                         </div>
                     </div>
                     <div className="w-full flex justify-between text-[12px] font-satoshi font-normal text-white/60 mt-2">
-                        <span>75%</span>
-                        <span>$9M</span>
+                        <span>25%</span>
+                        <span>$3M</span>
                     </div>
                 </div>
 

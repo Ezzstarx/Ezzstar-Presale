@@ -21,8 +21,8 @@ export default function Home() {
       <Roadmap />
       <Tokenomics />
       <UpcomingProjects />
-      <Team />
       <Partners />
+      <Team />
 
       <FAQ />
       <Footer />

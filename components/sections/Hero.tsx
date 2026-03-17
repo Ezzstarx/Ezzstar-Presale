@@ -22,6 +22,8 @@ const NFT_TIERS = [
         borderColor: "border-[#4ADE80]",
         borderGradient: "linear-gradient(to bottom, rgb(74,222,128) 0%, rgb(74,222,128) 30%, rgb(37,111,64) 50%, black 100%)", // Fades from 30%
         zIndex: 10,
+        supply: "20,000",
+        supplyColor: "text-[#4ADE80]",
         benefits: [
             "Bronze Star Verified Glowing Badge",
             "Standard Profile Frame",
@@ -41,6 +43,8 @@ const NFT_TIERS = [
         borderColor: "border-[#D946EF]",
         borderGradient: "linear-gradient(to bottom, rgb(217,70,239) 0%, rgb(217,70,239) 60%, rgb(109,35,120) 80%, black 100%)", // Fades from 60%
         zIndex: 30, // Center card on top
+        supply: "10,000",
+        supplyColor: "text-[#D946EF]",
         benefits: [
             "Gold Star Verified Glowing Badge",
             "Animated Profile Frame",
@@ -60,6 +64,8 @@ const NFT_TIERS = [
         borderColor: "border-[#EF4444]",
         borderGradient: "linear-gradient(to bottom, rgb(239,68,68) 0%, rgb(239,68,68) 85%, rgb(120,34,34) 92%, black 100%)", // Fades from 85%
         zIndex: 20,
+        supply: "15,000",
+        supplyColor: "text-[#EF4444]",
         benefits: [
             "Silver Star Verified Glowing Badge",
             "Silver Profile Frame",
@@ -288,6 +294,12 @@ export default function Hero() {
                                                         Receive: <span className={`font-bold ${selectedTier.color}`}>{(parseInt(selectedTier!.price.replace('$', '')) / 0.004).toLocaleString()} SPCA</span>
                                                     </span>
                                                 </li>
+                                                <li className="flex items-start gap-3 pt-1">
+                                                    <div className="mt-2 w-2 h-2 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                    <span className="text-white text-[15px] font-semibold font-satoshi leading-snug text-left">
+                                                        {selectedTier.name.replace(' NFT', '')} Supply: <span className={`font-bold ${selectedTier.color}`}>{selectedTier.supply}</span>
+                                                    </span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </motion.div>
@@ -397,6 +409,9 @@ export default function Hero() {
                                                                     Connect Wallet
                                                                 </button>
                                                             )}
+                                                            <p className="text-sm font-tektur font-semibold tracking-wide text-white">
+                                                                {tier.name.replace(' NFT', '')} Supply: <span className={tier.supplyColor}>{tier.supply}</span>
+                                                            </p>
                                                         </div>
 
                                                     </div>
