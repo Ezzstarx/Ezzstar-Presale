@@ -103,7 +103,7 @@ export default function Tokenomics() {
                                 <div>
                                     <h4 className="text-xl font-satoshi font-medium text-white mb-2">Contract Address</h4>
                                     <div className="flex flex-col gap-1">
-                                        <code className="text-gray-400 font-mono text-sm break-all">
+                                        <code className="text-gray-400 font-mono text-base break-all">
                                             {contractAddress}
                                         </code>
                                     </div>

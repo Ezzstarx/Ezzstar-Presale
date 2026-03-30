@@ -49,7 +49,7 @@ const NFT_TIERS = [
             "Gold Star Verified Glowing Badge",
             "Animated Profile Frame",
             "Early Access to New Feature",
-            "Discounted Premium Merch Every Quarter",
+            "Premium Merch Every Quarter",
             "3 Months Free Membership",
             "Tradable: Sell Your Status"
         ]
@@ -111,8 +111,8 @@ export default function Hero() {
     // Fixed positions for the 3-card carousel
     const CARD_POSITIONS = [
         { x: -140, scale: 1, zIndex: 10, opacity: 1, brightness: 1 },  // Left
-        { x: 0, scale: 1, zIndex: 20, opacity: 1, brightness: 1 },     // Center
-        { x: 140, scale: 1, zIndex: 30, opacity: 1, brightness: 1 },   // Right
+        { x: 0, scale: 1, zIndex: 30, opacity: 1, brightness: 1 },     // Center
+        { x: 140, scale: 1, zIndex: 20, opacity: 1, brightness: 1 },   // Right
     ];
 
     // Wallet State
@@ -144,7 +144,7 @@ export default function Hero() {
 
                     <div className="flex flex-row gap-3 sm:gap-4 justify-center pt-3 sm:pt-4">
                         <MagicButton className="w-[130px] sm:w-[155px] h-[32px] sm:h-[34px] rounded-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] backdrop-blur-md text-[14px] sm:text-[16px] font-medium font-tektur bg-black border-[0.5px] border-white/30 text-[#888888] hover:text-white">
-                            Presale is Live
+                            Liftoff is Live
                         </MagicButton>
                         <a href="https://ezzstar.gitbook.io/ezzstar-gitbook" target="_blank" rel="noopener noreferrer">
                             <MagicButton
@@ -282,20 +282,20 @@ export default function Hero() {
                                             <ul className="space-y-3 w-full pl-1">
                                                 {selectedTier.benefits.map((benefit, idx) => (
                                                     <li key={idx} className="flex items-start gap-3">
-                                                        <div className="mt-2 w-2 h-2 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                        <img src={selectedTier.badge} alt="" className="w-4 h-4 mt-0.5 object-contain shrink-0" />
                                                         <span className="text-white text-[15px] font-normal font-satoshi leading-snug text-left">
                                                             {benefit}
                                                         </span>
                                                     </li>
                                                 ))}
                                                 <li className="flex items-start gap-3 pt-1">
-                                                    <div className="mt-2 w-2 h-2 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                    <img src={selectedTier.badge} alt="" className="w-4 h-4 mt-0.5 object-contain shrink-0" />
                                                     <span className="text-white text-[15px] font-semibold font-satoshi leading-snug text-left">
                                                         Receive: <span className={`font-bold ${selectedTier.color}`}>{(parseInt(selectedTier!.price.replace('$', '')) / 0.004).toLocaleString()} SPCA</span>
                                                     </span>
                                                 </li>
                                                 <li className="flex items-start gap-3 pt-1">
-                                                    <div className="mt-2 w-2 h-2 rounded-full bg-white shrink-0 shadow-[0_0_4px_white]"></div>
+                                                    <img src={selectedTier.badge} alt="" className="w-4 h-4 mt-0.5 object-contain shrink-0" />
                                                     <span className="text-white text-[15px] font-semibold font-satoshi leading-snug text-left">
                                                         {selectedTier.name.replace(' NFT', '')} Supply: <span className={`font-bold ${selectedTier.color}`}>{selectedTier.supply}</span>
                                                     </span>
@@ -362,15 +362,15 @@ export default function Hero() {
                                                     </div>
 
                                                     {/* Middle: Bullet Points */}
-                                                    <ul className="space-y-3 w-full pl-2">
+                                                    <ul className="space-y-2.5 w-full pl-1">
                                                         {tier.benefits.map((benefit, i) => (
-                                                            <li key={i} className="flex items-start gap-3 text-sm text-gray-200 font-medium">
-                                                                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
+                                                            <li key={i} className="flex items-start gap-2 text-sm text-gray-200 font-medium">
+                                                                <img src={tier.badge} alt="" className="w-3.5 h-3.5 mt-0.5 object-contain shrink-0" />
                                                                 <span className="leading-tight">{benefit}</span>
                                                             </li>
                                                         ))}
-                                                        <li className="flex items-start gap-3 text-sm text-gray-200 font-medium pt-2">
-                                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/80 shrink-0" />
+                                                        <li className="flex items-start gap-2 text-sm text-gray-200 font-medium pt-2">
+                                                            <img src={tier.badge} alt="" className="w-3.5 h-3.5 mt-0.5 object-contain shrink-0" />
                                                             <span className="leading-tight">
                                                                 Receive: <span className={`font-medium ${tier.color}`}>{receiveAmount} SPCA</span>
                                                             </span>

@@ -12,7 +12,7 @@ const partners = [
     { name: "Collably Network", role: "Social", link: "https://x.com/CollablyNetwork/status/2019274063739564236?s=20", image: "/assets/images/partners/collably-network.png" },
     { name: "AWS", role: "Cloud", link: "#", image: "/assets/images/partners/aws.png" },
     { name: "GCB", role: "Gaming", link: "https://www.youtube.com/@greatchampionsbattle", image: "/assets/images/partners/gcb.png" },
-    { name: "CyreneAI", role: "AI", link: "#", image: "/assets/images/partners/cyreneai.png" },
+    { name: "CyreneAI", role: "Launchpad", link: "#", image: "/assets/images/partners/cyreneai.png" },
 ];
 
 export default function Partners() {
@@ -32,7 +32,7 @@ export default function Partners() {
     const [gap, setGap] = useState(32);
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const nextSlideRef = useRef<() => void>(() => {});
+    const nextSlideRef = useRef<() => void>(() => { });
 
     useEffect(() => {
         const updateDimensions = () => {

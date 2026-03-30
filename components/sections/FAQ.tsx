@@ -11,7 +11,7 @@ const faqs = [
         a: "Spica (SPCA) is the utility token of the Ezzstar ecosystem, used for earning, staking, and powering features across social, gaming, and metaverse experiences."
     },
     {
-        q: "Why should i buy the $SPCA crypto presale?",
+        q: "Why should i buy the $SPCA crypto?",
         a: "By holding $SPCA, you get many benefits such as NFT Signature, discord role, early access to test new projects."
     },
     {

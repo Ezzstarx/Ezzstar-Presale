@@ -34,8 +34,8 @@ const phases: PhaseData[] = [
         points: [
             { text: "Whitepaper & Concept", color: "#2ECC71" }, // Green
             { text: "Contract Verification on BSCscan", color: "#2ECC71" },
-            { text: "Web3 Website & Social Media Presence", color: "#2ECC71" },
-            { text: "SPICA Presale", color: "#2ECC71" },
+            { text: "Entertainment Website & Social Media Presence", color: "#2ECC71" },
+            { text: "SPICA Liftoff", color: "#2ECC71" },
             { text: "Airdrop Campaigns", color: "#2ECC71" },
             { text: "Launch Staking, Referral, Exclusive NFT Signature", color: "#2ECC71" },
             { text: "Crypto Community Marketing", color: "#F1C40F" } // Yellowish/Gold
