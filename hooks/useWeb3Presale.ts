@@ -3,7 +3,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { parseEther, parseUnits, keccak256 as viemKeccak256, encodePacked, getAddress, hexToBytes, bytesToHex } from 'viem';
 import { MerkleTree } from 'merkletreejs';
 
-export const PRESALE_ADDRESS = "0xC9bAc55d8bDd348D07D135b66F03A21df666f441";
+export const PRESALE_ADDRESS = "0x8eF9D5C76C8a68bb7D5a49898A22F65b87362D5f";
 export const SPICA_ADDRESS = "0x28AbE997d4AB43d3f938D99DC0c074E463Bec7ed";
 
 export const TOKENS = {
