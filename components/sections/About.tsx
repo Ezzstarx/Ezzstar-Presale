@@ -70,7 +70,7 @@ export default function About() {
                         {/* Text Content - Professional & Compact */}
                         <div className="space-y-4 text-center w-full max-w-[600px]">
                             <p className="text-sm md:text-[15px] text-white/90 font-satoshi leading-relaxed font-light">
-                                Welcome to <span className="font-medium text-white">Ezzstar</span>, a fully interconnected Web3 ecosystem empowering creators,
+                                Welcome to <span className="font-medium text-white">Ezzstar</span>, a fully interconnected entertainment ecosystem empowering creators,
                                 gamers, and anonymous users. We&apos;re not just building platforms. We&apos;re
                                 constructing an economy where <span className="font-medium text-white">time, identity, and creativity are currency.</span>
                             </p>
