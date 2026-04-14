@@ -97,7 +97,6 @@ export default function Footer() {
                         <div className="flex flex-col gap-5">
                             <h3 className="font-tektur text-lg font-medium !text-white mb-1">Service</h3>
                             <Link href="#referral" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Referral</Link>
-                            <Link href="/staking" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Staking</Link>
                         </div>
                     </div>
                 </div>

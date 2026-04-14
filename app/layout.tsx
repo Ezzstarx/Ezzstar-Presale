@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Tektur, Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import { WalletProvider } from '@/components/providers/WalletProvider';
@@ -35,6 +36,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-NPHCSLQQ3F"></Script>
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-NPHCSLQQ3F');
+          `}
+        </Script>
+      </head>
       <body className={`${tektur.variable} ${satoshi.variable} font-tektur text-white antialiased overflow-x-hidden relative`}>
         {/* Global Background Image */}
         <div

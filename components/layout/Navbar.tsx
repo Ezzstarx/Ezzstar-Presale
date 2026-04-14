@@ -62,7 +62,6 @@ export default function Navbar() {
     const navLinks = [
         { name: "Tokenomics", href: "/#tokenomics" },
         { name: "Roadmap", href: "/#roadmap" },
-        { name: "Stake", href: "/staking" },
         { name: "Referral", href: "/referral" },
         { name: "About Us", href: "/#about" },
         { name: "Our Team", href: "/#team" },
