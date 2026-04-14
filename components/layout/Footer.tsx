@@ -107,7 +107,7 @@ export default function Footer() {
                         <span className=" text-gray-50">Disclaimer:</span> Cryptocurrency might not be regulated in your area. Its value can fluctuate, and profits could be taxed according to your local laws.
                     </p>
                     <p className="text-gray-500 font-satoshi text-sm">
-                        <span className="text-[#FF00FF] font-medium">© 2025 Ezzstar All Rights reserved.</span>
+                        <span className="text-[#FF00FF] font-medium">© 2026 Ezzstar All Rights reserved.</span>
                     </p>
                 </div>
             </div>
