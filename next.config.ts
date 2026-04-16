@@ -1,6 +1,45 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/staking',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/#about',
+        permanent: true,
+      },
+      {
+        source: '/about-us',
+        destination: '/#about',
+        permanent: true,
+      },
+      {
+        source: '/community',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/ecosystem',
+        destination: '/#tokenomics',
+        permanent: true,
+      },
+      {
+        source: '/team',
+        destination: '/#team',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
