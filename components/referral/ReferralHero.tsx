@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useWallet } from "../providers/WalletProvider";
 import WithdrawModal from "../ui/WithdrawModal";
+import TransactionModal from "../ui/TransactionModal";
 import MagicButton from "../ui/MagicButton";
 import { useWeb3Presale, useReferralData } from "@/hooks/useWeb3Presale";
 import { formatUnits } from "viem";
@@ -58,6 +59,12 @@ export default function ReferralHero() {
 
     const [isWithdrawing, setIsWithdrawing] = useState(false);
 
+    // Transaction modal state
+    const [txModalOpen, setTxModalOpen] = useState(false);
+    const [txModalStatus, setTxModalStatus] = useState<"success" | "error" | "loading">("loading");
+    const [txModalTitle, setTxModalTitle] = useState("");
+    const [txModalMessage, setTxModalMessage] = useState("");
+
     // Setup referral when wallet connects
     useEffect(() => {
         if (isConnected && address) {
@@ -83,15 +90,24 @@ export default function ReferralHero() {
     const handleWithdraw = async () => {
         if (!isConnected) return;
         setIsWithdrawing(true);
+        setTxModalStatus("loading");
+        setTxModalTitle("Withdrawing Rewards");
+        setTxModalMessage("Please confirm the transaction in your wallet...");
+        setTxModalOpen(true);
         try {
             const tx = await withdrawRewards();
-            alert("Withdraw transaction submitted!");
+            setTxModalStatus("success");
+            setTxModalTitle("Rewards Withdrawn!");
+            setTxModalMessage("Your referral rewards have been successfully sent to your wallet.");
         } catch (error: any) {
             console.error(error);
-            alert("Withdraw failed: " + error.message);
+            setTxModalStatus("error");
+            setTxModalTitle("Withdrawal Failed");
+            const reason = error?.shortMessage || error?.message || "Unknown error";
+            setTxModalMessage(reason.length > 120 ? reason.slice(0, 120) + "..." : reason);
         } finally {
             setIsWithdrawing(false);
-            setIsWithdrawOpen(false); // Can open a success modal instead if preferred
+            setIsWithdrawOpen(false);
         }
     };
 
@@ -225,6 +241,15 @@ export default function ReferralHero() {
             </div>
             {/* Keeping the WithdrawModal as a potential fallback or extended feature, though we use direct withdraw now */}
             <WithdrawModal isOpen={isWithdrawOpen} onClose={() => setIsWithdrawOpen(false)} />
+
+            {/* Transaction Result Modal */}
+            <TransactionModal
+                isOpen={txModalOpen}
+                onClose={() => setTxModalOpen(false)}
+                status={txModalStatus}
+                title={txModalTitle}
+                message={txModalMessage}
+            />
         </div>
     );
 }

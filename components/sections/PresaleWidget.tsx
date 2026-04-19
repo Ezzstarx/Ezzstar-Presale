@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ArrowDown, Loader2 } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
 import MagicButton from "@/components/ui/MagicButton";
+import TransactionModal from "@/components/ui/TransactionModal";
 import { useWeb3Presale } from "@/hooks/useWeb3Presale";
 
 export default function PresaleWidget() {
@@ -13,6 +14,13 @@ export default function PresaleWidget() {
     const [amount, setAmount] = useState<string>("0.002");
     const [receiveAmount, setReceiveAmount] = useState<string>("0.05");
     const [isBuying, setIsBuying] = useState(false);
+
+    // Transaction Modal State
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalStatus, setModalStatus] = useState<"success" | "error" | "loading">("loading");
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalTxHash, setModalTxHash] = useState<string | undefined>(undefined);
 
     // Force Rebuild
     const RATES: Record<string, number> = {
@@ -49,12 +57,23 @@ export default function PresaleWidget() {
             return;
         }
         setIsBuying(true);
+        setModalStatus("loading");
+        setModalTitle("Processing Purchase");
+        setModalMessage(`Buying SPCA with ${payCurrency}... Please confirm in your wallet.`);
+        setModalTxHash(undefined);
+        setModalOpen(true);
         try {
-            await buyWithToken(payCurrency as any, parseFloat(amount));
-            alert("Purchase successful!");
+            const txHash = await buyWithToken(payCurrency as any, parseFloat(amount));
+            setModalStatus("success");
+            setModalTitle("Purchase Successful!");
+            setModalMessage(`You have successfully purchased ${receiveAmount} SPCA with ${amount} ${payCurrency}.`);
+            if (txHash) setModalTxHash(txHash as string);
         } catch (e: any) {
             console.error(e);
-            alert("Purchase failed: " + e.message);
+            setModalStatus("error");
+            setModalTitle("Purchase Failed");
+            const reason = e?.shortMessage || e?.message || "Unknown error";
+            setModalMessage(reason.length > 120 ? reason.slice(0, 120) + "..." : reason);
         } finally {
             setIsBuying(false);
         }
@@ -192,6 +211,16 @@ export default function PresaleWidget() {
                         {!isConnected ? "Connect Wallet" : isBuying ? <span className="inline-flex items-center gap-2 text-cyan-400"><Loader2 className="animate-spin" size={16} /> Processing...</span> : <span className="text-cyan-400">Buy Now</span>}
                     </MagicButton>
                 </div>
+
+                {/* Transaction Modal */}
+                <TransactionModal
+                    isOpen={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                    status={modalStatus}
+                    title={modalTitle}
+                    message={modalMessage}
+                    txHash={modalTxHash}
+                />
             </div>
         </div>
     );
