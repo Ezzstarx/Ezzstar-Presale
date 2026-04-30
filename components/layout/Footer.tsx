@@ -50,8 +50,8 @@ export default function Footer() {
                     {/* Left Column: Logo & Socials - Takes 4 Columns */}
                     <div className="col-span-1 md:col-span-4 flex flex-col items-center md:items-start gap-8 md:pl-6">
                         <Link href="/">
-                            {/* Increased Logo Size */}
-                            <div className="relative w-72 h-36 hover:opacity-90 transition-opacity">
+                            {/* Reduced Logo Size */}
+                            <div className="relative w-48 h-24 hover:opacity-90 transition-opacity">
                                 <Image
                                     src="/assets/images/Footer-Logo.png"
                                     alt="Ezzstar Logo"
@@ -67,7 +67,6 @@ export default function Footer() {
                             <SocialButton href="https://t.me/EzzstarSPCA" icon={Send} label="Telegram" colorClass="hover:text-[#0088cc]" />
                             <SocialButton href="https://x.com/ezzstarx?s=21" icon={XIcon} label="X" colorClass="hover:text-white" />
                             <SocialButton href="https://www.instagram.com/ezzstars/" icon={Instagram} label="Instagram" colorClass="hover:text-[#E1306C]" />
-                            <SocialButton href="https://medium.com/@ezzstar" icon={MediumIcon} label="Medium" colorClass="hover:text-white" />
                             <SocialButton href="https://www.linkedin.com/company/ezzstar/" icon={Linkedin} label="LinkedIn" colorClass="hover:text-[#0077b5]" />
                         </div>
                     </div>
